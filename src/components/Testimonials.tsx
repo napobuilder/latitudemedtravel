@@ -14,10 +14,10 @@ const Testimonials: React.FC = () => {
             <img src="https://images.unsplash.com/photo-1584432810601-6c7f27d2362b?q=80&w=2533&auto=format&fit=crop" className="w-full rounded-md opacity-80" alt="Video testimonio de una paciente sonriendo" />
             <div className="absolute inset-0 flex items-center justify-center">
               <button className="bg-white/30 backdrop-blur-sm rounded-full h-20 w-20 flex items-center justify-center text-white hover:bg-white/50 transition-colors">
-                <img src="/assets/icons/play.svg" alt="Play Icon" className="w-12 h-12 ml-1" />
+                <svg className="w-12 h-12 ml-1 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path></svg>
               </button>
             </div>
-            <p className="text-white text-center mt-4 font-semibold text-shadow">"Mi experiencia con Latitude superó todas mis expectativas." - Sofía R., Miami</p>
+            <p className="text-white text-center mt-4 font-semibold text-shadow">&quot;Mi experiencia con Latitude superó todas mis expectativas.&quot; - Sofía R., Miami</p>
           </div>
           {/* Text Testimonials */}
           <div className="space-y-6">
@@ -25,14 +25,14 @@ const Testimonials: React.FC = () => {
               <div className="flex items-center mb-2">
                 <span className="text-yellow-400">★★★★★</span>
               </div>
-              <p className="text-gray-600 italic">"El nivel de atención y profesionalismo es increíble. Me sentí segura y cuidada durante todo el proceso. ¡100% recomendados!"</p>
+              <p className="text-gray-600 italic">&quot;El nivel de atención y profesionalismo es increíble. Me sentí segura y cuidada durante todo el proceso. ¡100% recomendados!&quot;</p>
               <p className="font-bold text-right mt-3 text-brand-blue-900">- Ana G., Miami, FL</p>
             </div>
             <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
               <div className="flex items-center mb-2">
                 <span className="text-yellow-400">★★★★★</span>
               </div>
-              <p className="text-gray-600 italic">"Dudaba en viajar, pero el equipo de Latitude lo hizo todo tan fácil. Los resultados son mejores de lo que jamás soñé."</p>
+              <p className="text-gray-600 italic">&quot;Dudaba en viajar, pero el equipo de Latitude lo hizo todo tan fácil. Los resultados son mejores de lo que jamás soñé.&quot;</p>
               <p className="font-bold text-right mt-3 text-brand-blue-900">- Isabella V., Fort Lauderdale, FL</p>
             </div>
           </div>

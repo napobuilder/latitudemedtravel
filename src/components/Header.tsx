@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useCart } from '../hooks/useCart';
 import CartSidebar from './CartSidebar';
 import MobileMenu from './MobileMenu';
-import ServicesAccordion from './ServicesAccordion';
+import ServicesIcon from './ServicesIcon';
+import ServicesMenu from './ServicesMenu';
 
 const Header: React.FC = () => {
     const [isCartOpen, setCartOpen] = useState(false);
     const [isMenuOpen, setMenuOpen] = useState(false);
+    const [isServicesMenuOpen, setServicesMenuOpen] = useState(false);
 
     const handleMenuToggle = () => {
         setMenuOpen(!isMenuOpen);
         if (isCartOpen) setCartOpen(false);
+        if (isServicesMenuOpen) setServicesMenuOpen(false);
     };
 
     const handleCartToggle = () => {
         setCartOpen(!isCartOpen);
+        if (isMenuOpen) setMenuOpen(false);
+        if (isServicesMenuOpen) setServicesMenuOpen(false);
+    };
+
+    const handleServicesMenuToggle = () => {
+        setServicesMenuOpen(!isServicesMenuOpen);
+        if (isCartOpen) setCartOpen(false);
         if (isMenuOpen) setMenuOpen(false);
     };
 
@@ -36,8 +45,6 @@ const Header: React.FC = () => {
                         {/* Desktop Navigation */}
                         <nav className="hidden lg:flex items-center space-x-1">
                             <a href="#proceso" className="text-gray-700 hover:bg-gray-200/70 font-medium px-4 py-2 rounded-full transition-colors">Cómo Funciona</a>
-                            
-                            {/* Services Dropdown */}
                             <div className="relative group">
                                 <button className="flex items-center gap-1.5 text-gray-700 hover:bg-gray-200/70 font-medium px-4 py-2 rounded-full transition-colors">
                                     <span>Servicios</span>
@@ -93,7 +100,6 @@ const Header: React.FC = () => {
                                     </div>
                                 </div>
                             </div>
-
                             <a href="#expertos" className="text-gray-700 hover:bg-gray-200/70 font-medium px-4 py-2 rounded-full transition-colors">Nuestros Expertos</a>
                             <a href="#faq" className="text-gray-700 hover:bg-gray-200/70 font-medium px-4 py-2 rounded-full transition-colors">Preguntas Frecuentes</a>
                         </nav>
@@ -104,13 +110,13 @@ const Header: React.FC = () => {
                                 Consulta Virtual
                             </a>
                             <div className="lg:hidden">
-                                <ServicesAccordion />
+                                <ServicesIcon onClick={handleServicesMenuToggle} />
                             </div>
                             <button onClick={handleCartToggle} className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-300">
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                             </button>
                             <button onClick={handleMenuToggle} className="lg:hidden p-2 rounded-full hover:bg-gray-100 transition-colors duration-300">
-                                <svg id="menu-open-icon" className="w-7 h-7 text-brand-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                                <svg id="menu-open-icon" className="w-7 h-7 text-brand-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                             </button>
                         </div>
                     </div>
@@ -118,6 +124,7 @@ const Header: React.FC = () => {
             </header>
             {isMenuOpen && <MobileMenu isOpen={isMenuOpen} onClose={() => setMenuOpen(false)} />}
             {isCartOpen && <CartSidebar isOpen={isCartOpen} onClose={() => setCartOpen(false)} />}
+            {isServicesMenuOpen && <ServicesMenu isOpen={isServicesMenuOpen} onClose={() => setServicesMenuOpen(false)} />}
         </>
     );
 };

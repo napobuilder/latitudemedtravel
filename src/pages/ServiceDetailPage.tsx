@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { servicios, doctores, Servicio, Doctor } from '../data';
+import { servicios, doctores, Doctor } from '../data';
 import { useCart } from '../hooks/useCart';
 
 const ServiceDetailPage: React.FC = () => {
@@ -23,7 +23,7 @@ const ServiceDetailPage: React.FC = () => {
       {/* 1. Hero Section */}
       <section className="relative bg-gray-800 text-white py-32 px-6 text-center">
         <div className="absolute inset-0">
-          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2670&auto=format&fit=crop" alt="Fondo de consulta médica" className="w-full h-full object-cover opacity-30" />
+          <img src={servicioActual.heroImageUrl} alt={`Fondo de ${servicioActual.nombre}`} className="w-full h-full object-cover opacity-30" />
         </div>
         <div className="relative">
           <h1 className="text-4xl md:text-6xl font-bold font-display">{servicioActual.nombre}</h1>
@@ -77,8 +77,8 @@ const ServiceDetailPage: React.FC = () => {
 
               <h2 className="mt-12">Resultados (Antes y Después)</h2>
               <div className="grid grid-cols-2 gap-4 not-prose">
-                <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=870&auto=format&fit=crop" alt="Ejemplo de resultado 1" className="rounded-lg shadow-md" />
-                <img src="https://images.unsplash.com/photo-1593492544498-3791d2b85d3c?q=80&w=870&auto=format&fit=crop" alt="Ejemplo de resultado 2" className="rounded-lg shadow-md" />
+                <img src={servicioActual.cardImageUrl} alt="Ejemplo de resultado 1" className="rounded-lg shadow-md" />
+                <img src={servicioActual.heroImageUrl} alt="Ejemplo de resultado 2" className="rounded-lg shadow-md" />
               </div>
 
             </div>

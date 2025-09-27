@@ -12,9 +12,9 @@ const ContactCta: React.FC = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-blue-900">Da el Primer Paso Hacia tu Mejor Versión</h2>
             <p className="text-lg text-gray-700 mb-8">Completa el formulario y una de nuestras asesoras expertas en Miami se pondrá en contacto contigo para una consulta virtual 100% gratuita y sin compromiso.</p>
             <ul className="space-y-4 text-gray-600 text-left max-w-md mx-auto lg:mx-0">
-              <li className="flex items-center"><svg className="w-6 h-6 mr-3 text-brand-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Consulta confidencial con expertos.</li>
-              <li className="flex items-center"><svg className="w-6 h-6 mr-3 text-brand-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Recibe un presupuesto preliminar.</li>
-              <li className="flex items-center"><svg className="w-6 h-6 mr-3 text-brand-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Aclara todas tus dudas.</li>
+              <li className="flex items-center"><svg className="w-6 h-6 mr-3 text-brand-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>Consulta confidencial con expertos.</li>
+              <li className="flex items-center"><svg className="w-6 h-6 mr-3 text-brand-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>Recibe un presupuesto preliminar.</li>
+              <li className="flex items-center"><svg className="w-6 h-6 mr-3 text-brand-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>Aclara todas tus dudas.</li>
             </ul>
           </div>
           <div className="bg-white p-8 rounded-2xl shadow-2xl border border-gray-100">

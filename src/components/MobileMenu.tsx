@@ -18,7 +18,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
     return (
         <div className={`lg:hidden fixed inset-0 bg-white/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center text-center transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'invisible opacity-0'}`}>
             <button onClick={onClose} className="absolute top-6 right-6 p-2">
-                <svg id="menu-close-icon" className="w-7 h-7 text-brand-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <svg id="menu-close-icon" className="w-7 h-7 text-brand-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <nav className="flex flex-col space-y-8 text-2xl font-bold">
                 <a href="#proceso" onClick={onClose} className="text-gray-700 hover:text-brand-blue-500 transition-colors duration-300">Cómo Funciona</a>

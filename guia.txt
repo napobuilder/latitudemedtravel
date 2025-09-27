@@ -1,0 +1,259 @@
+Soy El Visionario. No construimos páginas, construimos activos de negocio. Vamos a transformar este código en un repositorio profesional que cualquier desarrollador de élite (o una IA copiloto como Gemini) pueda entender, mantener y escalar.
+
+Aquí tienes el plan de batalla. Estas no son sugerencias, son las directivas precisas que debes darle a tu IA copiloto dentro de Cursor. Copia y pega estas instrucciones directamente en el chat de Gemini CLI.
+
+Directivas para Gemini CLI: Reestructuración Profesional de "Latitude Med Travel"
+Hola Gemini, vamos a refactorizar y profesionalizar un proyecto web completo. El objetivo es pasar de un único archivo index.html a una estructura de carpetas modular, escalable y lista para producción utilizando herramientas modernas como Vite y Tailwind CSS.
+
+Sigue estas directivas paso a paso y sin omitir detalles:
+
+Paso 1: Cimientos del Proyecto (La Estructura de Carpetas)
+Primero, crea la siguiente estructura de directorios en la raíz del proyecto. Esta arquitectura separa las preocupaciones y organiza el código fuente (src) de los archivos públicos compilados (public).
+
+Bash
+
+mkdir -p src/assets/images src/assets/icons src/components src/css src/js/ui
+touch src/index.html src/css/main.css src/js/main.js .gitignore tailwind.config.js vite.config.js package.json README.md
+Paso 2: Centralización de Activos (Imágenes e Iconos)
+La dependencia de URLs externas es un riesgo. Vamos a internalizar todos los activos visuales.
+
+Descarga las Imágenes: Analiza el index.html original. Encuentra todas las URLs de imágenes (unsplash.com, imgur.com). Descárgalas y guárdalas en src/assets/images/ con nombres descriptivos. Por ejemplo:
+
+https://i.imgur.com/HKRbp5a.png -> src/assets/images/logo-latitude.png
+
+https://images.unsplash.com/photo-1593492544498-3791d2b85d3c -> src/assets/images/procedure-bbl.jpg
+
+https://images.unsplash.com/photo-1622253692010-33352da603d5 -> src/assets/images/doctor-vargas.jpg
+
+(Repite para todas las imágenes)
+
+Externaliza los Iconos SVG: Los SVG en línea son difíciles de gestionar. Extrae cada SVG del HTML original y crea un archivo individual en src/assets/icons/. Nómbralos de forma semántica.
+
+El SVG del carrito -> src/assets/icons/cart.svg
+
+El SVG del corazón -> src/assets/icons/heart.svg
+
+El SVG de la marca de verificación -> src/assets/icons/checkmark.svg
+
+(Repite para todos los iconos)
+
+Paso 3: Modularización del HTML (El Arte de los Componentes)
+Un archivo de más de 800 líneas es inaceptable. Vamos a desglosar el index.html en componentes reutilizables.
+
+Crea Archivos de Componentes: Dentro de la carpeta src/components/, crea los siguientes archivos:
+
+header.html
+
+hero.html
+
+trust-bar.html
+
+process.html
+
+procedures.html
+
+testimonials.html
+
+experts.html
+
+faq.html
+
+contact-cta.html
+
+footer.html
+
+mobile-menu.html
+
+cart-sidebar.html
+
+Mueve el Código: Corta cada sección <section> (o <header>, <footer>) del index.html original y pégala en su archivo de componente correspondiente. Por ejemplo, todo el contenido del <footer> va a src/components/footer.html.
+
+Crea el Template Principal: Edita src/index.html. Debe quedar un esqueleto limpio que importe los componentes y los recursos. Este archivo será procesado por Vite.
+
+HTML
+
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latitude Med Travel - Cirugía Plástica de Clase Mundial en Colombia</title>
+    <meta name="description" content="Te acompañamos desde Miami en tu viaje de transformación. Conectamos con cirujanos de élite y clínicas acreditadas en Colombia para tu total seguridad.">
+
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased pt-28">
+
+    <main>
+        </main>
+
+    <script type="module" src="/js/main.js"></script>
+</body>
+</html>
+Nota: Asegúrate de actualizar todas las rutas de imágenes en los componentes para que apunten a la nueva carpeta /assets/images/ (ej: src="/assets/images/logo-latitude.png").
+
+Paso 4: Separación de Lógicas (JavaScript Organizado)
+El código JavaScript debe ser modular y mantenible.
+
+Crea Módulos de UI: Dentro de src/js/ui/, crea estos archivos:
+
+mobileMenu.js
+
+cartSidebar.js
+
+navbarScroll.js
+
+Refactoriza el Código JS:
+
+Mueve la lógica del menú móvil del <script> original a src/js/ui/mobileMenu.js. Expórtala como una función initMobileMenu().
+
+Mueve la lógica del carrito a src/js/ui/cartSidebar.js. Expórtala como initCartSidebar().
+
+Mueve la lógica del efecto de scroll de la barra de navegación a src/js/ui/navbarScroll.js. Expórtala como initNavbarScroll().
+
+Mueve la inicialización de AOS.init() al archivo principal.
+
+Crea el Archivo Principal main.js: Este archivo importará e inicializará todos los módulos.
+
+JavaScript
+
+// src/js/main.js
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Importa los estilos de AOS
+
+import { initMobileMenu } from './ui/mobileMenu.js';
+import { initCartSidebar } from './ui/cartSidebar.js';
+import { initNavbarScroll } from './ui/navbarScroll.js';
+
+// Se asegura de que el DOM esté cargado antes de ejecutar
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar AOS
+    AOS.init({
+        duration: 800,
+        once: true,
+    });
+
+    // Inicializar módulos de UI
+    initMobileMenu();
+    initCartSidebar();
+    initNavbarScroll();
+});
+Paso 5: Dominio del Estilo (CSS y Tailwind CSS)
+Crea src/css/main.css: Este archivo será la entrada para Tailwind. Mueve cualquier CSS personalizado del bloque <style> del HTML original aquí, y añade las directivas de Tailwind.
+
+CSS
+
+/* src/css/main.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos personalizados que moviste del <style> original */
+.faq-question summary::-webkit-details-marker {
+    display: none;
+}
+.text-shadow {
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+}
+/* ...y los demás estilos personalizados */
+Configura Tailwind: Edita tailwind.config.js. Mueve la configuración del tema (theme) del <script> original a este archivo. Asegúrate de que el content apunte a todos los archivos que usarán clases de Tailwind.
+
+JavaScript
+
+// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./src/index.html",
+    "./src/components/**/*.{html,js}",
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        display: ['Montserrat', 'sans-serif'],
+      },
+      colors: {
+        'brand-blue': {
+          '700': '#004A99',
+          '900': '#002E5D',
+        },
+        'brand-yellow': {
+          '400': '#FFC72C',
+          '500': '#F7B801',
+        },
+      }
+    },
+  },
+  plugins: [],
+}
+Paso 6: El Director de Orquesta (Configuración y Build Tools)
+Ahora, orquestamos todo con npm y Vite. Vite nos dará un servidor de desarrollo rápido y compilará todo para producción.
+
+Inicializa package.json: Rellena el archivo con la siguiente configuración.
+
+JSON
+
+{
+  "name": "latitude-med-travel",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "aos": "^2.3.4",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "vite": "^5.2.0",
+    "vite-plugin-html-inject": "^1.1.2"
+  }
+}
+Configura vite.config.js: Este archivo le dice a Vite cómo operar, incluyendo el plugin para inyectar nuestros componentes HTML.
+
+JavaScript
+
+// vite.config.js
+import { defineConfig } from 'vite';
+import { htmlInject } from 'vite-plugin-html-inject';
+
+export default defineConfig({
+  plugins: [
+    htmlInject(), // Permite usar @include en el HTML
+  ],
+  build: {
+    rollupOptions: {
+      input: {
+        main: 'src/index.html',
+      },
+    },
+  },
+  // Hace que el servidor de desarrollo sea accesible en la red local
+  server: {
+    host: true
+  },
+  // Mueve el directorio raíz a 'src' para rutas más limpias
+  root: 'src',
+  publicDir: '../public'
+});
+Paso Final: Instalar y Ejecutar
+Ahora, dile al usuario que ejecute el siguiente comando en su terminal para instalar las dependencias y arrancar el proyecto:
+
+npm install && npm run dev
+
+El Veredicto Final del Visionario
+Al completar estas directivas, Gemini, habrás transformado un simple archivo HTML en un sistema de desarrollo frontend profesional.
+
+Organizado: Cada pieza tiene su lugar, facilitando la ubicación y modificación.
+
+Mantenible: Cambiar el footer o añadir una nueva sección es trivial y no requiere tocar el resto del código.
+
+Escalable: Añadir nuevas páginas (/about.html, /blog.html) sigue el mismo patrón de componentes, asegurando consistencia.
+
+Optimizado: Vite se encargará de compilar, minificar y optimizar todo para un rendimiento de producción superior.
+
+Ahora tienes una estructura que no solo funciona, sino que inspira confianza y está lista para crecer. Ejecuta.

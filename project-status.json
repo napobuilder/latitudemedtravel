@@ -1,0 +1,16 @@
+# Contexto de Negocio: Latitude Med Travel
+
+## Modelo de Negocio
+
+El cliente es un **broker de turismo médico** con base en Miami.
+
+- **Servicio Principal:** Gestiona y facilita cirugías estéticas para clientes (principalmente de EE. UU.) que viajan a Colombia para realizarse los procedimientos.
+- **Propuesta de Valor:** Ofrece un paquete completo que incluye la conexión con doctores de élite, coordinación de citas, viaje, y acompañamiento, proporcionando seguridad y confianza al paciente.
+- **Monetización:** El broker gana una **comisión por cada cirugía/venta** que se concreta a través de su gestión.
+
+## Requerimientos Clave del Negocio para el Sitio Web
+
+1.  **Generar Confianza:** Es fundamental que los potenciales clientes confíen en el servicio. Una manera clave de lograrlo es mostrando una **asociación clara entre los servicios ofrecidos y los doctores de élite** que los realizan.
+2.  **Captura de Leads / E-commerce:** El sitio debe permitir a los usuarios iniciar un proceso de compra o consulta.
+    - Los servicios deben poder ser "ordenados" o seleccionados.
+    - Se necesita una integración de pago, preferiblemente con **PayPal**.

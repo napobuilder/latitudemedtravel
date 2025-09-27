@@ -1,0 +1,11 @@
+[vite] connecting... client:495:9
+Uncaught ReferenceError: useState is not defined
+    Header Header.tsx:8
+    React 10
+    performWorkUntilDeadline scheduler.development.js:45
+Header.tsx:9:37
+    Header Header.tsx:8
+    React 10
+    performWorkUntilDeadline scheduler.development.js:45
+[vite] connected. client:618:15
+Error al interpretar el valor para '-webkit-text-size-adjust'.  Declaración rechazada. localhost:3000:137:29

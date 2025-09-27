@@ -1,0 +1,44 @@
+/* src/css/main.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos personalizados que moviste del <style> original */
+.faq-question summary::-webkit-details-marker {
+    display: none;
+}
+.text-shadow {
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+}
+/* ...y los demás estilos personalizados */
+
+/* Sophisticated animation for mobile services accordion */
+details.mobile-accordion > summary {
+    list-style: none;
+}
+details.mobile-accordion .content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease-in-out;
+}
+details.mobile-accordion[open] .content {
+    grid-template-rows: 1fr;
+}
+details.mobile-accordion .content > div {
+    overflow: hidden;
+}
+
+/* Staggered animation for mobile menu items */
+.mobile-menu-item {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+.mobile-menu-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.no-transition {
+    transition: none !important;
+}

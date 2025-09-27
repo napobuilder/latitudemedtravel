@@ -13,7 +13,7 @@ import AnimatedSection from '../components/AnimatedSection';
 
 const HomePage: React.FC = () => {
   return (
-    <main>
+    <>
       <Hero />
       <AnimatedSection>
         <TrustBar />
@@ -40,7 +40,7 @@ const HomePage: React.FC = () => {
         <ContactCta />
       </AnimatedSection>
       <Footer />
-    </main>
+    </>
   );
 };
 

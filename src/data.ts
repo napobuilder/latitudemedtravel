@@ -34,6 +34,8 @@ export interface Servicio {
   precioServicio: number;
   incluye: string[];
   doctorIds: string[];
+  heroImageUrl: string;
+  cardImageUrl: string;
 }
 
 export const servicios: Servicio[] = [
@@ -50,7 +52,9 @@ export const servicios: Servicio[] = [
       'Acompañamiento bilingüe personalizado',
       'Seguimiento post-operatorio en Miami'
     ],
-    doctorIds: ['dr_pinto']
+    doctorIds: ['dr_pinto'],
+    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
+    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
   },
   {
     id: 'diseno-de-sonrisa',
@@ -65,7 +69,9 @@ export const servicios: Servicio[] = [
       'Traslados y alojamiento premium',
       'Seguimiento y ajustes'
     ],
-    doctorIds: ['dr_rojas']
+    doctorIds: ['dr_rojas'],
+    heroImageUrl: '/Smile_Design.png',
+    cardImageUrl: '/Smile_Design.png'
   },
   {
     id: 'cirugia-facial',
@@ -80,7 +86,9 @@ export const servicios: Servicio[] = [
       'Cuidado post-operatorio 24/7',
       'Kit de recuperación y medicamentos'
     ],
-    doctorIds: ['dra_quintero']
+    doctorIds: ['dra_quintero'],
+    heroImageUrl: '/18-blefaroplastia.jpg',
+    cardImageUrl: '/18-blefaroplastia.jpg'
   },
   {
     id: 'medicina-estetica',
@@ -95,7 +103,9 @@ export const servicios: Servicio[] = [
       'Sesiones de seguimiento',
       'Asesoría de mantenimiento'
     ],
-    doctorIds: ['dra_quintero']
+    doctorIds: ['dra_quintero'],
+    heroImageUrl: '/cuidado-piel-frio.jpg',
+    cardImageUrl: '/cuidado-piel-frio.jpg'
   },
   {
     id: 'implante-capilar',
@@ -110,6 +120,8 @@ export const servicios: Servicio[] = [
       'Kit de cuidado post-implante',
       'Revisiones de seguimiento durante 1 año'
     ],
-    doctorIds: ['dr_pinto', 'dra_quintero']
+    doctorIds: ['dr_pinto', 'dra_quintero'],
+    heroImageUrl: '/evolucion-del-trasplante-capilar.jpg',
+    cardImageUrl: '/evolucion-del-trasplante-capilar.jpg'
   }
 ];

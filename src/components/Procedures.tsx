@@ -11,7 +11,7 @@ const Procedures: React.FC = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicios.map((servicio) => (
             <div key={servicio.id} className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-              <img src={`https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2670&auto=format&fit=crop`} alt={`Imagen de procedimiento de ${servicio.nombre}`} className="w-full h-56 object-cover" />
+              <img src={servicio.cardImageUrl} alt={`Imagen de procedimiento de ${servicio.nombre}`} className="w-full h-56 object-cover" />
               <div className="p-6 text-left">
                 <h3 className="text-xl font-bold text-brand-blue-900 mb-2">{servicio.nombre}</h3>
                 <p className="text-gray-600 mb-4">{servicio.subtitulo}</p>

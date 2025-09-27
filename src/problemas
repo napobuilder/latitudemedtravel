@@ -1,11 +1,221 @@
-[vite] connecting... client:495:9
-Uncaught ReferenceError: useState is not defined
-    Header Header.tsx:8
-    React 10
-    performWorkUntilDeadline scheduler.development.js:45
-Header.tsx:9:37
-    Header Header.tsx:8
-    React 10
-    performWorkUntilDeadline scheduler.development.js:45
-[vite] connected. client:618:15
-Error al interpretar el valor para '-webkit-text-size-adjust'.  Declaración rechazada. localhost:3000:137:29
+
+Skip to main content
+
+
+W
+Switch teams
+Projects
+Builds
+Extensions
+Domains
+Members
+Audit log
+Security Scorecard
+Usage & billing
+Team settings
+Visual editor dashboard
+Upgrade
+
+
+Projects
+latitudemedtraveltemp
+Switch projects
+Join NTL DEPLOY
+
+News
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Support
+Project navigation
+Project overview
+Project configuration
+Deploys
+Preview Servers
+Logs
+Metrics
+Domain management
+Forms
+Blobs
+Extensions
+Neon
+Deploy detailsYour deploy failed due to an error
+Deploy failed for latitudemedtraveltemp
+A failure prevented us from deploying your project.
+Why did it fail?
+fix(lint): correct JSX attributes and other linting errors
+Today at 7:24 PM, by napobuildernapobuilder on GitHub
+
+Production: master@1ee8ae3
+
+Retry
+Deploy settings
+Delete deploy
+Deploy log
+Why did it fail?
+
+
+
+
+Maximize log
+Initializing
+Complete
+Building
+Failed
+7:25:19 PM: Netlify Build                                                 
+7:25:19 PM: ────────────────────────────────────────────────────────────────
+7:25:19 PM: ​
+7:25:19 PM: ❯ Version
+7:25:19 PM:   @netlify/build 35.1.8
+7:25:19 PM: ​
+7:25:19 PM: ❯ Flags
+7:25:19 PM:   accountId: 6861d4f64a386cd9d7ac82e0
+7:25:19 PM:   baseRelDir: true
+7:25:19 PM:   buildId: 68d8723c3c086b0007d414e8
+7:25:19 PM:   deployId: 68d8723c3c086b0007d414ea
+7:25:19 PM: ​
+7:25:19 PM: ❯ Current directory
+7:25:19 PM:   /opt/build/repo
+7:25:19 PM: ​
+7:25:19 PM: ❯ Config file
+7:25:19 PM:   No config file was defined: using default values.
+7:25:19 PM: ​
+7:25:19 PM: ❯ Context
+7:25:19 PM:   production
+7:25:19 PM: ​
+7:25:19 PM: ❯ Installing extensions
+7:25:19 PM:    - neon
+7:25:20 PM: ​
+7:25:20 PM: ❯ Loading extensions
+7:25:20 PM:    - neon
+7:25:21 PM: ​
+7:25:21 PM: Build command from Netlify app                                
+7:25:21 PM: ────────────────────────────────────────────────────────────────
+7:25:21 PM: ​
+7:25:21 PM: $ npm run build
+7:25:21 PM: > latitude-med-travel@1.0.0 build
+7:25:21 PM: > vite build
+7:25:21 PM: vite v5.4.20 building for production...
+7:25:21 PM: transforming...
+7:25:21 PM: ✓ 47 modules transformed.
+7:25:21 PM: x Build failed in 620ms
+7:25:21 PM: error during build:
+7:25:21 PM: Could not resolve "./ServicesIcon" from "src/components/Header.tsx"
+7:25:21 PM: file: /opt/build/repo/src/components/Header.tsx
+7:25:21 PM:     at getRollupError (file:///opt/build/repo/node_modules/rollup/dist/es/shared/parseAst.js:401:41)
+7:25:21 PM:     at error (file:///opt/build/repo/node_modules/rollup/dist/es/shared/parseAst.js:397:42)
+7:25:21 PM:     at ModuleLoader.handleInvalidResolvedId (file:///opt/build/repo/node_modules/rollup/dist/es/shared/node-entry.js:21564:24)
+7:25:21 PM:     at file:///opt/build/repo/node_modules/rollup/dist/es/shared/node-entry.js:21524:26
+7:25:22 PM: Failed during stage 'building site': Build script returned non-zero exit code: 2 (https://ntl.fyi/exit-code-2)
+7:25:22 PM: ​
+7:25:22 PM: "build.command" failed                                        
+7:25:22 PM: ────────────────────────────────────────────────────────────────
+7:25:22 PM: ​
+7:25:22 PM:   Error message
+7:25:22 PM:   Command failed with exit code 1: npm run build (https://ntl.fyi/exit-code-1)
+7:25:22 PM: ​
+7:25:22 PM:   Error location
+7:25:22 PM:   In Build command from Netlify app:
+7:25:22 PM:   npm run build
+7:25:22 PM: ​
+7:25:22 PM:   Resolved config
+7:25:22 PM:   build:
+7:25:22 PM:     command: npm run build
+7:25:22 PM:     commandOrigin: ui
+7:25:22 PM:     publish: /opt/build/repo/dist
+7:25:22 PM:     publishOrigin: ui
+7:25:22 PM: Build failed due to a user error: Build script returned non-zero exit code: 2
+7:25:22 PM: Failing build: Failed to build site
+7:25:23 PM: Finished processing build request in 17.911s
+Deploying
+Skipped
+Cleanup
+Skipped
+Post-processing
+Skipped
+Docs
+Pricing
+Support
+Blog
+Changelog
+Terms
+© 2025 Netlify
+

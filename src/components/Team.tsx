@@ -1,5 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { equipo } from '../data';
+
+// Helper para codificar URLs con espacios y caracteres especiales
+const encodeImageUrl = (url: string): string => {
+  // Si la URL ya está codificada o es remota, retornarla tal cual
+  if (url.startsWith('http://') || url.startsWith('https://') || url.includes('%')) {
+    return url;
+  }
+  
+  // Dividir la URL en partes para codificar solo el nombre del archivo
+  const parts = url.split('/');
+  const filename = parts[parts.length - 1];
+  const path = parts.slice(0, -1).join('/');
+  
+  // Codificar el nombre del archivo (espacios y caracteres especiales)
+  const encodedFilename = encodeURIComponent(filename);
+  
+  return `${path}/${encodedFilename}`;
+};
 
 interface TeamMemberCardProps {
   miembro: {
@@ -20,6 +38,9 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ miembro }) => {
   const textoAMostrar = isExpanded && tieneDescripcionCompleta 
     ? miembro.descripcionCompleta 
     : (miembro.descripcion || miembro.descripcionCompleta || '');
+  
+  // Codificar la URL de la imagen para manejar espacios y caracteres especiales
+  const encodedImageUrl = useMemo(() => encodeImageUrl(miembro.fotoUrl), [miembro.fotoUrl]);
 
   return (
     <div className="group relative bg-white rounded-3xl p-8 md:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100">
@@ -36,7 +57,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ miembro }) => {
             {/* Foto */}
             <div className="relative w-40 h-40 md:w-44 md:h-44 rounded-full overflow-hidden border-4 border-white shadow-2xl group-hover:border-brand-yellow-400 transition-all duration-500 transform group-hover:scale-105">
               <img 
-                src={miembro.fotoUrl} 
+                src={encodedImageUrl} 
                 alt={`Foto de ${miembro.nombre}`} 
                 className="w-full h-full object-cover object-center"
                 style={{ 

@@ -6,6 +6,7 @@ import Procedures from '../components/Procedures';
 import Testimonials from '../components/Testimonials';
 import Naddia from '../components/Naddia';
 import Experts from '../components/Experts';
+import Team from '../components/Team';
 import Faq from '../components/Faq';
 import ContactCta from '../components/ContactCta';
 import Footer from '../components/Footer';
@@ -32,6 +33,9 @@ const HomePage: React.FC = () => {
       </AnimatedSection>
       <AnimatedSection>
         <Experts />
+      </AnimatedSection>
+      <AnimatedSection>
+        <Team />
       </AnimatedSection>
       <AnimatedSection>
         <Faq />

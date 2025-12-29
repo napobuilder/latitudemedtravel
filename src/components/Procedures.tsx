@@ -15,7 +15,7 @@ const Procedures: React.FC = () => {
         </div>
 
         {/* Procedimientos Faciales */}
-        <div className="mb-16">
+        <div id="procedimientos-faciales" className="mb-16">
           <h3 className="text-2xl md:text-3xl font-bold text-brand-blue-900 mb-8 text-center">Procedimientos Faciales</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {serviciosFaciales.map((servicio) => (
@@ -44,7 +44,7 @@ const Procedures: React.FC = () => {
         </div>
 
         {/* Procedimientos Corporales */}
-        <div>
+        <div id="procedimientos-corporales">
           <h3 className="text-2xl md:text-3xl font-bold text-brand-blue-900 mb-8 text-center">Procedimientos Corporales</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {serviciosCorporales.map((servicio) => (

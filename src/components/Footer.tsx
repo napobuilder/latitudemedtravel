@@ -33,11 +33,8 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="font-bold tracking-wider uppercase">Servicios</h3>
             <ul className="mt-4 space-y-2 text-sm">
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Cirugía Corporal</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Cirugía Facial</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Medicina Estética</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Diseño de Sonrisa</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Implante Capilar</a></li>
+              <li><a href="/#procedimientos-corporales" className="text-gray-300 hover:text-white transition-colors">Cirugía Corporal</a></li>
+              <li><a href="/#procedimientos-faciales" className="text-gray-300 hover:text-white transition-colors">Cirugía Facial</a></li>
             </ul>
           </div>
           {/* Contact Info */}

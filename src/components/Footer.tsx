@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
           {/* Logo & Social */}
           <div className="col-span-1 md:col-span-2 lg:col-span-1">
             <a href="#" className="flex items-center gap-3">
-              <img src="/assets/images/logo-latitude.png" alt="Icono de Latitude Med Travel" className="h-10 w-auto" />
+              <img src="/assets/images/logo-latitude.png" alt="Icono de Latitude Med Travel" className="h-10 w-auto brightness-0 invert" />
               <span className="font-display text-lg tracking-wide uppercase text-brand-yellow-400">
                 LATITUDE MED TRAVEL
               </span>

@@ -1,6 +1,10 @@
 import React from 'react';
+import { servicios } from '../data';
 
 const ContactCta: React.FC = () => {
+  // Organizar servicios por categoría para el select
+  const serviciosFaciales = servicios.filter(s => s.categoria === 'facial');
+  const serviciosCorporales = servicios.filter(s => s.categoria === 'corporal');
   return (
     <section id="contacto" className="py-20 md:py-32 relative overflow-hidden bg-white">
       <div className="absolute inset-0">
@@ -34,14 +38,23 @@ const ContactCta: React.FC = () => {
                 </div>
                 <div>
                   <label htmlFor="procedure" className="block text-sm font-medium text-gray-700">Procedimiento de Interés</label>
-                  <select id="procedure" name="procedure" className="mt-1 block w-full px-4 py-3 border border-gray-300 bg-white rounded-lg shadow-sm focus:outline-none focus:ring-brand-blue-700 focus:border-brand-blue-700 text-gray-800">
-                    <option>Seleccionar procedimiento...</option>
-                    <option>Cirugía Corporal</option>
-                    <option>Cirugía Facial</option>
-                    <option>Medicina Estética</option>
-                    <option>Diseño de Sonrisa</option>
-                    <option>Implante Capilar</option>
-                    <option>Otro</option>
+                  <select id="procedure" name="procedure" required className="mt-1 block w-full px-4 py-3 border border-gray-300 bg-white rounded-lg shadow-sm focus:outline-none focus:ring-brand-blue-700 focus:border-brand-blue-700 text-gray-800">
+                    <option value="">Seleccionar procedimiento...</option>
+                    <optgroup label="Procedimientos Faciales">
+                      {serviciosFaciales.map((servicio) => (
+                        <option key={servicio.id} value={servicio.nombre}>
+                          {servicio.nombre}
+                        </option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Procedimientos Corporales">
+                      {serviciosCorporales.map((servicio) => (
+                        <option key={servicio.id} value={servicio.nombre}>
+                          {servicio.nombre}
+                        </option>
+                      ))}
+                    </optgroup>
+                    <option value="Otro">Otro (especificar en mensaje)</option>
                   </select>
                 </div>
                 <div>

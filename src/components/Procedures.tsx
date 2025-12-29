@@ -61,9 +61,20 @@ const Procedures: React.FC = () => {
                 <div className="p-6 text-left">
                   <h4 className="text-xl font-bold text-brand-blue-900 mb-2">{servicio.nombre}</h4>
                   <p className="text-gray-600 mb-4 text-sm">{servicio.subtitulo}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-lg font-bold text-brand-blue-900">${servicio.precioConsulta} USD</span>
-                    <Link to={`/servicios/${servicio.id}`} className="font-semibold text-brand-blue-700 hover:text-brand-blue-900 text-sm">
+                  <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="inline-block px-2 py-1 bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold rounded uppercase">
+                        Consulta Virtual
+                      </span>
+                    </div>
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <span className="text-2xl font-bold text-brand-blue-900">${servicio.precioConsulta}</span>
+                      <span className="text-sm text-gray-600">USD</span>
+                    </div>
+                    <p className="text-xs text-gray-500">Precio de valoración inicial</p>
+                  </div>
+                  <div className="mt-4">
+                    <Link to={`/servicios/${servicio.id}`} className="font-semibold text-brand-blue-700 hover:text-brand-blue-900 text-sm inline-flex items-center">
                       Saber Más &rarr;
                     </Link>
                   </div>
@@ -90,9 +101,20 @@ const Procedures: React.FC = () => {
                 <div className="p-6 text-left">
                   <h4 className="text-xl font-bold text-brand-blue-900 mb-2">{servicio.nombre}</h4>
                   <p className="text-gray-600 mb-4 text-sm">{servicio.subtitulo}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-lg font-bold text-brand-blue-900">${servicio.precioConsulta} USD</span>
-                    <Link to={`/servicios/${servicio.id}`} className="font-semibold text-brand-blue-700 hover:text-brand-blue-900 text-sm">
+                  <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="inline-block px-2 py-1 bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold rounded uppercase">
+                        Consulta Virtual
+                      </span>
+                    </div>
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <span className="text-2xl font-bold text-brand-blue-900">${servicio.precioConsulta}</span>
+                      <span className="text-sm text-gray-600">USD</span>
+                    </div>
+                    <p className="text-xs text-gray-500">Precio de valoración inicial</p>
+                  </div>
+                  <div className="mt-4">
+                    <Link to={`/servicios/${servicio.id}`} className="font-semibold text-brand-blue-700 hover:text-brand-blue-900 text-sm inline-flex items-center">
                       Saber Más &rarr;
                     </Link>
                   </div>
@@ -160,9 +182,20 @@ const Procedures: React.FC = () => {
                     <div className="p-6 text-left">
                       <h4 className="text-xl font-bold text-brand-blue-900 mb-2">{servicio.nombre}</h4>
                       <p className="text-gray-600 mb-4 text-sm">{servicio.subtitulo}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-lg font-bold text-brand-blue-900">${servicio.precioConsulta} USD</span>
-                        <Link to={`/servicios/${servicio.id}`} className="font-semibold text-brand-blue-700 hover:text-brand-blue-900 text-sm">
+                      <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="inline-block px-2 py-1 bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold rounded uppercase">
+                            Consulta Virtual
+                          </span>
+                        </div>
+                        <div className="flex items-baseline gap-2 mb-1">
+                          <span className="text-2xl font-bold text-brand-blue-900">${servicio.precioConsulta}</span>
+                          <span className="text-sm text-gray-600">USD</span>
+                        </div>
+                        <p className="text-xs text-gray-500">Precio de valoración inicial</p>
+                      </div>
+                      <div className="mt-4">
+                        <Link to={`/servicios/${servicio.id}`} className="font-semibold text-brand-blue-700 hover:text-brand-blue-900 text-sm inline-flex items-center">
                           Saber Más &rarr;
                         </Link>
                       </div>
@@ -200,9 +233,20 @@ const Procedures: React.FC = () => {
                     <div className="p-6 text-left">
                       <h4 className="text-xl font-bold text-brand-blue-900 mb-2">{servicio.nombre}</h4>
                       <p className="text-gray-600 mb-4 text-sm">{servicio.subtitulo}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-lg font-bold text-brand-blue-900">${servicio.precioConsulta} USD</span>
-                        <Link to={`/servicios/${servicio.id}`} className="font-semibold text-brand-blue-700 hover:text-brand-blue-900 text-sm">
+                      <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="inline-block px-2 py-1 bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold rounded uppercase">
+                            Consulta Virtual
+                          </span>
+                        </div>
+                        <div className="flex items-baseline gap-2 mb-1">
+                          <span className="text-2xl font-bold text-brand-blue-900">${servicio.precioConsulta}</span>
+                          <span className="text-sm text-gray-600">USD</span>
+                        </div>
+                        <p className="text-xs text-gray-500">Precio de valoración inicial</p>
+                      </div>
+                      <div className="mt-4">
+                        <Link to={`/servicios/${servicio.id}`} className="font-semibold text-brand-blue-700 hover:text-brand-blue-900 text-sm inline-flex items-center">
                           Saber Más &rarr;
                         </Link>
                       </div>

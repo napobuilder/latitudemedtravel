@@ -41,8 +41,15 @@ const ServiceDetailPage: React.FC = () => {
           {/* Left Column (Sticky) */}
           <aside className="lg:col-span-1 lg:sticky lg:top-28 self-start mb-12 lg:mb-0">
             <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-              <p className="text-lg text-gray-600">Consulta Virtual</p>
-              <p className="text-4xl font-bold text-brand-blue-900 my-2">${servicioActual.precioConsulta} <span className="text-base font-medium">USD</span></p>
+              <div className="mb-4">
+                <span className="inline-block px-3 py-1 bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold rounded uppercase mb-3">
+                  Consulta Virtual
+                </span>
+              </div>
+              <div className="mb-2">
+                <p className="text-4xl font-bold text-brand-blue-900">${servicioActual.precioConsulta} <span className="text-lg font-medium">USD</span></p>
+              </div>
+              <p className="text-sm text-gray-500 mb-4">Precio de valoración inicial</p>
               <button onClick={handleAddToCart} className="w-full mt-4 bg-brand-yellow-400 text-brand-blue-900 font-bold py-3 px-6 rounded-full hover:bg-brand-yellow-500 transition-transform transform hover:scale-105">
                 Agendar Consulta Virtual
               </button>

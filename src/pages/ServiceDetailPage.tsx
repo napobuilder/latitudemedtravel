@@ -79,7 +79,9 @@ const ServiceDetailPage: React.FC = () => {
                 {doctoresAsociados.map(doctor => (
                   <div key={doctor.id} className="bg-white p-6 rounded-xl shadow-md border border-gray-100">
                     <div className="flex items-start gap-4">
-                      <img src={doctor.fotoUrl} alt={`Foto de ${doctor.alias}`} className="w-24 h-24 rounded-full border-4 border-brand-yellow-400 object-cover flex-shrink-0" />
+                      <div className="w-24 h-24 bg-gray-200 rounded-full border-4 border-brand-yellow-400 flex-shrink-0 overflow-hidden">
+                        <img src={doctor.fotoUrl} alt={`Foto de ${doctor.alias}`} className="w-full h-full object-cover" loading="lazy" />
+                      </div>
                       <div>
                         <h3 className="text-xl font-bold text-brand-blue-900 mb-1">{doctor.alias}</h3>
                         <p className="text-brand-blue-700 font-semibold text-sm mb-3">{doctor.especialidad}</p>
@@ -94,8 +96,12 @@ const ServiceDetailPage: React.FC = () => {
 
               <h2 className="mt-12">Resultados (Antes y Después)</h2>
               <div className="grid grid-cols-2 gap-4 not-prose">
-                <img src={servicioActual.cardImageUrl} alt="Ejemplo de resultado 1" className="rounded-lg shadow-md" />
-                <img src={servicioActual.heroImageUrl} alt="Ejemplo de resultado 2" className="rounded-lg shadow-md" />
+                <div className="bg-gray-200 rounded-lg shadow-md overflow-hidden aspect-square">
+                  <img src={servicioActual.cardImageUrl} alt="Ejemplo de resultado 1" className="w-full h-full object-cover" loading="lazy" />
+                </div>
+                <div className="bg-gray-200 rounded-lg shadow-md overflow-hidden aspect-square">
+                  <img src={servicioActual.heroImageUrl} alt="Ejemplo de resultado 2" className="w-full h-full object-cover" loading="lazy" />
+                </div>
               </div>
 
             </div>

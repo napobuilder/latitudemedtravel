@@ -11,8 +11,8 @@ const Experts: React.FC = () => {
           {doctores.map((doctor) => (
             <div key={doctor.id} className="bg-white rounded-2xl shadow-lg transform hover:-translate-y-2 transition-transform duration-300 p-8">
               <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
-                <div className="relative w-32 h-32 flex-shrink-0">
-                  <img src={doctor.fotoUrl} alt={`Foto de ${doctor.alias}`} className="w-full h-full rounded-full border-4 border-brand-yellow-400 object-cover object-center" style={{ objectPosition: 'center center' }} />
+                <div className="relative w-32 h-32 flex-shrink-0 bg-gray-200 rounded-full overflow-hidden">
+                  <img src={doctor.fotoUrl} alt={`Foto de ${doctor.alias}`} className="w-full h-full rounded-full border-4 border-brand-yellow-400 object-cover object-center" style={{ objectPosition: 'center center' }} loading="lazy" />
                 </div>
                 <div className="text-center md:text-left flex-1">
                   <h3 className="text-2xl font-bold text-brand-blue-900 mb-2">{doctor.alias}</h3>

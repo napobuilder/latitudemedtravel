@@ -133,7 +133,7 @@ const Testimonials: React.FC = () => {
           <div
             ref={carouselRef}
             className="relative bg-black rounded-3xl shadow-2xl overflow-hidden"
-            style={{ aspectRatio: '9/16' }}
+            style={{ aspectRatio: '9/16', minHeight: '400px' }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}

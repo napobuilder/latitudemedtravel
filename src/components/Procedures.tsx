@@ -20,7 +20,14 @@ const Procedures: React.FC = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {serviciosFaciales.map((servicio) => (
               <div key={servicio.id} className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                <img src={servicio.cardImageUrl} alt={`Imagen de procedimiento de ${servicio.nombre}`} className="w-full h-56 object-cover" />
+                <div className="w-full h-56 bg-gray-200 relative overflow-hidden">
+                  <img 
+                    src={servicio.cardImageUrl} 
+                    alt={`Imagen de procedimiento de ${servicio.nombre}`} 
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
                 <div className="p-6 text-left">
                   <h4 className="text-xl font-bold text-brand-blue-900 mb-2">{servicio.nombre}</h4>
                   <p className="text-gray-600 mb-4 text-sm">{servicio.subtitulo}</p>
@@ -42,7 +49,14 @@ const Procedures: React.FC = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {serviciosCorporales.map((servicio) => (
               <div key={servicio.id} className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                <img src={servicio.cardImageUrl} alt={`Imagen de procedimiento de ${servicio.nombre}`} className="w-full h-56 object-cover" />
+                <div className="w-full h-56 bg-gray-200 relative overflow-hidden">
+                  <img 
+                    src={servicio.cardImageUrl} 
+                    alt={`Imagen de procedimiento de ${servicio.nombre}`} 
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
                 <div className="p-6 text-left">
                   <h4 className="text-xl font-bold text-brand-blue-900 mb-2">{servicio.nombre}</h4>
                   <p className="text-gray-600 mb-4 text-sm">{servicio.subtitulo}</p>

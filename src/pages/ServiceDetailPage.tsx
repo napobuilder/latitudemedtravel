@@ -94,16 +94,6 @@ const ServiceDetailPage: React.FC = () => {
                 ))}
               </div>
 
-              <h2 className="mt-12">Resultados (Antes y Después)</h2>
-              <div className="grid grid-cols-2 gap-4 not-prose">
-                <div className="bg-gray-200 rounded-lg shadow-md overflow-hidden aspect-square">
-                  <img src={servicioActual.cardImageUrl} alt="Ejemplo de resultado 1" className="w-full h-full object-cover" loading="lazy" />
-                </div>
-                <div className="bg-gray-200 rounded-lg shadow-md overflow-hidden aspect-square">
-                  <img src={servicioActual.heroImageUrl} alt="Ejemplo de resultado 2" className="w-full h-full object-cover" loading="lazy" />
-                </div>
-              </div>
-
             </div>
           </div>
         </div>

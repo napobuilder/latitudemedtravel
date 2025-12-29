@@ -130,89 +130,89 @@ export const servicios: Servicio[] = [
   {
     id: 'mamoplastia-aumento',
     nombre: 'Mamoplastia de Aumento',
-    subtitulo: 'Aumento de senos con implantes.',
-    descripcion: 'La mamoplastia de aumento es un procedimiento que aumenta el tamaño y mejora la forma de los senos mediante la colocación de implantes mamarios. Este tratamiento puede mejorar la proporción corporal, restaurar el volumen perdido y aumentar la confianza del paciente.',
+    subtitulo: 'Aumento del volumen mamario con implantes para lograr forma simétrica y armónica.',
+    descripcion: 'La mamoplastia de aumento es una cirugía que requiere la utilización de implantes que se colocan bajo el tejido glandular y muscular. La finalidad es aumentar el volumen mamario, darles una forma simétrica y armónica a las mamas con fines estéticos, ya sea por razones de disminución en su desarrollo, cambios después de la lactancia materna o por una pérdida masiva de peso. Entre los diferentes tipos de implantes se encuentran: de solución salina (se introducen sin volumen y se llenan con solución salina, permitiendo controlar exactamente el volumen final) y de silicona (completamente sellados, con volumen fijo, garantizando más firmeza al seno, disponibles en diferentes formas: redondos con proyección baja, media o alta, o anatómicos en forma de lágrima). Las cirugías se clasifican según el tipo de incisiones: incisión axilar o transaxilar (en la parte media de la axila) e incisión areolar inferior (alrededor de la parte inferior de la areola, la más utilizada). El aumento mamario estiliza y da características especiales a la silueta femenina, logrando una figura armónica. Los resultados son de larga duración, pero no permanentes, ya que se puede tomar la decisión de retirarse los implantes en el momento que se desee.',
     precioConsulta: 55,
     categoria: 'corporal',
     doctorIds: ['dr_pinto'],
-    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
-    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+    heroImageUrl: 'https://drfreddypinto.com.co/drpinto/images/serviciosnuevos/MAMOAUMENTO.jpg',
+    cardImageUrl: 'https://drfreddypinto.com.co/drpinto/images/serviciosnuevos/MAMOAUMENTO.jpg'
   },
   {
     id: 'mamoplastia-reduccion',
     nombre: 'Mamoplastia de Reducción',
-    subtitulo: 'Reducción del tamaño del busto.',
-    descripcion: 'La mamoplastia de reducción es un procedimiento que reduce el tamaño de los senos eliminando exceso de tejido mamario, grasa y piel. Este tratamiento alivia molestias físicas, mejora la proporción corporal y proporciona un aspecto más equilibrado.',
+    subtitulo: 'Reducción del volumen mamario y elevación de senos (pexia mamaria).',
+    descripcion: 'Factores como la lactancia, pérdida de peso y la gravedad, hacen que los senos alteren sus dimensiones y su ubicación. Es normal que la mamoplastia de reducción vaya acompañada de una pexia mamaria, que es el nombre técnico que se le da a la elevación de senos. Esta cirugía también permite reducir el tamaño de la areola para dar un mejor efecto visual a la mama. Para esta cirugía se pueden usar múltiples técnicas quirúrgicas cuya elección dependerá de la calidad de la piel, el volumen del seno, el tamaño y posición de la areola: técnica areolar (cuando la caída es muy leve, requiere subir de 2 a 3 cm), técnica vertical (cuando la caída y el peso del seno es mayor) y técnica T invertida (para pacientes con volumen considerable, más invasiva pero logra disminuir el volumen y dar un realce natural del busto). Está dirigida a las mujeres que quieren reducir el volumen de su busto, ya sea porque les genera molestias en la espalda, después de una pérdida de peso considerable, luego de la lactancia o todas aquellas que no están conformes con su apariencia física. El tiempo estimado para este procedimiento es de 2 a 4 horas, con anestesia general. Los resultados son inmediatamente visibles y de larga duración, el nuevo tamaño ayudará a aliviar los problemas de espalda y dolor.',
     precioConsulta: 55,
     categoria: 'corporal',
     doctorIds: ['dr_pinto'],
-    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
-    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+    heroImageUrl: 'https://drfreddypinto.com.co/drpinto/images/serviciosnuevos/reduccion.jpg',
+    cardImageUrl: 'https://drfreddypinto.com.co/drpinto/images/serviciosnuevos/reduccion.jpg'
   },
   {
     id: 'liposuccion-lipoescultura',
     nombre: 'Liposucción / Lipoescultura',
-    subtitulo: 'Remodelación del contorno corporal y extracción de grasa.',
-    descripcion: 'La liposucción y lipoescultura son procedimientos que eliminan depósitos de grasa localizados y remodelan el contorno corporal. La lipoescultura de alta definición (HD) además define y esculpe la musculatura subyacente, creando un aspecto atlético y tonificado.',
+    subtitulo: 'Eliminación de grasa corporal localizada para moldear la silueta del paciente.',
+    descripcion: 'Normalmente la liposucción se lleva a cabo en el abdomen, caderas y en los muslos, aunque también puede realizarse en otras zonas del cuerpo como brazos, rodillas, tobillos, papada, glúteos o rostro. El objetivo fundamental es retirar la grasa corporal con el fin de eliminar la adiposidad localizada, celulitis, moldear la silueta del paciente y en menor medida reducir el peso corporal. Este procedimiento no es un tratamiento para el control de la obesidad ni el sobrepeso. Existen diferentes técnicas: convencional (aplicación de líquidos con vasoconstrictor directamente en la grasa), micro aire PAL (Power Assisted Liposuction, con movimientos anteroposteriores en la cánula), ultrasónica o Vaser (ondas ultrasónicas que rompen y emulsifican la grasa, útil en zonas con abundante fibrosis) y láser (lipolisis láser, que destruye las membranas de los adipocitos). Esta cirugía está diseñada para personas que deseen eliminar tejido graso, candidatos que han tratado de quitar esos gorditos con ejercicio y dieta sin éxito, o que quieren moldear su cuerpo y poseen un peso normal con piel elástica y firme. Se recomienda contar con 5 días para poder reintegrarse a sus actividades laborales y personales.',
     precioConsulta: 55,
     categoria: 'corporal',
     doctorIds: ['dr_pinto'],
-    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
-    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+    heroImageUrl: 'https://drfreddypinto.com.co/drpinto/images/serviciosnuevos/lipo.jpg',
+    cardImageUrl: 'https://drfreddypinto.com.co/drpinto/images/serviciosnuevos/lipo.jpg'
   },
   {
     id: 'lipectomia-abdominoplastia',
     nombre: 'Lipectomía (Abdominoplastia)',
-    subtitulo: 'Eliminación de exceso de piel y grasa abdominal.',
-    descripcion: 'La abdominoplastia es un procedimiento que elimina el exceso de piel y grasa del abdomen, tensa los músculos abdominales y mejora el contorno del vientre. Este tratamiento es ideal para pacientes que han perdido peso significativo o después del embarazo.',
+    subtitulo: 'Eliminación de exceso de piel y grasa abdominal con refuerzo de músculos abdominales.',
+    descripcion: 'Esta técnica quirúrgica consiste en realizar una incisión por encima del pubis a la altura del pliegue abdominal inferior, donde se levanta y se retira el exceso de piel y de grasa. Se refuerzan los músculos del abdomen permitiendo una apariencia más firme. Este procedimiento permite retirar tejido indeseado en región abdominal el cual se obtuvo ya sea por pérdida de peso, a causa del embarazo o condiciones hereditarias entre otras. Si usted presenta flacidez en la piel, estrías bajo el ombligo y abdomen prominente, usted es candidato para practicarse esta cirugía. Por lo general, este procedimiento es practicado a pacientes que después de haber estado embarazadas quedan con estrías, flacidez de piel y debilidad abdominal marcada y a personas que han tenido pérdidas considerables de peso, en su mayoría luego de una cirugía bariátrica. Esta cirugía puede durar hasta 3 horas y podrá regresar a sus actividades diarias en un lapso de 2 semanas. Se espera obtener con este procedimiento una cintura definida, mejorar el aspecto del ombligo, retirar casi por completo las estrías localizadas en la parte inferior del abdomen y tensar la piel en la región abdominal. Los resultados finales y definitivos se verán a los 12 meses de este procedimiento.',
     precioConsulta: 55,
     categoria: 'corporal',
     doctorIds: ['dr_pinto'],
-    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
-    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+    heroImageUrl: 'https://drfreddypinto.com.co/drpinto/images/serviciosnuevos/LIPECTOMIA.jpg',
+    cardImageUrl: 'https://drfreddypinto.com.co/drpinto/images/serviciosnuevos/LIPECTOMIA.jpg'
   },
   {
     id: 'gluteoplastia',
     nombre: 'Gluteoplastia',
-    subtitulo: 'Aumento o remodelación de glúteos.',
-    descripcion: 'La gluteoplastia es un procedimiento que aumenta o remodela los glúteos mediante implantes o transferencia de grasa (BBL - Brazilian Butt Lift). Este tratamiento mejora la forma, volumen y proyección de los glúteos, creando una silueta más armoniosa y atractiva.',
+    subtitulo: 'Aumento y moldeamiento de la forma de los glúteos mediante implantes o lipoinyección.',
+    descripcion: 'La elevación de los glúteos puede realizarse mediante la colocación de implantes, dejando únicamente una cicatriz a nivel del pliegue interglúteo o con lipoinyección glútea la cual es realizada por las incisiones de la liposucción. En este procedimiento se busca aumentar y moldear la forma de los glúteos o nalgas. Existen dos tipos principales: lipoinyección glútea (se aprovecha la grasa extraída de la liposucción para realizar un aumento de volumen en los glúteos, transfiriendo aproximadamente 300-350cc de grasa en cada glúteo, tiene la ventaja que no habrá rechazo por parte del organismo y los resultados son más naturales) e implantes de silicona (similares a los implantes de senos pero con características especiales, más grandes y aplanados, semejando la forma de los glúteos, utilizados en personas con poco tejido adiposo y músculos de los glúteos poco desarrollados). La gluteoplastia es indicada para pacientes que desean mejorar el volumen y proyección de la región glútea, o que encuentran cierta desproporción en la forma de los glúteos. Estos procedimientos pueden tener una duración hasta de 2 horas y pueden ser combinados con una lipoescultura en las áreas circundantes para definir mejor la curvatura de los glúteos. Los resultados parciales pueden verse en cuestión de semanas cuando los morados y la inflamación disminuya en un 90%.',
     precioConsulta: 55,
     categoria: 'corporal',
     doctorIds: ['dr_pinto'],
-    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
-    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+    heroImageUrl: 'https://drfreddypinto.com.co/drpinto/images/serviciosnuevos/GLUTEO.jpg',
+    cardImageUrl: 'https://drfreddypinto.com.co/drpinto/images/serviciosnuevos/GLUTEO.jpg'
   },
   {
     id: 'marcacion-abdomen',
     nombre: 'Marcación de Abdomen',
-    subtitulo: 'Definición de los músculos abdominales (frecuentemente parte de la lipoescultura de alta definición).',
-    descripcion: 'La marcación de abdomen es un procedimiento avanzado que define y resalta los músculos abdominales mediante técnicas de lipoescultura de alta definición. Este tratamiento crea un aspecto de "six-pack" o abdomen definido, ideal para pacientes que buscan un resultado atlético y esculpido.',
+    subtitulo: 'Resaltar las marcas laterales y centrales del abdomen para lograr abdominales marcados.',
+    descripcion: 'Lucir unos abdominales marcados es el sueño de muchos y este es una intervención que ha logrado que deje de serlo. Este procedimiento permite resaltar las marcas laterales y centrales del abdomen. No es una solución de pérdida de peso. Se suele utilizar en personas con un índice de masa corporal normal y que su dieta y rutina de ejercicio no le han permitido una marcación abdominal. Este tipo de procedimiento está dirigido a mujeres y hombres que quieren lucir un abdomen definido y marcado y que las rutinas de ejercicios y un modo de vida saludable no han sido suficientes para lograrlo. Este procedimiento no es aconsejado realizarlo en pacientes con problemas de sobrepeso y obesidad. La combinación de la lipoescultura en otras áreas le ayudará a conseguir unos muy buenos resultados que serán perceptibles de manera inmediata, pero a medida que baje la inflamación se notarán aún más en unas cuantas semanas. No es un procedimiento permanente y el paciente debe aceptar una rutina de ejercicios y dieta que ayudará a que los resultados sean duraderos.',
     precioConsulta: 55,
     categoria: 'corporal',
     doctorIds: ['dr_pinto'],
-    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
-    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+    heroImageUrl: 'https://drfreddypinto.com.co/drpinto/images/serviciosnuevos/marcacion.jpg',
+    cardImageUrl: 'https://drfreddypinto.com.co/drpinto/images/serviciosnuevos/marcacion.jpg'
   },
   {
     id: 'retiro-biopolimeros',
     nombre: 'Retiro de Biopolímeros',
-    subtitulo: 'Extracción quirúrgica de sustancias inyectables nocivas.',
-    descripcion: 'El retiro de biopolímeros es un procedimiento quirúrgico especializado que elimina sustancias inyectables nocivas o no autorizadas del cuerpo. Este tratamiento es crucial para la salud del paciente y requiere experiencia especializada en técnicas de extracción segura.',
+    subtitulo: 'Extracción quirúrgica de sustancias inyectables nocivas que ponen en riesgo la salud.',
+    descripcion: 'Los Biopolímeros o Biogel son dosis de silicona líquida que se inyectan en región facial o corporal. En algunos casos a estas sustancias se le añaden otros materiales que al aplicarlos, el cuerpo los encapsula produciendo granulomas o abultamientos que producen reacciones inflamatorias e inmunológicas severas, haciendo rechazo al producto, lo cual ponen en riesgo la integridad y la vida de los pacientes. Estos solo pueden ser extraídos mediante cirugía y no hay una plena garantía que la extracción sea del 100%. Los Biopolímeros están prohibidos a nivel mundial por los distintos problemas que se han presentado y al alto número de víctimas que ha dejado. El tipo de cirugía depende primordialmente de varios factores como la cantidad de sustancia aplicada, la zona, el tipo de material implantado, la reacción que el cuerpo haya producido y el tiempo que haya transcurrido entre otros. En casos como sustancias en la cara, labios y pómulos, es recomendable realizar la extracción de forma directa mediante una o varias cirugías dependiendo del caso. Lo importante en este tipo de cirugías es la extracción de la mayor cantidad de material de relleno. Al extraer el tejido comprometido y al sacar las sustancias invasivas, el paciente ya no presentará más inflamación ni dolor en la zona.',
     precioConsulta: 55,
     categoria: 'corporal',
     doctorIds: ['dr_pinto'],
-    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
-    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+    heroImageUrl: 'https://drfreddypinto.com.co/drpinto/images/serviciosnuevos/RETIROBIOPOLIMEROS.jpg',
+    cardImageUrl: 'https://drfreddypinto.com.co/drpinto/images/serviciosnuevos/RETIROBIOPOLIMEROS.jpg'
   },
   {
     id: 'rejuvenecimiento-vaginal',
     nombre: 'Rejuvenecimiento Vaginal',
-    subtitulo: 'Procedimientos estéticos para la zona íntima.',
-    descripcion: 'El rejuvenecimiento vaginal incluye diversos procedimientos estéticos y funcionales para la zona íntima, como labioplastia, vaginoplastia y tratamientos de rejuvenecimiento. Estos procedimientos mejoran la apariencia, función y confianza del paciente.',
+    subtitulo: 'Procedimientos estéticos y funcionales para mejorar la apariencia y sensibilidad de los genitales.',
+    descripcion: 'Lo que busca este procedimiento es darle un aspecto natural a los genitales y corregir esas pequeñas imperfecciones que se han vuelto incómodas para la paciente. Así mismo permite mejorar la sensibilidad a las mujeres que desean una vida sexual plena. El ensanchamiento de las paredes del introito vaginal no permite una fricción adecuada, disminuyendo el placer en el acto sexual. Con esta intervención se logra mejorar características propias de la juventud, la recreación del himen y la reducción del monte de Venus entre otras. Se pueden corregir condiciones como la hipertrofia de labios menores, mayores y el subdesarrollo de los mismos. También se puede realizar cirugía de clítoris y estrechamiento vaginal. La vagina queda reducida a solo 3 cm. de diámetro, medida standard establecida por los cirujanos, permitiendo aumentar el placer para ambas partes. Este procedimiento logra rejuvenecer y devolver el aspecto estético de la vagina ocasionado por el parto, herencia y pérdida dramática de peso. Está orientado a mejorar la calidad de vida de las pacientes, permitiendo tomar decisiones, mejorando su autoestima, aumentando la confianza y fortaleciendo el apetito sexual.',
     precioConsulta: 55,
     categoria: 'corporal',
     doctorIds: ['dr_pinto'],
-    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
-    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+    heroImageUrl: 'https://drfreddypinto.com.co/drpinto/images/REJUVAGINAL.jpg',
+    cardImageUrl: 'https://drfreddypinto.com.co/drpinto/images/REJUVAGINAL.jpg'
   },
 ];

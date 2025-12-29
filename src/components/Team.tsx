@@ -33,15 +33,18 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ miembro }) => {
             {/* Círculo de fondo con gradiente */}
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-blue-400 via-brand-blue-600 to-brand-blue-800 transform scale-110 group-hover:scale-125 transition-transform duration-500 opacity-20 group-hover:opacity-30"></div>
             
-                    {/* Foto */}
-                    <div className="relative w-40 h-40 md:w-44 md:h-44 rounded-full overflow-hidden border-4 border-white shadow-2xl group-hover:border-brand-yellow-400 transition-all duration-500 transform group-hover:scale-105">
-                      <img 
-                        src={miembro.fotoUrl} 
-                        alt={`Foto de ${miembro.nombre}`} 
-                        className="w-full h-full object-cover object-center"
-                        style={{ objectPosition: 'center 30%' }}
-                        loading="lazy"
-                      />
+            {/* Foto */}
+            <div className="relative w-40 h-40 md:w-44 md:h-44 rounded-full overflow-hidden border-4 border-white shadow-2xl group-hover:border-brand-yellow-400 transition-all duration-500 transform group-hover:scale-105">
+              <img 
+                src={miembro.fotoUrl} 
+                alt={`Foto de ${miembro.nombre}`} 
+                className="w-full h-full object-cover object-center"
+                style={{ 
+                  objectPosition: miembro.id === 'carolina_matheus' ? 'center 5%' : 'center top',
+                  transform: miembro.id === 'angela_pena' ? 'scale(1.3)' : 'none'
+                }}
+                loading="lazy"
+              />
               {/* Overlay sutil al hover */}
               <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>

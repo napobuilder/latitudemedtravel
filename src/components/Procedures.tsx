@@ -1,6 +1,83 @@
 import React, { useState } from 'react';
-import { servicios } from '../data';
+import { servicios, Servicio } from '../data';
 import { Link } from 'react-router-dom';
+
+interface ProcedureCardProps {
+  servicio: Servicio;
+  isFeatured?: boolean;
+}
+
+const ProcedureCard: React.FC<ProcedureCardProps> = ({ servicio, isFeatured = false }) => {
+  return (
+    <Link 
+      to={`/servicios/${servicio.id}`}
+      className="group relative bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-500 block cursor-pointer"
+    >
+      {/* Badge "Más Popular" - Solo en destacados */}
+      {isFeatured && (
+        <div className="absolute top-4 left-4 z-20">
+          <span className="inline-flex items-center px-3 py-1.5 bg-gradient-to-r from-brand-yellow-400 to-brand-yellow-500 text-brand-blue-900 text-xs font-bold rounded-full shadow-lg backdrop-blur-sm">
+            ⭐ Más Popular
+          </span>
+        </div>
+      )}
+
+      {/* Contenedor de imagen con efecto parallax */}
+      <div className="w-full h-56 bg-gray-200 relative overflow-hidden">
+        <img 
+          src={servicio.cardImageUrl} 
+          alt={`Imagen de procedimiento de ${servicio.nombre}`} 
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          loading="lazy"
+        />
+        
+        {/* Overlay con gradiente en hover mostrando precio */}
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-900/90 via-brand-blue-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center pb-6">
+          <div className="text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+            <span className="inline-block bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold px-3 py-1 rounded-full mb-2">
+              Valoración
+            </span>
+            <div className="flex items-baseline justify-center gap-2">
+              <span className="text-4xl font-bold text-white">${servicio.precioConsulta}</span>
+              <span className="text-lg text-white/80">USD</span>
+            </div>
+            <p className="text-sm text-white/90 mt-1">Precio de valoración inicial</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Contenido de la card */}
+      <div className="p-6 text-left">
+        <h4 className="text-xl font-bold text-brand-blue-900 mb-2 group-hover:text-brand-blue-700 transition-colors">
+          {servicio.nombre}
+        </h4>
+        <p className="text-gray-600 mb-4 text-sm line-clamp-2">{servicio.subtitulo}</p>
+        
+        {/* Precio visible normalmente (se oculta suavemente en hover) */}
+        <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200 group-hover:opacity-0 group-hover:scale-95 transition-all duration-300">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="inline-block px-2 py-1 bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold rounded uppercase">
+              Valoración
+            </span>
+          </div>
+          <div className="flex items-baseline gap-2 mb-1">
+            <span className="text-2xl font-bold text-brand-blue-900">${servicio.precioConsulta}</span>
+            <span className="text-sm text-gray-600">USD</span>
+          </div>
+          <p className="text-xs text-gray-500">Precio de valoración inicial</p>
+        </div>
+
+        {/* Indicador "Saber Más" - ahora solo visual ya que toda la card es clickeable */}
+        <div className="mt-4">
+          <span className="font-semibold text-brand-blue-700 group-hover:text-brand-blue-900 text-sm inline-flex items-center">
+            Saber Más 
+            <span className="ml-1 transform group-hover:translate-x-1 transition-transform">→</span>
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+};
 
 const Procedures: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'facial' | 'corporal'>('facial');
@@ -34,7 +111,7 @@ const Procedures: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-brand-blue-900 mb-4">Procedimientos Destacados</h2>
           <p className="max-w-2xl mx-auto text-lg text-gray-600 mb-6">
-            Consulta virtual disponible para todos nuestros procedimientos. Agenda tu cita y conoce más sobre cada tratamiento.
+            Valoración disponible para todos nuestros procedimientos. Agenda tu cita y conoce más sobre cada tratamiento.
           </p>
           <a 
             href="/#procedimientos-completos" 
@@ -49,37 +126,7 @@ const Procedures: React.FC = () => {
           <h3 className="text-2xl md:text-3xl font-bold text-brand-blue-900 mb-8 text-center">Procedimientos Faciales</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {destacadosFaciales.map((servicio) => (
-              <div key={servicio.id} className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                <div className="w-full h-56 bg-gray-200 relative overflow-hidden">
-                  <img 
-                    src={servicio.cardImageUrl} 
-                    alt={`Imagen de procedimiento de ${servicio.nombre}`} 
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-6 text-left">
-                  <h4 className="text-xl font-bold text-brand-blue-900 mb-2">{servicio.nombre}</h4>
-                  <p className="text-gray-600 mb-4 text-sm">{servicio.subtitulo}</p>
-                  <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="inline-block px-2 py-1 bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold rounded uppercase">
-                        Consulta Virtual
-                      </span>
-                    </div>
-                    <div className="flex items-baseline gap-2 mb-1">
-                      <span className="text-2xl font-bold text-brand-blue-900">${servicio.precioConsulta}</span>
-                      <span className="text-sm text-gray-600">USD</span>
-                    </div>
-                    <p className="text-xs text-gray-500">Precio de valoración inicial</p>
-                  </div>
-                  <div className="mt-4">
-                    <Link to={`/servicios/${servicio.id}`} className="font-semibold text-brand-blue-700 hover:text-brand-blue-900 text-sm inline-flex items-center">
-                      Saber Más &rarr;
-                    </Link>
-                  </div>
-                </div>
-              </div>
+              <ProcedureCard key={servicio.id} servicio={servicio} isFeatured={true} />
             ))}
           </div>
         </div>
@@ -89,37 +136,7 @@ const Procedures: React.FC = () => {
           <h3 className="text-2xl md:text-3xl font-bold text-brand-blue-900 mb-8 text-center">Procedimientos Corporales</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {destacadosCorporales.map((servicio) => (
-              <div key={servicio.id} className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                <div className="w-full h-56 bg-gray-200 relative overflow-hidden">
-                  <img 
-                    src={servicio.cardImageUrl} 
-                    alt={`Imagen de procedimiento de ${servicio.nombre}`} 
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-6 text-left">
-                  <h4 className="text-xl font-bold text-brand-blue-900 mb-2">{servicio.nombre}</h4>
-                  <p className="text-gray-600 mb-4 text-sm">{servicio.subtitulo}</p>
-                  <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="inline-block px-2 py-1 bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold rounded uppercase">
-                        Consulta Virtual
-                      </span>
-                    </div>
-                    <div className="flex items-baseline gap-2 mb-1">
-                      <span className="text-2xl font-bold text-brand-blue-900">${servicio.precioConsulta}</span>
-                      <span className="text-sm text-gray-600">USD</span>
-                    </div>
-                    <p className="text-xs text-gray-500">Precio de valoración inicial</p>
-                  </div>
-                  <div className="mt-4">
-                    <Link to={`/servicios/${servicio.id}`} className="font-semibold text-brand-blue-700 hover:text-brand-blue-900 text-sm inline-flex items-center">
-                      Saber Más &rarr;
-                    </Link>
-                  </div>
-                </div>
-              </div>
+              <ProcedureCard key={servicio.id} servicio={servicio} isFeatured={true} />
             ))}
           </div>
         </div>
@@ -170,37 +187,7 @@ const Procedures: React.FC = () => {
             <div>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {facialesToShow.map((servicio) => (
-                  <div key={servicio.id} className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <div className="w-full h-56 bg-gray-200 relative overflow-hidden">
-                      <img 
-                        src={servicio.cardImageUrl} 
-                        alt={`Imagen de procedimiento de ${servicio.nombre}`} 
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="p-6 text-left">
-                      <h4 className="text-xl font-bold text-brand-blue-900 mb-2">{servicio.nombre}</h4>
-                      <p className="text-gray-600 mb-4 text-sm">{servicio.subtitulo}</p>
-                      <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="inline-block px-2 py-1 bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold rounded uppercase">
-                            Consulta Virtual
-                          </span>
-                        </div>
-                        <div className="flex items-baseline gap-2 mb-1">
-                          <span className="text-2xl font-bold text-brand-blue-900">${servicio.precioConsulta}</span>
-                          <span className="text-sm text-gray-600">USD</span>
-                        </div>
-                        <p className="text-xs text-gray-500">Precio de valoración inicial</p>
-                      </div>
-                      <div className="mt-4">
-                        <Link to={`/servicios/${servicio.id}`} className="font-semibold text-brand-blue-700 hover:text-brand-blue-900 text-sm inline-flex items-center">
-                          Saber Más &rarr;
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
+                  <ProcedureCard key={servicio.id} servicio={servicio} isFeatured={procedimientosDestacados.includes(servicio.id)} />
                 ))}
               </div>
               {serviciosFaciales.length > 4 && (
@@ -221,37 +208,7 @@ const Procedures: React.FC = () => {
             <div>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {corporalesToShow.map((servicio) => (
-                  <div key={servicio.id} className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                    <div className="w-full h-56 bg-gray-200 relative overflow-hidden">
-                      <img 
-                        src={servicio.cardImageUrl} 
-                        alt={`Imagen de procedimiento de ${servicio.nombre}`} 
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="p-6 text-left">
-                      <h4 className="text-xl font-bold text-brand-blue-900 mb-2">{servicio.nombre}</h4>
-                      <p className="text-gray-600 mb-4 text-sm">{servicio.subtitulo}</p>
-                      <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="inline-block px-2 py-1 bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold rounded uppercase">
-                            Consulta Virtual
-                          </span>
-                        </div>
-                        <div className="flex items-baseline gap-2 mb-1">
-                          <span className="text-2xl font-bold text-brand-blue-900">${servicio.precioConsulta}</span>
-                          <span className="text-sm text-gray-600">USD</span>
-                        </div>
-                        <p className="text-xs text-gray-500">Precio de valoración inicial</p>
-                      </div>
-                      <div className="mt-4">
-                        <Link to={`/servicios/${servicio.id}`} className="font-semibold text-brand-blue-700 hover:text-brand-blue-900 text-sm inline-flex items-center">
-                          Saber Más &rarr;
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
+                  <ProcedureCard key={servicio.id} servicio={servicio} isFeatured={procedimientosDestacados.includes(servicio.id)} />
                 ))}
               </div>
               {serviciosCorporales.length > 4 && (

@@ -25,7 +25,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                 <a href="#expertos" onClick={onClose} className="text-gray-700 hover:text-brand-blue-500 transition-colors duration-300">Nuestros Expertos</a>
                 <a href="#faq" onClick={onClose} className="text-gray-700 hover:text-brand-blue-500 transition-colors duration-300">Preguntas Frecuentes</a>
                 <a href="#contacto" onClick={onClose} className="mt-4 inline-block bg-brand-yellow-400 text-brand-blue-900 font-semibold py-3 px-8 rounded-full text-lg hover:bg-brand-yellow-500 transition-colors duration-300 shadow">
-                    Consulta Virtual
+                    Valoración
                 </a>
             </nav>
         </div>

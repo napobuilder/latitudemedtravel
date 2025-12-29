@@ -34,9 +34,9 @@ const ContactCta: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="text-center lg:text-left">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-blue-900">Da el Primer Paso Hacia tu Mejor Versión</h2>
-            <p className="text-lg text-gray-700 mb-8">Completa el formulario y una de nuestras asesoras expertas en Tennessee se pondrá en contacto contigo para una consulta virtual 100% gratuita y sin compromiso.</p>
+            <p className="text-lg text-gray-700 mb-8">Completa el formulario y una de nuestras asesoras expertas en Tennessee se pondrá en contacto contigo para una valoración 100% gratuita y sin compromiso.</p>
             <ul className="space-y-4 text-gray-600 text-left max-w-md mx-auto lg:mx-0">
-              <li className="flex items-center"><svg className="w-6 h-6 mr-3 text-brand-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>Consulta confidencial con expertos.</li>
+              <li className="flex items-center"><svg className="w-6 h-6 mr-3 text-brand-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>Valoración confidencial con expertos.</li>
               <li className="flex items-center"><svg className="w-6 h-6 mr-3 text-brand-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>Recibe un presupuesto preliminar.</li>
               <li className="flex items-center"><svg className="w-6 h-6 mr-3 text-brand-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>Aclara todas tus dudas.</li>
             </ul>
@@ -86,7 +86,7 @@ const ContactCta: React.FC = () => {
                 </div>
                 <div>
                   <button type="submit" className="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-lg font-bold text-brand-blue-900 bg-brand-yellow-400 hover:bg-brand-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-yellow-500 transition duration-300">
-                    Enviar y Solicitar Consulta
+                    Enviar y Solicitar Valoración
                   </button>
                 </div>
               </div>

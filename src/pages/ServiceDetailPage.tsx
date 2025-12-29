@@ -29,7 +29,7 @@ const ServiceDetailPage: React.FC = () => {
           <h1 className="text-4xl md:text-6xl font-bold font-display">{servicioActual.nombre}</h1>
           <p className="text-xl md:text-2xl mt-4 text-gray-200">{servicioActual.subtitulo}</p>
           <button onClick={handleAddToCart} className="mt-8 bg-brand-yellow-400 text-brand-blue-900 font-bold py-3 px-8 rounded-full text-lg hover:bg-brand-yellow-500 transition-transform transform hover:scale-105">
-            Agendar Consulta Virtual
+            Agendar Valoración
           </button>
         </div>
       </section>
@@ -43,7 +43,7 @@ const ServiceDetailPage: React.FC = () => {
             <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
               <div className="mb-4">
                 <span className="inline-block px-3 py-1 bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold rounded uppercase mb-3">
-                  Consulta Virtual
+                  Valoración
                 </span>
               </div>
               <div className="mb-2">
@@ -51,9 +51,9 @@ const ServiceDetailPage: React.FC = () => {
               </div>
               <p className="text-sm text-gray-500 mb-4">Precio de valoración inicial</p>
               <button onClick={handleAddToCart} className="w-full mt-4 bg-brand-yellow-400 text-brand-blue-900 font-bold py-3 px-6 rounded-full hover:bg-brand-yellow-500 transition-transform transform hover:scale-105">
-                Agendar Consulta Virtual
+                Agendar Valoración
               </button>
-              <h3 className="font-bold text-lg mt-6 mb-3 text-brand-blue-900">¿Qué Incluye la Consulta?</h3>
+              <h3 className="font-bold text-lg mt-6 mb-3 text-brand-blue-900">¿Qué Incluye la Valoración?</h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-center">
                   <svg className="w-5 h-5 mr-2 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>

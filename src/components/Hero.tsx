@@ -89,7 +89,7 @@ const Hero: React.FC = () => {
                 href="#contacto" 
                 className="bg-brand-yellow-400 text-brand-blue-900 font-bold py-3 px-8 rounded-full text-base md:text-lg hover:bg-brand-yellow-500 transition duration-300 shadow-xl inline-block mt-4"
               >
-                Solicitar Consulta Virtual Gratuita
+                Solicitar Valoración
               </a>
             </motion.div>
           </motion.div>

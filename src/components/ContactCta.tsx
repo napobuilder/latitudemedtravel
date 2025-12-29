@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { servicios } from '../data';
+import { useCart } from '../hooks/useCart';
 
 const ContactCta: React.FC = () => {
+  const { addToCart } = useCart();
+  const [selectedProcedureId, setSelectedProcedureId] = useState<string>('');
+  
   // Organizar servicios por categoría para el select
   const serviciosFaciales = servicios.filter(s => s.categoria === 'facial');
   const serviciosCorporales = servicios.filter(s => s.categoria === 'corporal');
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    // Si hay un procedimiento seleccionado (y no es "Otro"), agregarlo al carrito
+    if (selectedProcedureId && selectedProcedureId !== 'otro') {
+      const servicioSeleccionado = servicios.find(s => s.id === selectedProcedureId);
+      if (servicioSeleccionado) {
+        addToCart(servicioSeleccionado);
+      }
+    }
+    
+    // Aquí se enviará el formulario a Formspree cuando lo integremos
+    // Por ahora solo agregamos al carrito
+  };
+
   return (
     <section id="contacto" className="py-20 md:py-32 relative overflow-hidden bg-white">
       <div className="absolute inset-0">
@@ -22,7 +42,7 @@ const ContactCta: React.FC = () => {
             </ul>
           </div>
           <div className="bg-white p-8 rounded-2xl shadow-2xl border border-gray-100">
-            <form action="#" method="POST">
+            <form onSubmit={handleSubmit} action="#" method="POST">
               <div className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nombre Completo</label>
@@ -38,23 +58,30 @@ const ContactCta: React.FC = () => {
                 </div>
                 <div>
                   <label htmlFor="procedure" className="block text-sm font-medium text-gray-700">Procedimiento de Interés</label>
-                  <select id="procedure" name="procedure" required className="mt-1 block w-full px-4 py-3 border border-gray-300 bg-white rounded-lg shadow-sm focus:outline-none focus:ring-brand-blue-700 focus:border-brand-blue-700 text-gray-800">
+                  <select 
+                    id="procedure" 
+                    name="procedure" 
+                    required 
+                    value={selectedProcedureId}
+                    onChange={(e) => setSelectedProcedureId(e.target.value)}
+                    className="mt-1 block w-full px-4 py-3 border border-gray-300 bg-white rounded-lg shadow-sm focus:outline-none focus:ring-brand-blue-700 focus:border-brand-blue-700 text-gray-800"
+                  >
                     <option value="">Seleccionar procedimiento...</option>
                     <optgroup label="Procedimientos Faciales">
                       {serviciosFaciales.map((servicio) => (
-                        <option key={servicio.id} value={servicio.nombre}>
+                        <option key={servicio.id} value={servicio.id}>
                           {servicio.nombre}
                         </option>
                       ))}
                     </optgroup>
                     <optgroup label="Procedimientos Corporales">
                       {serviciosCorporales.map((servicio) => (
-                        <option key={servicio.id} value={servicio.nombre}>
+                        <option key={servicio.id} value={servicio.id}>
                           {servicio.nombre}
                         </option>
                       ))}
                     </optgroup>
-                    <option value="Otro">Otro (especificar en mensaje)</option>
+                    <option value="otro">Otro (especificar en mensaje)</option>
                   </select>
                 </div>
                 <div>

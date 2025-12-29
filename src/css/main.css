@@ -42,3 +42,12 @@ details.mobile-accordion .content > div {
 .no-transition {
     transition: none !important;
 }
+
+/* Hide scrollbar for thumbnail carousel */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}

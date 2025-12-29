@@ -36,7 +36,7 @@ const Faq: React.FC = () => {
               <img src="/assets/icons/chevron-down.svg" alt="Chevron Down" className="w-5 h-5 transition-transform duration-300 transform group-open:rotate-180" />
             </summary>
             <p className="mt-4 text-gray-600">
-              Tu recuperación se llevará a cabo en un entorno cómodo y seguro en Colombia. Estarás en contacto directo con tu cirujano para los controles postoperatorios. Una vez regreses a Miami, nuestro equipo coordinará tu seguimiento para asegurar que tu evolución sea la correcta y para resolver cualquier duda que puedas tener.
+              Tu recuperación se llevará a cabo en un entorno cómodo y seguro en Colombia. Estarás en contacto directo con tu cirujano para los controles postoperatorios. Una vez regreses a Estados Unidos, nuestro equipo coordinará tu seguimiento para asegurar que tu evolución sea la correcta y para resolver cualquier duda que puedas tener.
             </p>
           </details>
         </div>

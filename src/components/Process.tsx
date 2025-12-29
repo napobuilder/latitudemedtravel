@@ -37,7 +37,7 @@ const Process: React.FC = () => {
               <img src="/assets/icons/recovery-follow-up.svg" alt="Recovery Follow-up Icon" className="w-10 h-10" />
             </div>
             <h3 className="text-xl font-bold text-brand-blue-900 mb-2">4. Recuperación y Seguimiento</h3>
-            <p className="text-gray-600">Disfruta de una recuperación confortable y coordinamos tu seguimiento al regresar a Miami.</p>
+            <p className="text-gray-600">Disfruta de una recuperación confortable y coordinamos tu seguimiento al regresar a Estados Unidos.</p>
           </div>
         </div>
       </div>

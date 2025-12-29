@@ -3,6 +3,8 @@ export interface Doctor {
   alias: string;
   especialidad: string;
   fotoUrl: string;
+  biografia?: string;
+  credenciales?: string[];
 }
 
 export const doctores: Doctor[] = [
@@ -10,7 +12,15 @@ export const doctores: Doctor[] = [
     id: 'dr_pinto',
     alias: 'Dr. Pinto',
     especialidad: 'Especialista en Contorno Corporal',
-    fotoUrl: '/2.jpg'
+    fotoUrl: '/2.jpg',
+    biografia: 'Cirujano con formación universitaria en Colombia y entrenamiento avanzado en Estados Unidos, especializado en técnicas de marcación y definición muscular de alta precisión. Líder de opinión que participa activamente como conferencista en congresos científicos, garantizando acceso a los últimos avances tecnológicos. Director de una clínica de primer nivel certificada por las federaciones médicas más importantes de Iberoamérica.',
+    credenciales: [
+      'Formación universitaria en Colombia',
+      'Entrenamiento avanzado en Estados Unidos',
+      'Especialista en técnicas de marcación y definición muscular',
+      'Conferencista en congresos científicos',
+      'Director de clínica certificada por federaciones médicas de Iberoamérica'
+    ]
   }
 ];
 
@@ -38,7 +48,7 @@ export const servicios: Servicio[] = [
       'Traslados privados (aeropuerto-hotel-clínica)',
       'Alojamiento en hotel 5 estrellas',
       'Acompañamiento bilingüe personalizado',
-      'Seguimiento post-operatorio en Miami'
+      'Seguimiento post-operatorio en Estados Unidos'
     ],
     doctorIds: ['dr_pinto'],
     heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',

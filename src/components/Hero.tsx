@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
           className="text-lg md:text-xl max-w-3xl mx-auto mb-8 text-gray-600"
           variants={itemVariants}
         >
-          Te acompañamos desde Miami en cada paso de tu viaje, conectándote con cirujanos de élite y clínicas acreditadas para que logres tus metas con total seguridad.
+          Te acompañamos desde Estados Unidos en cada paso de tu viaje, conectándote con cirujanos de élite y clínicas acreditadas para que logres tus metas con total seguridad.
         </motion.p>
         <motion.div variants={itemVariants}>
           <a href="#contacto" className="bg-brand-yellow-400 text-brand-blue-900 font-bold py-4 px-8 rounded-full text-lg hover:bg-brand-yellow-500 transition duration-300 shadow-xl inline-block">

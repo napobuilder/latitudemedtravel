@@ -29,7 +29,7 @@ const ServiceDetailPage: React.FC = () => {
           <h1 className="text-4xl md:text-6xl font-bold font-display">{servicioActual.nombre}</h1>
           <p className="text-xl md:text-2xl mt-4 text-gray-200">{servicioActual.subtitulo}</p>
           <button onClick={handleAddToCart} className="mt-8 bg-brand-yellow-400 text-brand-blue-900 font-bold py-3 px-8 rounded-full text-lg hover:bg-brand-yellow-500 transition-transform transform hover:scale-105">
-            Añadir a mi Consulta
+            Agendar Consulta Virtual
           </button>
         </div>
       </section>
@@ -41,19 +41,29 @@ const ServiceDetailPage: React.FC = () => {
           {/* Left Column (Sticky) */}
           <aside className="lg:col-span-1 lg:sticky lg:top-28 self-start mb-12 lg:mb-0">
             <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-              <p className="text-lg text-gray-600">Tarifa de Acompañamiento</p>
-              <p className="text-4xl font-bold text-brand-blue-900 my-2">${servicioActual.precioServicio} <span className="text-base font-medium">USD</span></p>
+              <p className="text-lg text-gray-600">Consulta Virtual</p>
+              <p className="text-4xl font-bold text-brand-blue-900 my-2">${servicioActual.precioConsulta} <span className="text-base font-medium">USD</span></p>
               <button onClick={handleAddToCart} className="w-full mt-4 bg-brand-yellow-400 text-brand-blue-900 font-bold py-3 px-6 rounded-full hover:bg-brand-yellow-500 transition-transform transform hover:scale-105">
-                Añadir a mi Consulta
+                Agendar Consulta Virtual
               </button>
-              <h3 className="font-bold text-lg mt-6 mb-3 text-brand-blue-900">¿Qué Incluye?</h3>
+              <h3 className="font-bold text-lg mt-6 mb-3 text-brand-blue-900">¿Qué Incluye la Consulta?</h3>
               <ul className="space-y-3 text-gray-600">
-                {servicioActual.incluye.map((item, index) => (
-                  <li key={index} className="flex items-center">
-                    <svg className="w-5 h-5 mr-2 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                    <span>{item}</span>
-                  </li>
-                ))}
+                <li className="flex items-center">
+                  <svg className="w-5 h-5 mr-2 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span>Evaluación personalizada del procedimiento</span>
+                </li>
+                <li className="flex items-center">
+                  <svg className="w-5 h-5 mr-2 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span>Revisión de tu caso con el especialista</span>
+                </li>
+                <li className="flex items-center">
+                  <svg className="w-5 h-5 mr-2 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span>Información sobre el procedimiento y resultados esperados</span>
+                </li>
+                <li className="flex items-center">
+                  <svg className="w-5 h-5 mr-2 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                  <span>Orientación sobre el proceso y próximos pasos</span>
+                </li>
               </ul>
             </div>
           </aside>
@@ -61,16 +71,23 @@ const ServiceDetailPage: React.FC = () => {
           {/* Right Column (Content) */}
           <div className="lg:col-span-2">
             <div className="prose prose-lg max-w-none text-gray-700">
-              <h2>¿Qué es una {servicioActual.nombre}?</h2>
+              <h2>¿Qué es {servicioActual.nombre}?</h2>
               <p>{servicioActual.descripcion}</p>
               
-              <h2 className="mt-12">Nuestros Expertos para este Procedimiento</h2>
-              <div className="grid sm:grid-cols-2 gap-8 not-prose">
+              <h2 className="mt-12">Nuestro Especialista</h2>
+              <div className="grid sm:grid-cols-1 gap-8 not-prose">
                 {doctoresAsociados.map(doctor => (
-                  <div key={doctor.id} className="bg-white p-4 rounded-xl shadow-md text-center border border-gray-100">
-                    <img src={doctor.fotoUrl} alt={`Foto de ${doctor.alias}`} className="w-24 h-24 rounded-full mx-auto mb-3 border-4 border-brand-yellow-400 object-cover" />
-                    <h3 className="text-lg font-bold text-brand-blue-900">{doctor.alias}</h3>
-                    <p className="text-brand-blue-700 font-semibold text-sm">{doctor.especialidad}</p>
+                  <div key={doctor.id} className="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <div className="flex items-start gap-4">
+                      <img src={doctor.fotoUrl} alt={`Foto de ${doctor.alias}`} className="w-24 h-24 rounded-full border-4 border-brand-yellow-400 object-cover flex-shrink-0" />
+                      <div>
+                        <h3 className="text-xl font-bold text-brand-blue-900 mb-1">{doctor.alias}</h3>
+                        <p className="text-brand-blue-700 font-semibold text-sm mb-3">{doctor.especialidad}</p>
+                        {doctor.biografia && (
+                          <p className="text-gray-600 text-sm leading-relaxed">{doctor.biografia}</p>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>

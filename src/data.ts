@@ -29,97 +29,190 @@ export interface Servicio {
   nombre: string;
   subtitulo: string;
   descripcion: string;
-  precioServicio: number;
-  incluye: string[];
+  precioConsulta: number; // Precio fijo de consulta
+  categoria: 'facial' | 'corporal';
   doctorIds: string[];
   heroImageUrl: string;
   cardImageUrl: string;
 }
 
 export const servicios: Servicio[] = [
+  // Procedimientos Faciales
   {
-    id: 'liposuccion-hd',
-    nombre: 'Liposucción HD',
-    subtitulo: 'Define tu silueta y esculpe tu cuerpo.',
-    descripcion: 'La Liposucción de Alta Definición (HD) es un procedimiento avanzado que no solo elimina la grasa, sino que también esculpe y define la musculatura subyacente para crear un aspecto atlético y tonificado. Es ideal para pacientes que ya están en buena forma pero luchan por eliminar depósitos de grasa rebeldes.',
-    precioServicio: 1500,
-    incluye: [
-      'Coordinación de citas con el cirujano',
-      'Traslados privados (aeropuerto-hotel-clínica)',
-      'Alojamiento en hotel 5 estrellas',
-      'Acompañamiento bilingüe personalizado',
-      'Seguimiento post-operatorio en Estados Unidos'
-    ],
-    doctorIds: ['dr_pinto'],
-    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
-    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
-  },
-  {
-    id: 'diseno-de-sonrisa',
-    nombre: 'Diseño de Sonrisa',
-    subtitulo: 'La sonrisa perfecta, diseñada para ti.',
-    descripcion: 'El diseño de sonrisa combina varios procedimientos de odontología cosmética para lograr una sonrisa armoniosa y estéticamente agradable. Se personaliza completamente para adaptarse a tus rasgos faciales y objetivos estéticos.',
-    precioServicio: 1200,
-    incluye: [
-      'Consulta y diseño 3D de la sonrisa',
-      'Blanqueamiento dental profesional',
-      'Carillas de porcelana o composite',
-      'Traslados y alojamiento premium',
-      'Seguimiento y ajustes'
-    ],
-    doctorIds: ['dr_pinto'],
-    heroImageUrl: '/Smile_Design.png',
-    cardImageUrl: '/Smile_Design.png'
-  },
-  {
-    id: 'cirugia-facial',
-    nombre: 'Cirugía Facial',
-    subtitulo: 'Armoniza tus rasgos y rejuvenece tu rostro.',
-    descripcion: 'Procedimientos como el lifting facial, la rinoplastia o la blefaroplastia, diseñados para mejorar la proporción y la juventud del rostro, realizados por cirujanos expertos en técnicas mínimamente invasivas.',
-    precioServicio: 2500,
-    incluye: [
-      'Análisis facial y planificación quirúrgica',
-      'Honorarios del equipo quirúrgico',
-      'Estancia en clínica de primer nivel',
-      'Cuidado post-operatorio 24/7',
-      'Kit de recuperación y medicamentos'
-    ],
+    id: 'rinoplastia',
+    nombre: 'Rinoplastia',
+    subtitulo: 'Cirugía de nariz (funcional o estética).',
+    descripcion: 'La rinoplastia es un procedimiento quirúrgico que modifica la forma y estructura de la nariz para mejorar su apariencia estética o corregir problemas funcionales. Puede incluir la reducción o aumento del tamaño, el ajuste de la punta nasal, la corrección de desviaciones del tabique, o la mejora de la respiración.',
+    precioConsulta: 55,
+    categoria: 'facial',
     doctorIds: ['dr_pinto'],
     heroImageUrl: '/18-blefaroplastia.jpg',
     cardImageUrl: '/18-blefaroplastia.jpg'
   },
   {
-    id: 'medicina-estetica',
-    nombre: 'Medicina Estética',
-    subtitulo: 'Tratamientos no invasivos para una piel radiante.',
-    descripcion: 'Desde toxina botulínica (Botox) y rellenos dérmicos hasta terapias láser avanzadas, nuestros tratamientos de medicina estética rejuvenecen tu piel sin necesidad de cirugía, ofreciendo resultados naturales y duraderos.',
-    precioServicio: 800,
-    incluye: [
-      'Evaluación dermatológica completa',
-      'Aplicación de tratamientos por especialistas',
-      'Productos de cuidado de la piel de alta gama',
-      'Sesiones de seguimiento',
-      'Asesoría de mantenimiento'
-    ],
+    id: 'frontoplastia',
+    nombre: 'Frontoplastia',
+    subtitulo: 'Rejuvenecimiento de la frente (lifting).',
+    descripcion: 'La frontoplastia es un procedimiento de lifting de la frente que elimina arrugas horizontales, eleva las cejas caídas y rejuvenece la apariencia del tercio superior del rostro. Se realiza mediante técnicas mínimamente invasivas que proporcionan resultados naturales y duraderos.',
+    precioConsulta: 55,
+    categoria: 'facial',
     doctorIds: ['dr_pinto'],
-    heroImageUrl: '/cuidado-piel-frio.jpg',
-    cardImageUrl: '/cuidado-piel-frio.jpg'
+    heroImageUrl: '/18-blefaroplastia.jpg',
+    cardImageUrl: '/18-blefaroplastia.jpg'
   },
   {
-    id: 'implante-capilar',
-    nombre: 'Implante Capilar',
-    subtitulo: 'Recupera la densidad y la confianza.',
-    descripcion: 'Utilizando las técnicas más avanzadas como FUE (Extracción de Unidad Folicular), restauramos la densidad del cabello de forma natural y con resultados permanentes, tanto para hombres como para mujeres.',
-    precioServicio: 3500,
-    incluye: [
-      'Consulta y diagnóstico capilar',
-      'Procedimiento de trasplante capilar',
-      'Tratamientos de bioestimulación (PRP)',
-      'Kit de cuidado post-implante',
-      'Revisiones de seguimiento durante 1 año'
-    ],
+    id: 'blefaroplastia',
+    nombre: 'Blefaroplastia',
+    subtitulo: 'Cirugía de párpados (para eliminar bolsas o exceso de piel).',
+    descripcion: 'La blefaroplastia corrige el exceso de piel, las bolsas y la flacidez en los párpados superiores e inferiores. Este procedimiento rejuvenece la mirada, elimina la apariencia de cansancio y mejora significativamente la estética del área periocular.',
+    precioConsulta: 55,
+    categoria: 'facial',
     doctorIds: ['dr_pinto'],
-    heroImageUrl: '/evolucion-del-trasplante-capilar.jpg',
-    cardImageUrl: '/evolucion-del-trasplante-capilar.jpg'
-  }
+    heroImageUrl: '/18-blefaroplastia.jpg',
+    cardImageUrl: '/18-blefaroplastia.jpg'
+  },
+  {
+    id: 'ritidoplastia',
+    nombre: 'Ritidoplastia',
+    subtitulo: 'Estiramiento facial (lifting) para tratar arrugas y flacidez.',
+    descripcion: 'La ritidoplastia, también conocida como lifting facial, es un procedimiento quirúrgico que elimina el exceso de piel y tensa los músculos faciales para reducir arrugas, líneas de expresión y flacidez. Proporciona un aspecto más joven y rejuvenecido del rostro completo.',
+    precioConsulta: 55,
+    categoria: 'facial',
+    doctorIds: ['dr_pinto'],
+    heroImageUrl: '/18-blefaroplastia.jpg',
+    cardImageUrl: '/18-blefaroplastia.jpg'
+  },
+  {
+    id: 'cervicoplastia',
+    nombre: 'Cervicoplastia',
+    subtitulo: 'Cirugía del cuello (papada y flacidez).',
+    descripcion: 'La cervicoplastia es un procedimiento que elimina el exceso de piel y grasa del cuello, corrigiendo la papada y la flacidez. Este tratamiento rejuvenece el perfil del cuello y la mandíbula, proporcionando una apariencia más definida y juvenil.',
+    precioConsulta: 55,
+    categoria: 'facial',
+    doctorIds: ['dr_pinto'],
+    heroImageUrl: '/18-blefaroplastia.jpg',
+    cardImageUrl: '/18-blefaroplastia.jpg'
+  },
+  {
+    id: 'bichectomia',
+    nombre: 'Bichectomía',
+    subtitulo: 'Extracción de las bolsas de Bichat para afinar las mejillas.',
+    descripcion: 'La bichectomía es un procedimiento quirúrgico que consiste en la extracción de las bolsas de Bichat (grasa facial) para afinar y definir el contorno facial. Este tratamiento proporciona un aspecto más esculpido y definido de las mejillas, creando una silueta facial más armoniosa.',
+    precioConsulta: 55,
+    categoria: 'facial',
+    doctorIds: ['dr_pinto'],
+    heroImageUrl: '/18-blefaroplastia.jpg',
+    cardImageUrl: '/18-blefaroplastia.jpg'
+  },
+  {
+    id: 'mentoplastia',
+    nombre: 'Mentoplastia',
+    subtitulo: 'Cirugía del mentón (aumento o corrección).',
+    descripcion: 'La mentoplastia es un procedimiento que modifica la forma y tamaño del mentón mediante aumento con implantes o reducción ósea. Este tratamiento mejora el perfil facial, equilibra las proporciones y puede corregir asimetrías del mentón.',
+    precioConsulta: 55,
+    categoria: 'facial',
+    doctorIds: ['dr_pinto'],
+    heroImageUrl: '/18-blefaroplastia.jpg',
+    cardImageUrl: '/18-blefaroplastia.jpg'
+  },
+  {
+    id: 'otoplastia',
+    nombre: 'Otoplastia',
+    subtitulo: 'Cirugía de orejas (corrección de orejas prominentes).',
+    descripcion: 'La otoplastia es un procedimiento quirúrgico que corrige la forma, posición o tamaño de las orejas. Comúnmente se realiza para corregir orejas prominentes o despegadas, mejorando la armonía facial y aumentando la confianza del paciente.',
+    precioConsulta: 55,
+    categoria: 'facial',
+    doctorIds: ['dr_pinto'],
+    heroImageUrl: '/18-blefaroplastia.jpg',
+    cardImageUrl: '/18-blefaroplastia.jpg'
+  },
+  // Procedimientos Corporales
+  {
+    id: 'mamoplastia-aumento',
+    nombre: 'Mamoplastia de Aumento',
+    subtitulo: 'Aumento de senos con implantes.',
+    descripcion: 'La mamoplastia de aumento es un procedimiento que aumenta el tamaño y mejora la forma de los senos mediante la colocación de implantes mamarios. Este tratamiento puede mejorar la proporción corporal, restaurar el volumen perdido y aumentar la confianza del paciente.',
+    precioConsulta: 55,
+    categoria: 'corporal',
+    doctorIds: ['dr_pinto'],
+    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
+    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+  },
+  {
+    id: 'mamoplastia-reduccion',
+    nombre: 'Mamoplastia de Reducción',
+    subtitulo: 'Reducción del tamaño del busto.',
+    descripcion: 'La mamoplastia de reducción es un procedimiento que reduce el tamaño de los senos eliminando exceso de tejido mamario, grasa y piel. Este tratamiento alivia molestias físicas, mejora la proporción corporal y proporciona un aspecto más equilibrado.',
+    precioConsulta: 55,
+    categoria: 'corporal',
+    doctorIds: ['dr_pinto'],
+    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
+    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+  },
+  {
+    id: 'liposuccion-lipoescultura',
+    nombre: 'Liposucción / Lipoescultura',
+    subtitulo: 'Remodelación del contorno corporal y extracción de grasa.',
+    descripcion: 'La liposucción y lipoescultura son procedimientos que eliminan depósitos de grasa localizados y remodelan el contorno corporal. La lipoescultura de alta definición (HD) además define y esculpe la musculatura subyacente, creando un aspecto atlético y tonificado.',
+    precioConsulta: 55,
+    categoria: 'corporal',
+    doctorIds: ['dr_pinto'],
+    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
+    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+  },
+  {
+    id: 'lipectomia-abdominoplastia',
+    nombre: 'Lipectomía (Abdominoplastia)',
+    subtitulo: 'Eliminación de exceso de piel y grasa abdominal.',
+    descripcion: 'La abdominoplastia es un procedimiento que elimina el exceso de piel y grasa del abdomen, tensa los músculos abdominales y mejora el contorno del vientre. Este tratamiento es ideal para pacientes que han perdido peso significativo o después del embarazo.',
+    precioConsulta: 55,
+    categoria: 'corporal',
+    doctorIds: ['dr_pinto'],
+    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
+    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+  },
+  {
+    id: 'gluteoplastia',
+    nombre: 'Gluteoplastia',
+    subtitulo: 'Aumento o remodelación de glúteos.',
+    descripcion: 'La gluteoplastia es un procedimiento que aumenta o remodela los glúteos mediante implantes o transferencia de grasa (BBL - Brazilian Butt Lift). Este tratamiento mejora la forma, volumen y proyección de los glúteos, creando una silueta más armoniosa y atractiva.',
+    precioConsulta: 55,
+    categoria: 'corporal',
+    doctorIds: ['dr_pinto'],
+    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
+    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+  },
+  {
+    id: 'marcacion-abdomen',
+    nombre: 'Marcación de Abdomen',
+    subtitulo: 'Definición de los músculos abdominales (frecuentemente parte de la lipoescultura de alta definición).',
+    descripcion: 'La marcación de abdomen es un procedimiento avanzado que define y resalta los músculos abdominales mediante técnicas de lipoescultura de alta definición. Este tratamiento crea un aspecto de "six-pack" o abdomen definido, ideal para pacientes que buscan un resultado atlético y esculpido.',
+    precioConsulta: 55,
+    categoria: 'corporal',
+    doctorIds: ['dr_pinto'],
+    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
+    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+  },
+  {
+    id: 'retiro-biopolimeros',
+    nombre: 'Retiro de Biopolímeros',
+    subtitulo: 'Extracción quirúrgica de sustancias inyectables nocivas.',
+    descripcion: 'El retiro de biopolímeros es un procedimiento quirúrgico especializado que elimina sustancias inyectables nocivas o no autorizadas del cuerpo. Este tratamiento es crucial para la salud del paciente y requiere experiencia especializada en técnicas de extracción segura.',
+    precioConsulta: 55,
+    categoria: 'corporal',
+    doctorIds: ['dr_pinto'],
+    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
+    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+  },
+  {
+    id: 'rejuvenecimiento-vaginal',
+    nombre: 'Rejuvenecimiento Vaginal',
+    subtitulo: 'Procedimientos estéticos para la zona íntima.',
+    descripcion: 'El rejuvenecimiento vaginal incluye diversos procedimientos estéticos y funcionales para la zona íntima, como labioplastia, vaginoplastia y tratamientos de rejuvenecimiento. Estos procedimientos mejoran la apariencia, función y confianza del paciente.',
+    precioConsulta: 55,
+    categoria: 'corporal',
+    doctorIds: ['dr_pinto'],
+    heroImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg',
+    cardImageUrl: '/liposuccion-HD-o-de-Alta-Definicion.jpg'
+  },
 ];

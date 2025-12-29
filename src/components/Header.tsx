@@ -1,14 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CartSidebar from './CartSidebar';
 import MobileMenu from './MobileMenu';
 import ServicesIcon from './ServicesIcon';
 import ServicesMenu from './ServicesMenu';
+import { servicios } from '../data';
+import { useCart } from '../hooks/useCart';
 
 const Header: React.FC = () => {
     const [isCartOpen, setCartOpen] = useState(false);
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [isServicesMenuOpen, setServicesMenuOpen] = useState(false);
+    const [cartAnimation, setCartAnimation] = useState(false);
+    const { item, shouldOpenCart, setShouldOpenCart } = useCart();
+
+    // Abrir carrito automáticamente cuando se agrega un item
+    useEffect(() => {
+        if (shouldOpenCart && item) {
+            // Animación suave del badge primero
+            setCartAnimation(true);
+            // Pequeño delay antes de abrir el carrito para mejor UX
+            setTimeout(() => {
+                setCartOpen(true);
+                setShouldOpenCart(false);
+            }, 150);
+            // Resetear animación después de un tiempo
+            setTimeout(() => setCartAnimation(false), 800);
+        }
+    }, [shouldOpenCart, item, setShouldOpenCart]);
 
     const handleMenuToggle = () => {
         setMenuOpen(!isMenuOpen);
@@ -50,26 +69,49 @@ const Header: React.FC = () => {
                                     <span>Servicios</span>
                                     <svg className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
                                 </button>
-                                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-screen max-w-4xl p-4 opacity-0 scale-95 group-hover:scale-100 group-hover:opacity-100 invisible group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2">
-                                    <div className="bg-white rounded-2xl shadow-xl border border-gray-100 grid grid-cols-2 gap-4 p-6">
-                                        <Link to="#procedimientos" className="flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-                                            <div className="flex-shrink-0 bg-brand-yellow-400/20 text-brand-blue-900 rounded-lg p-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-screen max-w-6xl p-4 opacity-0 scale-95 group-hover:scale-100 group-hover:opacity-100 invisible group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2">
+                                    <div className="bg-white rounded-2xl shadow-xl border border-gray-100 grid grid-cols-2 gap-6 p-6">
+                                        {/* Procedimientos Faciales */}
+                                        <div>
+                                            <div className="flex items-center gap-3 mb-4 pb-3 border-b border-gray-200">
+                                                <div className="flex-shrink-0 bg-brand-yellow-400/20 text-brand-blue-900 rounded-lg p-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                                </div>
+                                                <h3 className="font-bold text-brand-blue-900 text-lg">Procedimientos Faciales</h3>
                                             </div>
-                                            <div>
-                                                <h3 className="font-bold text-brand-blue-900">Procedimientos Faciales</h3>
-                                                <p className="text-sm text-gray-600">Rinoplastia, blefaroplastia, lifting facial y más.</p>
+                                            <div className="space-y-2">
+                                                {servicios.filter(s => s.categoria === 'facial').map(servicio => (
+                                                    <Link
+                                                        key={servicio.id}
+                                                        to={`/servicios/${servicio.id}`}
+                                                        className="block px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors text-sm text-gray-700 hover:text-brand-blue-900"
+                                                    >
+                                                        {servicio.nombre}
+                                                    </Link>
+                                                ))}
                                             </div>
-                                        </Link>
-                                        <Link to="#procedimientos" className="flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-                                            <div className="flex-shrink-0 bg-brand-yellow-400/20 text-brand-blue-900 rounded-lg p-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.085a2 2 0 00-1.736.97l-2.714 5.428a2 2 0 001.736 2.97h4.615a2 2 0 002-2z" /></svg>
+                                        </div>
+                                        
+                                        {/* Procedimientos Corporales */}
+                                        <div>
+                                            <div className="flex items-center gap-3 mb-4 pb-3 border-b border-gray-200">
+                                                <div className="flex-shrink-0 bg-brand-yellow-400/20 text-brand-blue-900 rounded-lg p-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.085a2 2 0 00-1.736.97l-2.714 5.428a2 2 0 001.736 2.97h4.615a2 2 0 002-2z" /></svg>
+                                                </div>
+                                                <h3 className="font-bold text-brand-blue-900 text-lg">Procedimientos Corporales</h3>
                                             </div>
-                                            <div>
-                                                <h3 className="font-bold text-brand-blue-900">Procedimientos Corporales</h3>
-                                                <p className="text-sm text-gray-600">Liposucción, abdominoplastia, mamoplastia y más.</p>
+                                            <div className="space-y-2">
+                                                {servicios.filter(s => s.categoria === 'corporal').map(servicio => (
+                                                    <Link
+                                                        key={servicio.id}
+                                                        to={`/servicios/${servicio.id}`}
+                                                        className="block px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors text-sm text-gray-700 hover:text-brand-blue-900"
+                                                    >
+                                                        {servicio.nombre}
+                                                    </Link>
+                                                ))}
                                             </div>
-                                        </Link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -85,8 +127,13 @@ const Header: React.FC = () => {
                             <div className="lg:hidden">
                                 <ServicesIcon onClick={handleServicesMenuToggle} />
                             </div>
-                            <button onClick={handleCartToggle} className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-300">
+                            <button onClick={handleCartToggle} className="relative p-2 rounded-full hover:bg-gray-100 transition-colors duration-300">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                {item && (
+                                    <span className={`absolute -top-1 -right-1 bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center transition-all duration-500 ${cartAnimation ? 'scale-125' : 'scale-100'}`}>
+                                        1
+                                    </span>
+                                )}
                             </button>
                             <button onClick={handleMenuToggle} className="lg:hidden p-2 rounded-full hover:bg-gray-100 transition-colors duration-300">
                                 <svg id="menu-open-icon" className="w-7 h-7 text-brand-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>

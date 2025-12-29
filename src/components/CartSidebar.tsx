@@ -7,7 +7,12 @@ interface CartSidebarProps {
 }
 
 const CartSidebar: React.FC<CartSidebarProps> = ({ isOpen, onClose }) => {
-    const { item, clearCart, stripePaymentLink } = useCart();
+    const { item, clearCart, stripePaymentLink, setShouldOpenCart } = useCart();
+
+    const handleClose = () => {
+        setShouldOpenCart(false);
+        onClose();
+    };
 
     useEffect(() => {
         if (isOpen) {
@@ -25,11 +30,11 @@ const CartSidebar: React.FC<CartSidebarProps> = ({ isOpen, onClose }) => {
 
     return (
         <div className={`fixed inset-0 z-50 ${isOpen ? '' : 'invisible'}`}>
-            <div className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`} onClick={onClose}></div>
+            <div className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`} onClick={handleClose}></div>
             <div className={`absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl transform transition-transform duration-300 flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
                 <div className="flex items-center justify-between p-6 border-b">
                     <h2 className="text-2xl font-bold text-brand-blue-900">Consulta Virtual</h2>
-                    <button onClick={onClose} className="p-2 text-gray-500 hover:text-gray-800">
+                    <button onClick={handleClose} className="p-2 text-gray-500 hover:text-gray-800">
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>

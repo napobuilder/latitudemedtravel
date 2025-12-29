@@ -11,18 +11,6 @@ export const doctores: Doctor[] = [
     alias: 'Dr. Pinto',
     especialidad: 'Especialista en Contorno Corporal',
     fotoUrl: '/2.jpg'
-  },
-  {
-    id: 'dra_quintero',
-    alias: 'Dra. Quintero',
-    especialidad: 'Especialista en Cirugía Facial',
-    fotoUrl: '/2.jpg' // Reemplazar con la foto correcta
-  },
-  {
-    id: 'dr_rojas',
-    alias: 'Dr. Rojas',
-    especialidad: 'Especialista en Diseño de Sonrisa',
-    fotoUrl: '/2.jpg' // Reemplazar con la foto correcta
   }
 ];
 
@@ -69,7 +57,7 @@ export const servicios: Servicio[] = [
       'Traslados y alojamiento premium',
       'Seguimiento y ajustes'
     ],
-    doctorIds: ['dr_rojas'],
+    doctorIds: ['dr_pinto'],
     heroImageUrl: '/Smile_Design.png',
     cardImageUrl: '/Smile_Design.png'
   },
@@ -86,7 +74,7 @@ export const servicios: Servicio[] = [
       'Cuidado post-operatorio 24/7',
       'Kit de recuperación y medicamentos'
     ],
-    doctorIds: ['dra_quintero'],
+    doctorIds: ['dr_pinto'],
     heroImageUrl: '/18-blefaroplastia.jpg',
     cardImageUrl: '/18-blefaroplastia.jpg'
   },
@@ -103,7 +91,7 @@ export const servicios: Servicio[] = [
       'Sesiones de seguimiento',
       'Asesoría de mantenimiento'
     ],
-    doctorIds: ['dra_quintero'],
+    doctorIds: ['dr_pinto'],
     heroImageUrl: '/cuidado-piel-frio.jpg',
     cardImageUrl: '/cuidado-piel-frio.jpg'
   },
@@ -120,7 +108,7 @@ export const servicios: Servicio[] = [
       'Kit de cuidado post-implante',
       'Revisiones de seguimiento durante 1 año'
     ],
-    doctorIds: ['dr_pinto', 'dra_quintero'],
+    doctorIds: ['dr_pinto'],
     heroImageUrl: '/evolucion-del-trasplante-capilar.jpg',
     cardImageUrl: '/evolucion-del-trasplante-capilar.jpg'
   }

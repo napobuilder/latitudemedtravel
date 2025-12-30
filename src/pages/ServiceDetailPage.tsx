@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { servicios, doctores, Doctor } from '../data';
 import { useCart } from '../hooks/useCart';
@@ -8,6 +8,19 @@ const ServiceDetailPage: React.FC = () => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const servicioActual = servicios.find(s => s.id === serviceId);
+
+  // Scroll al top cuando se carga la página del servicio
+  useEffect(() => {
+    // Scroll inmediato al top sin animación para mejor UX
+    window.scrollTo(0, 0);
+    
+    // También asegurarse después de un pequeño delay por si hay algún layout shift
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 50);
+
+    return () => clearTimeout(timer);
+  }, [serviceId]); // Se ejecuta cuando cambia el serviceId
 
   if (!servicioActual) {
     return (

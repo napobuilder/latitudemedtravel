@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import CartSidebar from './CartSidebar';
 import MobileMenu from './MobileMenu';
 import ServicesIcon from './ServicesIcon';
@@ -13,6 +13,37 @@ const Header: React.FC = () => {
     const [isServicesMenuOpen, setServicesMenuOpen] = useState(false);
     const [cartAnimation, setCartAnimation] = useState(false);
     const { item, shouldOpenCart, setShouldOpenCart } = useCart();
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    // Helper para manejar enlaces a secciones de la homepage
+    const handleSectionLink = (sectionId: string, e?: React.MouseEvent<HTMLAnchorElement>) => {
+        if (e) {
+            e.preventDefault();
+        }
+        
+        const sectionName = sectionId.replace('#', '');
+        
+        if (location.pathname === '/') {
+            // Si estamos en homepage, hacer scroll suave con offset para el header
+            setTimeout(() => {
+                const element = document.getElementById(sectionName);
+                if (element) {
+                    const headerOffset = 100;
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 10);
+        } else {
+            // Si estamos en otra página, navegar a homepage con hash
+            navigate(`/#${sectionName}`);
+        }
+    };
 
     // Abrir carrito automáticamente cuando se agrega un item
     useEffect(() => {
@@ -63,7 +94,13 @@ const Header: React.FC = () => {
 
                         {/* Desktop Navigation */}
                         <nav className="hidden lg:flex items-center space-x-1">
-                            <a href="#proceso" className="text-gray-700 hover:bg-gray-200/70 font-medium px-4 py-2 rounded-full transition-colors">Cómo Funciona</a>
+                            <a 
+                                href="#proceso" 
+                                onClick={(e) => handleSectionLink('#proceso', e)}
+                                className="text-gray-700 hover:bg-gray-200/70 font-medium px-4 py-2 rounded-full transition-colors cursor-pointer"
+                            >
+                                Cómo Funciona
+                            </a>
                             <div className="relative group">
                                 <button className="flex items-center gap-1.5 text-gray-700 hover:bg-gray-200/70 font-medium px-4 py-2 rounded-full transition-colors">
                                     <span>Servicios</span>
@@ -115,13 +152,29 @@ const Header: React.FC = () => {
                                     </div>
                                 </div>
                             </div>
-                            <a href="#expertos" className="text-gray-700 hover:bg-gray-200/70 font-medium px-4 py-2 rounded-full transition-colors">Nuestros Expertos</a>
-                            <a href="#faq" className="text-gray-700 hover:bg-gray-200/70 font-medium px-4 py-2 rounded-full transition-colors">Preguntas Frecuentes</a>
+                            <a 
+                                href="#expertos" 
+                                onClick={(e) => handleSectionLink('#expertos', e)}
+                                className="text-gray-700 hover:bg-gray-200/70 font-medium px-4 py-2 rounded-full transition-colors cursor-pointer"
+                            >
+                                Nuestros Expertos
+                            </a>
+                            <a 
+                                href="#faq" 
+                                onClick={(e) => handleSectionLink('#faq', e)}
+                                className="text-gray-700 hover:bg-gray-200/70 font-medium px-4 py-2 rounded-full transition-colors cursor-pointer"
+                            >
+                                Preguntas Frecuentes
+                            </a>
                         </nav>
 
                         {/* Action Buttons */}
                         <div className="flex items-center space-x-2 pr-4">
-                            <a href="#contacto" className="hidden sm:inline-block bg-brand-yellow-400 text-brand-blue-900 font-semibold py-2 px-5 rounded-full text-sm hover:bg-brand-yellow-500 transition-colors duration-300 shadow">
+                            <a 
+                                href="#contacto" 
+                                onClick={(e) => handleSectionLink('#contacto', e)}
+                                className="hidden sm:inline-block bg-brand-yellow-400 text-brand-blue-900 font-semibold py-2 px-5 rounded-full text-sm hover:bg-brand-yellow-500 transition-colors duration-300 shadow cursor-pointer"
+                            >
                                 Valoración
                             </a>
                             <div className="lg:hidden">

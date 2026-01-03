@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { equipo } from '../data';
+import { getEquipoTraducido } from '../data';
 import { useTranslation } from '../hooks/useTranslation';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Helper para codificar URLs con espacios y caracteres especiales
 const encodeImageUrl = (url: string): string => {
@@ -149,6 +150,8 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ miembro }) => {
 
 const Team: React.FC = () => {
   const t = useTranslation();
+  const { language } = useLanguage();
+  const equipo = useMemo(() => getEquipoTraducido(language), [language]);
   
   return (
     <section id="equipo" className="py-20 md:py-32 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">

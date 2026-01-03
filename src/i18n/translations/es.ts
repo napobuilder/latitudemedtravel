@@ -74,6 +74,18 @@ export const es: Translations = {
   // Procedures Section
   procedures: {
     initialConsultationPrice: 'Precio de valoración inicial',
+    mostPopular: 'Más Popular',
+    facialProcedures: 'Procedimientos Faciales',
+    bodyProcedures: 'Procedimientos Corporales',
+    allProcedures: {
+      title: 'Todos Nuestros Procedimientos',
+      subtitle: 'Explora nuestra gama completa de procedimientos de cirugía plástica y estética',
+      facialTab: 'Procedimientos Faciales',
+      bodyTab: 'Procedimientos Corporales',
+      viewLess: 'Ver menos',
+      viewAllFacial: 'Ver todos los',
+      viewAllBody: 'Ver todos los',
+    },
   },
 
   // Process Section
@@ -175,12 +187,35 @@ export const es: Translations = {
   experts: {
     title: 'Conoce a Nuestro Cirujano de Élite',
     subtitle: 'Colaboramos exclusivamente con cirujanos plásticos certificados y con una trayectoria de excelencia comprobada.',
+    credentials: 'Credenciales y Certificaciones',
   },
 
   // Team Section
   team: {
     title: 'Nuestro Equipo de Cuidado',
     subtitle: 'Profesionales dedicadas que te acompañan en cada paso de tu transformación con atención personalizada y experta.',
+  },
+
+  // ContactCta Section
+  contactCta: {
+    title: 'Da el Primer Paso Hacia tu Mejor Versión',
+    subtitle: 'Completa el formulario y una de nuestras asesoras expertas en Tennessee se pondrá en contacto contigo para una valoración 100% gratuita y sin compromiso.',
+    benefits: {
+      confidential: 'Valoración confidencial con expertos.',
+      quote: 'Recibe un presupuesto preliminar.',
+      questions: 'Aclara todas tus dudas.',
+    },
+    form: {
+      fullName: 'Nombre Completo',
+      email: 'Correo Electrónico',
+      phone: 'Teléfono',
+      procedure: 'Procedimiento de Interés',
+      selectProcedure: 'Seleccionar procedimiento...',
+      facialProcedures: 'Procedimientos Faciales',
+      bodyProcedures: 'Procedimientos Corporales',
+      other: 'Otro (especificar en mensaje)',
+      submit: 'Enviar y Solicitar Valoración',
+    },
   },
 
   // Common

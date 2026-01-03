@@ -24,7 +24,7 @@ const ProcedureCard: React.FC<ProcedureCardProps> = ({ servicio, isFeatured = fa
       {isFeatured && (
         <div className="absolute top-4 left-4 z-20">
           <span className="inline-flex items-center px-3 py-1.5 bg-gradient-to-r from-brand-yellow-400 to-brand-yellow-500 text-brand-blue-900 text-xs font-bold rounded-full shadow-lg backdrop-blur-sm">
-            ⭐ Más Popular
+            ⭐ {t.procedures.mostPopular}
           </span>
         </div>
       )}
@@ -134,7 +134,7 @@ const Procedures: React.FC = () => {
 
         {/* Procedimientos Faciales Destacados */}
         <div id="procedimientos-faciales" className="mb-16">
-          <h3 className="text-2xl md:text-3xl font-bold text-brand-blue-900 mb-8 text-center">Procedimientos Faciales</h3>
+          <h3 className="text-2xl md:text-3xl font-bold text-brand-blue-900 mb-8 text-center">{t.procedures.facialProcedures}</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {destacadosFaciales.map((servicio) => (
               <ProcedureCard key={servicio.id} servicio={servicio} isFeatured={true} />
@@ -144,7 +144,7 @@ const Procedures: React.FC = () => {
 
         {/* Procedimientos Corporales Destacados */}
         <div id="procedimientos-corporales" className="mb-12">
-          <h3 className="text-2xl md:text-3xl font-bold text-brand-blue-900 mb-8 text-center">Procedimientos Corporales</h3>
+          <h3 className="text-2xl md:text-3xl font-bold text-brand-blue-900 mb-8 text-center">{t.procedures.bodyProcedures}</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {destacadosCorporales.map((servicio) => (
               <ProcedureCard key={servicio.id} servicio={servicio} isFeatured={true} />
@@ -155,9 +155,9 @@ const Procedures: React.FC = () => {
         {/* Sección completa de todos los procedimientos con Tabs */}
         <div id="procedimientos-completos" className="mt-16 pt-16 border-t border-gray-200">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-blue-900 mb-4">Todos Nuestros Procedimientos</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-blue-900 mb-4">{t.procedures.allProcedures.title}</h2>
             <p className="max-w-2xl mx-auto text-lg text-gray-600">
-              Explora nuestra gama completa de procedimientos de cirugía plástica y estética
+              {t.procedures.allProcedures.subtitle}
             </p>
           </div>
 
@@ -175,7 +175,7 @@ const Procedures: React.FC = () => {
                     : 'text-gray-500 border-transparent hover:text-brand-blue-700'
                 }`}
               >
-                Procedimientos Faciales ({serviciosFaciales.length})
+                {t.procedures.allProcedures.facialTab} ({serviciosFaciales.length})
               </button>
               <button
                 onClick={() => {
@@ -188,7 +188,7 @@ const Procedures: React.FC = () => {
                     : 'text-gray-500 border-transparent hover:text-brand-blue-700'
                 }`}
               >
-                Procedimientos Corporales ({serviciosCorporales.length})
+                {t.procedures.allProcedures.bodyTab} ({serviciosCorporales.length})
               </button>
             </div>
           </div>
@@ -207,7 +207,7 @@ const Procedures: React.FC = () => {
                     onClick={() => setShowAllFaciales(!showAllFaciales)}
                     className="px-8 py-3 bg-brand-blue-900 text-white font-semibold rounded-full hover:bg-brand-blue-800 transition-colors"
                   >
-                    {showAllFaciales ? 'Ver menos' : `Ver todos los ${serviciosFaciales.length} procedimientos faciales`}
+                    {showAllFaciales ? t.procedures.allProcedures.viewLess : `${t.procedures.allProcedures.viewAllFacial} ${serviciosFaciales.length} ${t.procedures.facialProcedures.toLowerCase()}`}
                   </button>
                 </div>
               )}
@@ -228,7 +228,7 @@ const Procedures: React.FC = () => {
                     onClick={() => setShowAllCorporales(!showAllCorporales)}
                     className="px-8 py-3 bg-brand-blue-900 text-white font-semibold rounded-full hover:bg-brand-blue-800 transition-colors"
                   >
-                    {showAllCorporales ? 'Ver menos' : `Ver todos los ${serviciosCorporales.length} procedimientos corporales`}
+                    {showAllCorporales ? t.procedures.allProcedures.viewLess : `${t.procedures.allProcedures.viewAllBody} ${serviciosCorporales.length} ${t.procedures.bodyProcedures.toLowerCase()}`}
                   </button>
                 </div>
               )}

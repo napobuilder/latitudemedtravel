@@ -1,9 +1,12 @@
-import React from 'react';
-import { doctores } from '../data';
+import React, { useMemo } from 'react';
+import { getDoctoresTraducidos } from '../data';
 import { useTranslation } from '../hooks/useTranslation';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Experts: React.FC = () => {
   const t = useTranslation();
+  const { language } = useLanguage();
+  const doctores = useMemo(() => getDoctoresTraducidos(language), [language]);
   
   return (
     <section id="expertos" className="bg-white py-20 md:py-28">
@@ -25,7 +28,7 @@ const Experts: React.FC = () => {
                   )}
                   {doctor.credenciales && doctor.credenciales.length > 0 && (
                     <div className="mt-4 pt-4 border-t border-gray-200">
-                      <h4 className="text-sm font-semibold text-brand-blue-900 mb-3">Credenciales y Certificaciones</h4>
+                      <h4 className="text-sm font-semibold text-brand-blue-900 mb-3">{t.experts.credentials}</h4>
                       <ul className="space-y-2">
                         {doctor.credenciales.map((credencial, index) => (
                           <li key={index} className="flex items-start text-sm text-gray-600">

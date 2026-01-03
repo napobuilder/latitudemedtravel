@@ -79,6 +79,18 @@ export interface Translations {
   // Procedures Section
   procedures: {
     initialConsultationPrice: string;
+    mostPopular: string;
+    facialProcedures: string;
+    bodyProcedures: string;
+    allProcedures: {
+      title: string;
+      subtitle: string;
+      facialTab: string;
+      bodyTab: string;
+      viewLess: string;
+      viewAllFacial: string;
+      viewAllBody: string;
+    };
   };
 
   // Process Section
@@ -176,12 +188,35 @@ export interface Translations {
   experts: {
     title: string;
     subtitle: string;
+    credentials: string;
   };
 
   // Team Section
   team: {
     title: string;
     subtitle: string;
+  };
+
+  // ContactCta Section
+  contactCta: {
+    title: string;
+    subtitle: string;
+    benefits: {
+      confidential: string;
+      quote: string;
+      questions: string;
+    };
+    form: {
+      fullName: string;
+      email: string;
+      phone: string;
+      procedure: string;
+      selectProcedure: string;
+      facialProcedures: string;
+      bodyProcedures: string;
+      other: string;
+      submit: string;
+    };
   };
 
   // Common

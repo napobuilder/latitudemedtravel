@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
-import { getServicioTraducido, doctores, Doctor } from '../data';
+import { getServicioTraducido, getDoctoresTraducidos, Doctor } from '../data';
 import { useCart } from '../hooks/useCart';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTranslation } from '../hooks/useTranslation';
@@ -14,6 +14,7 @@ const ServiceDetailPage: React.FC = () => {
   const t = useTranslation();
   const { addToCart } = useCart();
   const servicioActual = serviceId ? getServicioTraducido(serviceId, language) : undefined;
+  const doctores = useMemo(() => getDoctoresTraducidos(language), [language]);
   const languagePrefix = getLanguagePrefix(location.pathname) || `/${language}`;
 
   // Scroll al top cuando se carga la página del servicio
@@ -79,7 +80,7 @@ const ServiceDetailPage: React.FC = () => {
     );
   }
 
-  const doctoresAsociados: Doctor[] = doctores.filter(d => servicioActual.doctorIds.includes(d.id));
+  const doctoresAsociados: Doctor[] = servicioActual ? doctores.filter(d => servicioActual.doctorIds.includes(d.id)) : [];
 
   const handleAddToCart = () => {
     addToCart(servicioActual);

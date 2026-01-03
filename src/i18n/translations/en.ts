@@ -74,6 +74,18 @@ export const en: Translations = {
   // Procedures Section
   procedures: {
     initialConsultationPrice: 'Initial consultation price',
+    mostPopular: 'Most Popular',
+    facialProcedures: 'Facial Procedures',
+    bodyProcedures: 'Body Procedures',
+    allProcedures: {
+      title: 'All Our Procedures',
+      subtitle: 'Explore our complete range of plastic and aesthetic surgery procedures',
+      facialTab: 'Facial Procedures',
+      bodyTab: 'Body Procedures',
+      viewLess: 'View less',
+      viewAllFacial: 'View all',
+      viewAllBody: 'View all',
+    },
   },
 
   // Process Section
@@ -175,12 +187,35 @@ export const en: Translations = {
   experts: {
     title: 'Meet Our Elite Surgeon',
     subtitle: 'We collaborate exclusively with certified plastic surgeons with a proven track record of excellence.',
+    credentials: 'Credentials and Certifications',
   },
 
   // Team Section
   team: {
     title: 'Our Care Team',
     subtitle: 'Dedicated professionals who accompany you at every step of your transformation with personalized and expert care.',
+  },
+
+  // ContactCta Section
+  contactCta: {
+    title: 'Take the First Step Towards Your Best Version',
+    subtitle: 'Complete the form and one of our expert advisors in Tennessee will contact you for a 100% free and no-obligation consultation.',
+    benefits: {
+      confidential: 'Confidential consultation with experts.',
+      quote: 'Receive a preliminary quote.',
+      questions: 'Clarify all your questions.',
+    },
+    form: {
+      fullName: 'Full Name',
+      email: 'Email',
+      phone: 'Phone',
+      procedure: 'Procedure of Interest',
+      selectProcedure: 'Select procedure...',
+      facialProcedures: 'Facial Procedures',
+      bodyProcedures: 'Body Procedures',
+      other: 'Other (specify in message)',
+      submit: 'Submit and Request Consultation',
+    },
   },
 
   // Common

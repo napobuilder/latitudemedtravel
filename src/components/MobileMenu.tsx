@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useTranslation } from '../hooks/useTranslation';
+import { getLanguagePrefix } from '../utils/routes';
 
 interface MobileMenuProps {
     isOpen: boolean;
@@ -9,6 +12,9 @@ interface MobileMenuProps {
 const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
     const location = useLocation();
     const navigate = useNavigate();
+    const { language } = useLanguage();
+    const t = useTranslation();
+    const languagePrefix = getLanguagePrefix(location.pathname) || `/${language}`;
 
     useEffect(() => {
         if (isOpen) {
@@ -25,8 +31,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
         onClose(); // Cerrar el menú móvil
         
         const sectionName = sectionId.replace('#', '');
+        const isHomePage = location.pathname === `/${language}` || location.pathname === '/es' || location.pathname === '/en';
         
-        if (location.pathname === '/') {
+        if (isHomePage) {
             // Si estamos en homepage, hacer scroll suave con offset para el header
             setTimeout(() => {
                 const element = document.getElementById(sectionName);
@@ -43,7 +50,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
             }, 10);
         } else {
             // Si estamos en otra página, navegar a homepage con hash
-            navigate(`/#${sectionName}`);
+            navigate(`${languagePrefix}#${sectionName}`);
         }
     };
 
@@ -58,28 +65,28 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                     onClick={(e) => handleSectionLink('#proceso', e)} 
                     className="text-gray-700 hover:text-brand-blue-500 transition-colors duration-300 cursor-pointer"
                 >
-                    Cómo Funciona
+                    {t.header.nav.howItWorks}
                 </a>
                 <a 
                     href="#expertos" 
                     onClick={(e) => handleSectionLink('#expertos', e)} 
                     className="text-gray-700 hover:text-brand-blue-500 transition-colors duration-300 cursor-pointer"
                 >
-                    Nuestros Expertos
+                    {t.header.nav.experts}
                 </a>
                 <a 
                     href="#faq" 
                     onClick={(e) => handleSectionLink('#faq', e)} 
                     className="text-gray-700 hover:text-brand-blue-500 transition-colors duration-300 cursor-pointer"
                 >
-                    Preguntas Frecuentes
+                    {t.header.nav.faq}
                 </a>
                 <a 
                     href="#contacto" 
                     onClick={(e) => handleSectionLink('#contacto', e)} 
                     className="mt-4 inline-block bg-brand-yellow-400 text-brand-blue-900 font-semibold py-3 px-8 rounded-full text-lg hover:bg-brand-yellow-500 transition-colors duration-300 shadow cursor-pointer"
                 >
-                    Valoración
+                    {t.header.cta.consultation}
                 </a>
             </nav>
         </div>

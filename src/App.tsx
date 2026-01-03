@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { useLanguage } from './contexts/LanguageContext';
+import { detectLanguage } from './utils/languageDetector';
+import { getLanguageFromPath, buildLocalizedPath } from './utils/routes';
 import HomePage from './pages/HomePage';
 import ServiceDetailPage from './pages/ServiceDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -20,15 +23,48 @@ const ScrollToTop: React.FC = () => {
   return null;
 };
 
+// Componente para redirigir desde / a /es/ o /en/
+const RootRedirect: React.FC = () => {
+  const language = detectLanguage();
+  return <Navigate to={`/${language}`} replace />;
+};
+
+// Componente wrapper para sincronizar idioma con la URL
+const LanguageSync: React.FC = () => {
+  const { language, setLanguage } = useLanguage();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Si la URL tiene un prefijo de idioma, sincronizar el contexto
+    const urlLanguage = getLanguageFromPath(location.pathname);
+    if (urlLanguage && urlLanguage !== language) {
+      setLanguage(urlLanguage);
+    }
+  }, [location.pathname, language, setLanguage]);
+
+  return null;
+};
+
 const App: React.FC = () => {
   return (
     <>
+      <LanguageSync />
       <ScrollToTop />
       <Header />
       <main className="pt-20">
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/servicios/:serviceId" element={<ServiceDetailPage />} />
+          {/* Redirigir / a /es/ o /en/ según preferencia */}
+          <Route path="/" element={<RootRedirect />} />
+          
+          {/* Rutas en español */}
+          <Route path="/es" element={<HomePage />} />
+          <Route path="/es/servicios/:serviceId" element={<ServiceDetailPage />} />
+          
+          {/* Rutas en inglés */}
+          <Route path="/en" element={<HomePage />} />
+          <Route path="/en/procedures/:serviceId" element={<ServiceDetailPage />} />
+          
+          {/* 404 para cualquier otra ruta */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

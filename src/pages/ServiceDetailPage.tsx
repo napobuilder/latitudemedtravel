@@ -1,13 +1,18 @@
 import React, { useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { servicios, doctores, Doctor } from '../data';
 import { useCart } from '../hooks/useCart';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getLanguagePrefix } from '../utils/routes';
 
 const ServiceDetailPage: React.FC = () => {
   const { serviceId } = useParams<{ serviceId: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { language } = useLanguage();
   const { addToCart } = useCart();
   const servicioActual = servicios.find(s => s.id === serviceId);
+  const languagePrefix = getLanguagePrefix(location.pathname) || `/${language}`;
 
   // Scroll al top cuando se carga la página del servicio
   useEffect(() => {
@@ -55,7 +60,7 @@ const ServiceDetailPage: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
-              to="/#procedimientos"
+              to={`${languagePrefix}#procedimientos`}
               className="inline-flex items-center justify-center bg-brand-yellow-400 text-brand-blue-900 font-bold py-3 px-8 rounded-full hover:bg-brand-yellow-500 transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
               Ver Todos los Procedimientos

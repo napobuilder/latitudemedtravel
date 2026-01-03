@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { servicios, Servicio } from '../data';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
+import { buildLocalizedPath, getServicesRouteName } from '../utils/routes';
 
 interface ProcedureCardProps {
   servicio: Servicio;
@@ -8,9 +10,12 @@ interface ProcedureCardProps {
 }
 
 const ProcedureCard: React.FC<ProcedureCardProps> = ({ servicio, isFeatured = false }) => {
+  const { language } = useLanguage();
+  const serviceRoute = buildLocalizedPath(language, `/${getServicesRouteName(language)}/${servicio.id}`);
+  
   return (
     <Link 
-      to={`/servicios/${servicio.id}`}
+      to={serviceRoute}
       className="group relative bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-500 block cursor-pointer"
     >
       {/* Badge "Más Popular" - Solo en destacados */}

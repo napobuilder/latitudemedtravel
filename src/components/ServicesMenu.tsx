@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { servicios } from '../data';
+import { useLanguage } from '../contexts/LanguageContext';
+import { buildLocalizedPath, getServicesRouteName } from '../utils/routes';
 
 interface ServicesMenuProps {
     isOpen: boolean;
@@ -8,6 +10,7 @@ interface ServicesMenuProps {
 }
 
 const ServicesMenu: React.FC<ServicesMenuProps> = ({ isOpen, onClose }) => {
+    const { language } = useLanguage();
     useEffect(() => {
         if (isOpen) {
             document.body.classList.add('overflow-hidden');
@@ -27,7 +30,7 @@ const ServicesMenu: React.FC<ServicesMenuProps> = ({ isOpen, onClose }) => {
                 {servicios.map(servicio => (
                     <Link 
                         key={servicio.id} 
-                        to={`/servicios/${servicio.id}`}
+                        to={buildLocalizedPath(language, `/${getServicesRouteName(language)}/${servicio.id}`)}
                         onClick={onClose} 
                         className="text-brand-blue-900 hover:text-brand-yellow-500 transition-colors duration-300"
                     >

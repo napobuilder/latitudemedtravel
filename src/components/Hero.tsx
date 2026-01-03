@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { servicios } from '../data';
+import { useTranslation } from '../hooks/useTranslation';
 
 const Hero: React.FC = () => {
+  const t = useTranslation();
+  
   // Obtener imágenes destacadas de los procedimientos (usar heroImageUrl)
   const procedimientosDestacados = [
     'rinoplastia',
@@ -61,7 +64,7 @@ const Hero: React.FC = () => {
                   ? 'w-8 bg-brand-yellow-400'
                   : 'w-2 bg-white/50 hover:bg-white/75'
               }`}
-              aria-label={`Ir a imagen ${index + 1}`}
+              aria-label={`${t.common.goToImage} ${index + 1}`}
             />
           ))}
         </div>
@@ -76,9 +79,9 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-light text-white mb-3 tracking-wide">
-              Redescubre tu Confianza.
+              {t.hero.title}
               <br className="hidden md:block" />
-              <span className="font-normal">Cirugía Plástica de Clase Mundial en Colombia.</span>
+              <span className="font-normal">{t.hero.subtitle}</span>
             </h1>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -89,7 +92,7 @@ const Hero: React.FC = () => {
                 href="#contacto" 
                 className="bg-brand-yellow-400 text-brand-blue-900 font-bold py-3 px-8 rounded-full text-base md:text-lg hover:bg-brand-yellow-500 transition duration-300 shadow-xl inline-block mt-4"
               >
-                Solicitar Valoración
+                {t.hero.cta}
               </a>
             </motion.div>
           </motion.div>

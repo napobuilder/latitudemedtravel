@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTranslation } from '../hooks/useTranslation';
 
 const Naddia: React.FC = () => {
+  const t = useTranslation();
+  
   return (
     <section id="naddia" className="bg-gradient-to-b from-gray-50 to-white py-20 md:py-28">
       <div className="container mx-auto px-6">
@@ -16,29 +19,23 @@ const Naddia: React.FC = () => {
 
           {/* Título */}
           <h2 className="text-3xl md:text-4xl font-bold text-brand-blue-900 mb-8">
-            Nuestra Visión y Misión
+            {t.naddia.title}
           </h2>
 
           {/* Contenido */}
           <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
             <p className="text-xl md:text-2xl font-semibold text-brand-blue-900">
-              Tu salud es nuestra prioridad y tu destino seguro.
+              {t.naddia.tagline}
             </p>
             
-            <p>
-              Nosotros trazamos la ruta confiable y sin fronteras, logrando poner en tus manos a expertos de la salud de clase mundial y convirtiendo tu viaje en una experiencia transformadora, única y placentera.
-            </p>
-            
-            <p className="font-semibold text-brand-blue-800">
-              Somos tu puente de confianza hacia la medicina estética de excelencia.
-            </p>
-            
-            <p>
-              Nuestra labor es simplificar tu viaje uniendo logística impecable con los mejores estándares clínicos, para que tú solo te enfoques en tu recuperación mientras nosotros cuidamos todo lo demás.
-            </p>
+            {t.naddia.paragraphs.map((paragraph, index) => (
+              <p key={index} className={index === 1 ? 'font-semibold text-brand-blue-800' : ''}>
+                {paragraph}
+              </p>
+            ))}
             
             <p className="text-xl font-semibold text-brand-blue-900 pt-4 border-t border-gray-200">
-              En Latitude Med Travel te brindamos el acompañamiento integral y la seguridad que mereces.
+              {t.naddia.closing}
             </p>
           </div>
         </div>

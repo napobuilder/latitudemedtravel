@@ -81,6 +81,109 @@ export interface Translations {
     initialConsultationPrice: string;
   };
 
+  // Process Section
+  process: {
+    title: string;
+    subtitle: string;
+    steps: {
+      consultation: {
+        title: string;
+        description: string;
+      };
+      travel: {
+        title: string;
+        description: string;
+      };
+      procedure: {
+        title: string;
+        description: string;
+      };
+      recovery: {
+        title: string;
+        description: string;
+      };
+    };
+  };
+
+  // FAQ Section
+  faq: {
+    title: string;
+    subtitle: string;
+    questions: {
+      safety: {
+        question: string;
+        answer: string;
+      };
+      package: {
+        question: string;
+        answer: string;
+      };
+      recovery: {
+        question: string;
+        answer: string;
+      };
+    };
+  };
+
+  // TrustBar Section
+  trustBar: {
+    jci: {
+      title: string;
+      subtitle: string;
+    };
+    surgeons: {
+      title: string;
+      subtitle: string;
+    };
+    support: {
+      title: string;
+      subtitle: string;
+    };
+    accompaniment: {
+      title: string;
+      subtitle: string;
+    };
+  };
+
+  // Naddia Section
+  naddia: {
+    title: string;
+    tagline: string;
+    paragraphs: string[];
+    closing: string;
+  };
+
+  // Testimonials Section
+  testimonials: {
+    title: string;
+    subtitle: string;
+    previousVideo: string;
+    nextVideo: string;
+    goToVideo: string;
+    testimonials: {
+      ana: {
+        text: string;
+        author: string;
+      };
+      isabella: {
+        text: string;
+        author: string;
+      };
+    };
+  };
+
+  // Experts Section
+  experts: {
+    title: string;
+    subtitle: string;
+  };
+
+  // Team Section
+  team: {
+    title: string;
+    subtitle: string;
+  };
+
   // Common
   common: {
     learnMore: string;

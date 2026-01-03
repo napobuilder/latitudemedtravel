@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from '../hooks/useTranslation';
 
 interface VideoTestimonial {
   id: string;
@@ -23,6 +24,7 @@ const videos: VideoTestimonial[] = [
 ];
 
 const Testimonials: React.FC = () => {
+  const t = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [touchStart, setTouchStart] = useState(0);
@@ -121,10 +123,10 @@ const Testimonials: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-brand-blue-900 mb-4">
-            Historias Reales, Vidas Transformadas
+            {t.testimonials.title}
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-gray-600">
-            Experiencias auténticas de nuestras pacientes en Colombia
+            {t.testimonials.subtitle}
           </p>
         </div>
 
@@ -194,7 +196,7 @@ const Testimonials: React.FC = () => {
               <button
                 onClick={goToPrevious}
                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 rounded-full p-3 transition-colors z-10"
-                aria-label="Video anterior"
+                aria-label={t.testimonials.previousVideo}
               >
                 <svg
                   className="w-6 h-6 text-white"
@@ -216,7 +218,7 @@ const Testimonials: React.FC = () => {
               <button
                 onClick={goToNext}
                 className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 rounded-full p-3 transition-colors z-10"
-                aria-label="Siguiente video"
+                aria-label={t.testimonials.nextVideo}
               >
                 <svg
                   className="w-6 h-6 text-white"
@@ -247,7 +249,7 @@ const Testimonials: React.FC = () => {
                       ? 'bg-white/50'
                       : 'bg-white/20'
                   }`}
-                  aria-label={`Ir al video ${index + 1}`}
+                  aria-label={`${t.testimonials.goToVideo} ${index + 1}`}
                 />
               ))}
             </div>
@@ -288,18 +290,18 @@ const Testimonials: React.FC = () => {
               <span className="text-yellow-400">★★★★★</span>
             </div>
             <p className="text-gray-600 italic">
-              &quot;El nivel de atención y profesionalismo es increíble. Me sentí segura y cuidada durante todo el proceso. ¡100% recomendados!&quot;
+              &quot;{t.testimonials.testimonials.ana.text}&quot;
             </p>
-            <p className="font-bold text-right mt-3 text-brand-blue-900">- Ana G., Estados Unidos</p>
+            <p className="font-bold text-right mt-3 text-brand-blue-900">{t.testimonials.testimonials.ana.author}</p>
           </div>
           <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
             <div className="flex items-center mb-2">
               <span className="text-yellow-400">★★★★★</span>
             </div>
             <p className="text-gray-600 italic">
-              &quot;Dudaba en viajar, pero el equipo de Latitude lo hizo todo tan fácil. Los resultados son mejores de lo que jamás soñé.&quot;
+              &quot;{t.testimonials.testimonials.isabella.text}&quot;
             </p>
-            <p className="font-bold text-right mt-3 text-brand-blue-900">- Isabella V., Estados Unidos</p>
+            <p className="font-bold text-right mt-3 text-brand-blue-900">{t.testimonials.testimonials.isabella.author}</p>
           </div>
         </div>
       </div>

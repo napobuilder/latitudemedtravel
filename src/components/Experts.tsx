@@ -1,12 +1,15 @@
 import React from 'react';
 import { doctores } from '../data';
+import { useTranslation } from '../hooks/useTranslation';
 
 const Experts: React.FC = () => {
+  const t = useTranslation();
+  
   return (
     <section id="expertos" className="bg-white py-20 md:py-28">
       <div className="container mx-auto px-6 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-brand-blue-900 mb-4">Conoce a Nuestro Cirujano de Élite</h2>
-        <p className="max-w-2xl mx-auto text-lg text-gray-600 mb-16">Colaboramos exclusivamente con cirujanos plásticos certificados y con una trayectoria de excelencia comprobada.</p>
+        <h2 className="text-3xl md:text-4xl font-bold text-brand-blue-900 mb-4">{t.experts.title}</h2>
+        <p className="max-w-2xl mx-auto text-lg text-gray-600 mb-16">{t.experts.subtitle}</p>
         <div className="grid sm:grid-cols-1 lg:grid-cols-1 gap-8 max-w-2xl mx-auto">
           {doctores.map((doctor) => (
             <div key={doctor.id} className="bg-white rounded-2xl shadow-lg transform hover:-translate-y-2 transition-transform duration-300 p-8">

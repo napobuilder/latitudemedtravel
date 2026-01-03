@@ -1,30 +1,33 @@
 import React from 'react';
+import { useTranslation } from '../hooks/useTranslation';
 
 const Process: React.FC = () => {
+  const t = useTranslation();
+  
   const steps = [
     {
       number: '01',
       icon: '/assets/icons/consultation.svg',
-      title: 'Valoración y Planificación',
-      description: 'Inicia con una valoración confidencial para diseñar tu plan personalizado junto a nuestras asesoras expertas.'
+      title: t.process.steps.consultation.title,
+      description: t.process.steps.consultation.description
     },
     {
       number: '02',
       icon: '/assets/icons/travel-coordination.svg',
-      title: 'Coordinación de Viaje',
-      description: 'Nos encargamos de todos los detalles: vuelos, alojamiento premium y traslados privados para tu total comodidad.'
+      title: t.process.steps.travel.title,
+      description: t.process.steps.travel.description
     },
     {
       number: '03',
       icon: '/assets/icons/procedure-care.svg',
-      title: 'Procedimiento y Cuidado',
-      description: 'Recibe tratamiento en clínicas de vanguardia con el acompañamiento de nuestro equipo local bilingüe.'
+      title: t.process.steps.procedure.title,
+      description: t.process.steps.procedure.description
     },
     {
       number: '04',
       icon: '/assets/icons/recovery-follow-up.svg',
-      title: 'Recuperación y Seguimiento',
-      description: 'Disfruta de una recuperación confortable y coordinamos tu seguimiento al regresar a Estados Unidos.'
+      title: t.process.steps.recovery.title,
+      description: t.process.steps.recovery.description
     }
   ];
 
@@ -39,10 +42,10 @@ const Process: React.FC = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-brand-blue-900 mb-4">
-            Tu Transformación, Simplificada en 4 Pasos
+            {t.process.title}
           </h2>
           <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-600">
-            Nos encargamos de la complejidad para que tú solo te concentres en tu bienestar.
+            {t.process.subtitle}
           </p>
         </div>
 

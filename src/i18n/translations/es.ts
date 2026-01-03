@@ -76,6 +76,113 @@ export const es: Translations = {
     initialConsultationPrice: 'Precio de valoración inicial',
   },
 
+  // Process Section
+  process: {
+    title: 'Tu Transformación, Simplificada en 4 Pasos',
+    subtitle: 'Nos encargamos de la complejidad para que tú solo te concentres en tu bienestar.',
+    steps: {
+      consultation: {
+        title: 'Valoración y Planificación',
+        description: 'Inicia con una valoración confidencial para diseñar tu plan personalizado junto a nuestras asesoras expertas.',
+      },
+      travel: {
+        title: 'Coordinación de Viaje',
+        description: 'Nos encargamos de todos los detalles: vuelos, alojamiento premium y traslados privados para tu total comodidad.',
+      },
+      procedure: {
+        title: 'Procedimiento y Cuidado',
+        description: 'Recibe tratamiento en clínicas de vanguardia con el acompañamiento de nuestro equipo local bilingüe.',
+      },
+      recovery: {
+        title: 'Recuperación y Seguimiento',
+        description: 'Disfruta de una recuperación confortable y coordinamos tu seguimiento al regresar a Estados Unidos.',
+      },
+    },
+  },
+
+  // FAQ Section
+  faq: {
+    title: 'Preguntas Frecuentes',
+    subtitle: 'Resolvemos tus dudas más comunes para darte total tranquilidad.',
+    questions: {
+      safety: {
+        question: '¿Es seguro viajar a Colombia para una cirugía plástica?',
+        answer: 'Absolutamente. Colombia es un referente mundial en cirugía plástica. Nosotros amplificamos tu seguridad al conectarte únicamente con cirujanos certificados por la SCCP y clínicas que cumplen con los más altos estándares internacionales, como la acreditación JCI. Además, nuestro equipo local te acompaña en todo momento.',
+      },
+      package: {
+        question: '¿Qué incluye el paquete de Latitude Med Travel?',
+        answer: 'Ofrecemos un servicio integral. Nos encargamos de la coordinación de tus citas médicas, la planificación de tu viaje (vuelos y alojamiento premium), traslados privados aeropuerto-hotel-clínica, y te asignamos un acompañante bilingüe local. Nuestro objetivo es que tu única preocupación sea tu recuperación y bienestar.',
+      },
+      recovery: {
+        question: '¿Cómo es el proceso de recuperación y seguimiento?',
+        answer: 'Tu recuperación se llevará a cabo en un entorno cómodo y seguro en Colombia. Estarás en contacto directo con tu cirujano para los controles postoperatorios. Una vez regreses a Estados Unidos, nuestro equipo coordinará tu seguimiento para asegurar que tu evolución sea la correcta y para resolver cualquier duda que puedas tener.',
+      },
+    },
+  },
+
+  // TrustBar Section
+  trustBar: {
+    jci: {
+      title: 'Clínicas JCI',
+      subtitle: 'Acreditación Internacional',
+    },
+    surgeons: {
+      title: 'Cirujanos Certificados',
+      subtitle: 'Sociedad Colombiana',
+    },
+    support: {
+      title: 'Soporte en USA',
+      subtitle: 'Equipo Bilingüe',
+    },
+    accompaniment: {
+      title: 'Acompañamiento',
+      subtitle: 'Servicio Premium',
+    },
+  },
+
+  // Naddia Section
+  naddia: {
+    title: 'Nuestra Visión y Misión',
+    tagline: 'Tu salud es nuestra prioridad y tu destino seguro.',
+    paragraphs: [
+      'Nosotros trazamos la ruta confiable y sin fronteras, logrando poner en tus manos a expertos de la salud de clase mundial y convirtiendo tu viaje en una experiencia transformadora, única y placentera.',
+      'Somos tu puente de confianza hacia la medicina estética de excelencia.',
+      'Nuestra labor es simplificar tu viaje uniendo logística impecable con los mejores estándares clínicos, para que tú solo te enfoques en tu recuperación mientras nosotros cuidamos todo lo demás.',
+    ],
+    closing: 'En Latitude Med Travel te brindamos el acompañamiento integral y la seguridad que mereces.',
+  },
+
+  // Testimonials Section
+  testimonials: {
+    title: 'Historias Reales, Vidas Transformadas',
+    subtitle: 'Experiencias auténticas de nuestras pacientes en Colombia',
+    previousVideo: 'Video anterior',
+    nextVideo: 'Siguiente video',
+    goToVideo: 'Ir al video',
+    testimonials: {
+      ana: {
+        text: '"El nivel de atención y profesionalismo es increíble. Me sentí segura y cuidada durante todo el proceso. ¡100% recomendados!"',
+        author: '- Ana G., Estados Unidos',
+      },
+      isabella: {
+        text: '"Dudaba en viajar, pero el equipo de Latitude lo hizo todo tan fácil. Los resultados son mejores de lo que jamás soñé."',
+        author: '- Isabella V., Estados Unidos',
+      },
+    },
+  },
+
+  // Experts Section
+  experts: {
+    title: 'Conoce a Nuestro Cirujano de Élite',
+    subtitle: 'Colaboramos exclusivamente con cirujanos plásticos certificados y con una trayectoria de excelencia comprobada.',
+  },
+
+  // Team Section
+  team: {
+    title: 'Nuestro Equipo de Cuidado',
+    subtitle: 'Profesionales dedicadas que te acompañan en cada paso de tu transformación con atención personalizada y experta.',
+  },
+
   // Common
   common: {
     learnMore: 'Saber Más',

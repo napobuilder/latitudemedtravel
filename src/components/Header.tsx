@@ -178,11 +178,11 @@ const Header: React.FC = () => {
                         </nav>
 
                         {/* Action Buttons */}
-                        <div className="flex items-center space-x-2 pr-4">
+                        <div className="flex items-center space-x-3 pr-4">
                             <a 
                                 href="#contacto" 
                                 onClick={(e) => handleSectionLink('#contacto', e)}
-                                className="hidden sm:inline-block bg-brand-yellow-400 text-brand-blue-900 font-semibold py-2 px-5 rounded-full text-sm hover:bg-brand-yellow-500 transition-colors duration-300 shadow cursor-pointer"
+                                className="hidden sm:inline-block bg-brand-yellow-400 text-brand-blue-900 font-semibold py-2 px-5 rounded-full text-sm hover:bg-brand-yellow-500 transition-colors duration-300 shadow cursor-pointer ml-2"
                             >
                                 {t.header.cta.consultation}
                             </a>

@@ -48,6 +48,34 @@ export const es: Translations = {
     copyright: '© 2024 Latitude Med Travel. Todos los derechos reservados.',
   },
 
+  // Service Detail Page
+  serviceDetail: {
+    scheduleConsultation: 'Agendar Valoración',
+    consultation: 'Valoración',
+    initialConsultationPrice: 'Precio de valoración inicial',
+    whatIncludes: '¿Qué Incluye la Valoración?',
+    whatIncludesList: {
+      personalizedEvaluation: 'Evaluación personalizada del procedimiento',
+      caseReview: 'Revisión de tu caso con el especialista',
+      procedureInfo: 'Información sobre el procedimiento y resultados esperados',
+      processGuidance: 'Orientación sobre el proceso y próximos pasos',
+      personalizedQuote: 'Presupuesto personalizado',
+    },
+    whatIs: '¿Qué es',
+    ourSpecialist: 'Nuestro Especialista',
+    notFound: {
+      title: 'Procedimiento No Encontrado',
+      message: 'Lo sentimos, el procedimiento que estás buscando no existe o ha sido removido.',
+      viewAll: 'Ver Todos los Procedimientos',
+      goBack: 'Volver Atrás',
+    },
+  },
+
+  // Procedures Section
+  procedures: {
+    initialConsultationPrice: 'Precio de valoración inicial',
+  },
+
   // Common
   common: {
     learnMore: 'Saber Más',

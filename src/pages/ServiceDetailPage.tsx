@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
-import { servicios, doctores, Doctor } from '../data';
+import { getServicioTraducido, doctores, Doctor } from '../data';
 import { useCart } from '../hooks/useCart';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTranslation } from '../hooks/useTranslation';
 import { getLanguagePrefix } from '../utils/routes';
 
 const ServiceDetailPage: React.FC = () => {
@@ -10,8 +11,9 @@ const ServiceDetailPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { language } = useLanguage();
+  const t = useTranslation();
   const { addToCart } = useCart();
-  const servicioActual = servicios.find(s => s.id === serviceId);
+  const servicioActual = serviceId ? getServicioTraducido(serviceId, language) : undefined;
   const languagePrefix = getLanguagePrefix(location.pathname) || `/${language}`;
 
   // Scroll al top cuando se carga la página del servicio
@@ -51,11 +53,11 @@ const ServiceDetailPage: React.FC = () => {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-bold text-brand-blue-900 mb-4">
-            Procedimiento No Encontrado
+            {t.serviceDetail.notFound.title}
           </h1>
           
           <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto">
-            Lo sentimos, el procedimiento que estás buscando no existe o ha sido removido.
+            {t.serviceDetail.notFound.message}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -63,13 +65,13 @@ const ServiceDetailPage: React.FC = () => {
               to={`${languagePrefix}#procedimientos`}
               className="inline-flex items-center justify-center bg-brand-yellow-400 text-brand-blue-900 font-bold py-3 px-8 rounded-full hover:bg-brand-yellow-500 transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
-              Ver Todos los Procedimientos
+              {t.serviceDetail.notFound.viewAll}
             </Link>
             <button
               onClick={() => navigate(-1)}
               className="inline-flex items-center justify-center bg-white text-brand-blue-900 font-semibold py-3 px-8 rounded-full border-2 border-brand-blue-900 hover:bg-brand-blue-900 hover:text-white transition-all duration-300"
             >
-              Volver Atrás
+              {t.serviceDetail.notFound.goBack}
             </button>
           </div>
         </div>
@@ -94,7 +96,7 @@ const ServiceDetailPage: React.FC = () => {
           <h1 className="text-4xl md:text-6xl font-bold font-display">{servicioActual.nombre}</h1>
           <p className="text-xl md:text-2xl mt-4 text-gray-200">{servicioActual.subtitulo}</p>
           <button onClick={handleAddToCart} className="mt-8 bg-brand-yellow-400 text-brand-blue-900 font-bold py-3 px-8 rounded-full text-lg hover:bg-brand-yellow-500 transition-transform transform hover:scale-105">
-            Agendar Valoración
+            {t.serviceDetail.scheduleConsultation}
           </button>
         </div>
       </section>
@@ -108,37 +110,37 @@ const ServiceDetailPage: React.FC = () => {
             <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
               <div className="mb-4">
                 <span className="inline-block px-3 py-1 bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold rounded uppercase mb-3">
-                  Valoración
+                  {t.serviceDetail.consultation}
                 </span>
               </div>
               <div className="mb-2">
                 <p className="text-4xl font-bold text-brand-blue-900">${servicioActual.precioConsulta} <span className="text-lg font-medium">USD</span></p>
               </div>
-              <p className="text-sm text-gray-500 mb-4">Precio de valoración inicial</p>
+              <p className="text-sm text-gray-500 mb-4">{t.serviceDetail.initialConsultationPrice}</p>
               <button onClick={handleAddToCart} className="w-full mt-4 bg-brand-yellow-400 text-brand-blue-900 font-bold py-3 px-6 rounded-full hover:bg-brand-yellow-500 transition-transform transform hover:scale-105">
-                Agendar Valoración
+                {t.serviceDetail.scheduleConsultation}
               </button>
-              <h3 className="font-bold text-lg mt-6 mb-3 text-brand-blue-900">¿Qué Incluye la Valoración?</h3>
+              <h3 className="font-bold text-lg mt-6 mb-3 text-brand-blue-900">{t.serviceDetail.whatIncludes}</h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-center">
                   <svg className="w-5 h-5 mr-2 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                  <span>Evaluación personalizada del procedimiento</span>
+                  <span>{t.serviceDetail.whatIncludesList.personalizedEvaluation}</span>
                 </li>
                 <li className="flex items-center">
                   <svg className="w-5 h-5 mr-2 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                  <span>Revisión de tu caso con el especialista</span>
+                  <span>{t.serviceDetail.whatIncludesList.caseReview}</span>
                 </li>
                 <li className="flex items-center">
                   <svg className="w-5 h-5 mr-2 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                  <span>Información sobre el procedimiento y resultados esperados</span>
+                  <span>{t.serviceDetail.whatIncludesList.procedureInfo}</span>
                 </li>
                 <li className="flex items-center">
                   <svg className="w-5 h-5 mr-2 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                  <span>Orientación sobre el proceso y próximos pasos</span>
+                  <span>{t.serviceDetail.whatIncludesList.processGuidance}</span>
                 </li>
                 <li className="flex items-center">
                   <svg className="w-5 h-5 mr-2 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                  <span>Presupuesto personalizado</span>
+                  <span>{t.serviceDetail.whatIncludesList.personalizedQuote}</span>
                 </li>
               </ul>
             </div>
@@ -147,10 +149,10 @@ const ServiceDetailPage: React.FC = () => {
           {/* Right Column (Content) */}
           <div className="lg:col-span-2">
             <div className="prose prose-lg max-w-none text-gray-700">
-              <h2>¿Qué es {servicioActual.nombre}?</h2>
+              <h2>{t.serviceDetail.whatIs} {servicioActual.nombre}?</h2>
               <p>{servicioActual.descripcion}</p>
               
-              <h2 className="mt-12">Nuestro Especialista</h2>
+              <h2 className="mt-12">{t.serviceDetail.ourSpecialist}</h2>
               <div className="grid sm:grid-cols-1 gap-8 not-prose">
                 {doctoresAsociados.map(doctor => (
                   <div key={doctor.id} className="bg-white p-6 rounded-xl shadow-md border border-gray-100">

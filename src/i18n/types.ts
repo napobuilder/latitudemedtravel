@@ -53,6 +53,34 @@ export interface Translations {
     copyright: string;
   };
 
+  // Service Detail Page
+  serviceDetail: {
+    scheduleConsultation: string;
+    consultation: string;
+    initialConsultationPrice: string;
+    whatIncludes: string;
+    whatIncludesList: {
+      personalizedEvaluation: string;
+      caseReview: string;
+      procedureInfo: string;
+      processGuidance: string;
+      personalizedQuote: string;
+    };
+    whatIs: string;
+    ourSpecialist: string;
+    notFound: {
+      title: string;
+      message: string;
+      viewAll: string;
+      goBack: string;
+    };
+  };
+
+  // Procedures Section
+  procedures: {
+    initialConsultationPrice: string;
+  };
+
   // Common
   common: {
     learnMore: string;

@@ -48,6 +48,34 @@ export const en: Translations = {
     copyright: '© 2024 Latitude Med Travel. All rights reserved.',
   },
 
+  // Service Detail Page
+  serviceDetail: {
+    scheduleConsultation: 'Schedule Consultation',
+    consultation: 'Consultation',
+    initialConsultationPrice: 'Initial consultation price',
+    whatIncludes: 'What Does the Consultation Include?',
+    whatIncludesList: {
+      personalizedEvaluation: 'Personalized procedure evaluation',
+      caseReview: 'Review of your case with the specialist',
+      procedureInfo: 'Information about the procedure and expected results',
+      processGuidance: 'Guidance on the process and next steps',
+      personalizedQuote: 'Personalized quote',
+    },
+    whatIs: 'What is',
+    ourSpecialist: 'Our Specialist',
+    notFound: {
+      title: 'Procedure Not Found',
+      message: 'Sorry, the procedure you\'re looking for doesn\'t exist or has been removed.',
+      viewAll: 'View All Procedures',
+      goBack: 'Go Back',
+    },
+  },
+
+  // Procedures Section
+  procedures: {
+    initialConsultationPrice: 'Initial consultation price',
+  },
+
   // Common
   common: {
     learnMore: 'Learn More',

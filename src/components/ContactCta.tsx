@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { servicios } from '../data';
+import React, { useState, useMemo } from 'react';
+import { getServiciosTraducidos } from '../data';
 import { useCart } from '../hooks/useCart';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const ContactCta: React.FC = () => {
+  const { language } = useLanguage();
+  const servicios = useMemo(() => getServiciosTraducidos(language), [language]);
   const { addToCart } = useCart();
   const [selectedProcedureId, setSelectedProcedureId] = useState<string>('');
   

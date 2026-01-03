@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { servicios, Servicio } from '../data';
+import React, { useState, useMemo } from 'react';
+import { getServiciosTraducidos, Servicio } from '../data';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTranslation } from '../hooks/useTranslation';
 import { buildLocalizedPath, getServicesRouteName } from '../utils/routes';
 
 interface ProcedureCardProps {
@@ -11,6 +12,7 @@ interface ProcedureCardProps {
 
 const ProcedureCard: React.FC<ProcedureCardProps> = ({ servicio, isFeatured = false }) => {
   const { language } = useLanguage();
+  const t = useTranslation();
   const serviceRoute = buildLocalizedPath(language, `/${getServicesRouteName(language)}/${servicio.id}`);
   
   return (
@@ -40,13 +42,13 @@ const ProcedureCard: React.FC<ProcedureCardProps> = ({ servicio, isFeatured = fa
         <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-900/90 via-brand-blue-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center pb-6">
           <div className="text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
             <span className="inline-block bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold px-3 py-1 rounded-full mb-2">
-              Valoración
+              {t.serviceDetail.consultation}
             </span>
             <div className="flex items-baseline justify-center gap-2">
               <span className="text-4xl font-bold text-white">${servicio.precioConsulta}</span>
               <span className="text-lg text-white/80">USD</span>
             </div>
-            <p className="text-sm text-white/90 mt-1">Precio de valoración inicial</p>
+            <p className="text-sm text-white/90 mt-1">{t.procedures.initialConsultationPrice}</p>
           </div>
         </div>
       </div>
@@ -62,20 +64,20 @@ const ProcedureCard: React.FC<ProcedureCardProps> = ({ servicio, isFeatured = fa
         <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200 group-hover:opacity-0 group-hover:scale-95 transition-all duration-300">
           <div className="flex items-center gap-2 mb-2">
             <span className="inline-block px-2 py-1 bg-brand-yellow-400 text-brand-blue-900 text-xs font-bold rounded uppercase">
-              Valoración
+              {t.serviceDetail.consultation}
             </span>
           </div>
           <div className="flex items-baseline gap-2 mb-1">
             <span className="text-2xl font-bold text-brand-blue-900">${servicio.precioConsulta}</span>
             <span className="text-sm text-gray-600">USD</span>
           </div>
-          <p className="text-xs text-gray-500">Precio de valoración inicial</p>
+          <p className="text-xs text-gray-500">{t.procedures.initialConsultationPrice}</p>
         </div>
 
         {/* Indicador "Saber Más" - ahora solo visual ya que toda la card es clickeable */}
         <div className="mt-4">
           <span className="font-semibold text-brand-blue-700 group-hover:text-brand-blue-900 text-sm inline-flex items-center">
-            Saber Más 
+            {t.common.learnMore} 
             <span className="ml-1 transform group-hover:translate-x-1 transition-transform">→</span>
           </span>
         </div>
@@ -85,6 +87,10 @@ const ProcedureCard: React.FC<ProcedureCardProps> = ({ servicio, isFeatured = fa
 };
 
 const Procedures: React.FC = () => {
+  const { language } = useLanguage();
+  const t = useTranslation();
+  const servicios = useMemo(() => getServiciosTraducidos(language), [language]);
+  
   const [activeTab, setActiveTab] = useState<'facial' | 'corporal'>('facial');
   const [showAllFaciales, setShowAllFaciales] = useState(false);
   const [showAllCorporales, setShowAllCorporales] = useState(false);

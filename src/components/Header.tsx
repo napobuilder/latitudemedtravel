@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import CartSidebar from './CartSidebar';
 import MobileMenu from './MobileMenu';
@@ -7,7 +7,7 @@ import ServicesMenu from './ServicesMenu';
 import LanguageSelector from './LanguageSelector';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTranslation } from '../hooks/useTranslation';
-import { servicios } from '../data';
+import { getServiciosTraducidos } from '../data';
 import { useCart } from '../hooks/useCart';
 import { getLanguagePrefix, buildLocalizedPath, getServicesRouteName } from '../utils/routes';
 
@@ -19,6 +19,7 @@ const Header: React.FC = () => {
     const { item, shouldOpenCart, setShouldOpenCart } = useCart();
     const { language } = useLanguage();
     const t = useTranslation();
+    const servicios = useMemo(() => getServiciosTraducidos(language), [language]);
     const location = useLocation();
     const navigate = useNavigate();
     const languagePrefix = getLanguagePrefix(location.pathname) || `/${language}`;

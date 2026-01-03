@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { servicios } from '../data';
+import { getServiciosTraducidos } from '../data';
 import { useLanguage } from '../contexts/LanguageContext';
 import { buildLocalizedPath, getServicesRouteName } from '../utils/routes';
 
@@ -11,6 +11,7 @@ interface ServicesMenuProps {
 
 const ServicesMenu: React.FC<ServicesMenuProps> = ({ isOpen, onClose }) => {
     const { language } = useLanguage();
+    const servicios = useMemo(() => getServiciosTraducidos(language), [language]);
     useEffect(() => {
         if (isOpen) {
             document.body.classList.add('overflow-hidden');

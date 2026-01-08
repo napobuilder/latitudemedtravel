@@ -82,3 +82,41 @@ details.mobile-accordion .content > div {
 .animate-ripple {
     animation: ripple 0.6s ease-out;
 }
+
+/* Scroll snap for video carousel - Safari iOS compatible */
+.scroll-snap-x-mandatory {
+    -webkit-scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory;
+}
+
+.scroll-snap-type-x-mandatory {
+    -webkit-scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory;
+}
+
+.scroll-snap-align-center {
+    -webkit-scroll-snap-align: center;
+    scroll-snap-align: center;
+}
+
+.scroll-snap-align-start {
+    -webkit-scroll-snap-align: start;
+    scroll-snap-align: start;
+}
+
+/* Video slide - force 100% width for Safari iOS */
+.video-slide {
+    width: 100% !important;
+    flex-basis: 100% !important;
+    flex-shrink: 0;
+}
+
+/* Hide scrollbar for video container */
+.video-container {
+    -webkit-overflow-scrolling: touch;
+    will-change: scroll-position;
+}
+
+.video-container::-webkit-scrollbar {
+    display: none;
+}

@@ -49,10 +49,15 @@ const Testimonials: React.FC = () => {
       isScrollingRef.current = true;
       setCurrentIndex(nextIndex);
       setIsPlaying(false);
-      // Scroll to next video using scrollLeft
+      // Scroll to next video using scrollLeft with requestAnimationFrame for Safari iOS
       if (containerRef.current) {
-        const scrollPosition = nextIndex * containerRef.current.offsetWidth;
-        containerRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+        requestAnimationFrame(() => {
+          if (containerRef.current) {
+            const containerWidth = containerRef.current.offsetWidth;
+            const scrollPosition = nextIndex * containerWidth;
+            containerRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+          }
+        });
       }
       setTimeout(() => {
         isScrollingRef.current = false;
@@ -66,10 +71,15 @@ const Testimonials: React.FC = () => {
       isScrollingRef.current = true;
       setCurrentIndex(prevIndex);
       setIsPlaying(false);
-      // Scroll to previous video using scrollLeft
+      // Scroll to previous video using scrollLeft with requestAnimationFrame for Safari iOS
       if (containerRef.current) {
-        const scrollPosition = prevIndex * containerRef.current.offsetWidth;
-        containerRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+        requestAnimationFrame(() => {
+          if (containerRef.current) {
+            const containerWidth = containerRef.current.offsetWidth;
+            const scrollPosition = prevIndex * containerWidth;
+            containerRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+          }
+        });
       }
       setTimeout(() => {
         isScrollingRef.current = false;
@@ -81,10 +91,15 @@ const Testimonials: React.FC = () => {
     isScrollingRef.current = true;
     setCurrentIndex(index);
     setIsPlaying(false);
-    // Scroll to selected video using scrollLeft
+    // Scroll to selected video using scrollLeft with requestAnimationFrame for Safari iOS
     if (containerRef.current) {
-      const scrollPosition = index * containerRef.current.offsetWidth;
-      containerRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+      requestAnimationFrame(() => {
+        if (containerRef.current) {
+          const containerWidth = containerRef.current.offsetWidth;
+          const scrollPosition = index * containerWidth;
+          containerRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+        }
+      });
     }
     setTimeout(() => {
       isScrollingRef.current = false;
@@ -205,14 +220,18 @@ const Testimonials: React.FC = () => {
     const handleScroll = () => {
       if (isScrollingRef.current) return; // Ignore programmatic scrolls
 
-      const containerWidth = container.offsetWidth;
-      const scrollLeft = container.scrollLeft;
-      const newIndex = Math.round(scrollLeft / containerWidth);
+      // Use requestAnimationFrame for Safari iOS to ensure accurate measurements
+      requestAnimationFrame(() => {
+        if (!container) return;
+        const containerWidth = container.offsetWidth;
+        const scrollLeft = container.scrollLeft;
+        const newIndex = Math.round(scrollLeft / containerWidth);
 
-      if (newIndex !== currentIndex && newIndex >= 0 && newIndex < videos.length) {
-        setCurrentIndex(newIndex);
-        setIsPlaying(false);
-      }
+        if (newIndex !== currentIndex && newIndex >= 0 && newIndex < videos.length) {
+          setCurrentIndex(newIndex);
+          setIsPlaying(false);
+        }
+      });
     };
 
     container.addEventListener('scroll', handleScroll, { passive: true });
@@ -276,8 +295,15 @@ const Testimonials: React.FC = () => {
     const thumbnail = thumbnailRefs.current[currentIndex];
     const thumbnailContainer = thumbnailContainerRef.current;
     if (thumbnail && thumbnailContainer) {
-      const scrollPosition = thumbnail.offsetLeft - (thumbnailContainer.offsetWidth / 2) + (thumbnail.offsetWidth / 2);
-      thumbnailContainer.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+      // Use requestAnimationFrame for Safari iOS to ensure accurate measurements
+      requestAnimationFrame(() => {
+        const thumbnail = thumbnailRefs.current[currentIndex];
+        const thumbnailContainer = thumbnailContainerRef.current;
+        if (thumbnail && thumbnailContainer) {
+          const scrollPosition = thumbnail.offsetLeft - (thumbnailContainer.offsetWidth / 2) + (thumbnail.offsetWidth / 2);
+          thumbnailContainer.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+        }
+      });
     }
   }, [currentIndex]);
 
@@ -292,6 +318,24 @@ const Testimonials: React.FC = () => {
       });
     }
   }, [currentIndex, isPlaying]);
+
+  // Initialize scroll position to 0 on mount (Safari iOS fix)
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      // Use requestAnimationFrame to ensure layout is complete
+      requestAnimationFrame(() => {
+        // Force scroll to position 0
+        container.scrollTo({ left: 0, behavior: 'instant' });
+        // Double-check after a short delay (Safari iOS sometimes needs this)
+        setTimeout(() => {
+          if (container.scrollLeft !== 0) {
+            container.scrollTo({ left: 0, behavior: 'instant' });
+          }
+        }, 100);
+      });
+    }
+  }, []);
 
   return (
     <section id="testimonios" className="py-12 md:py-20 lg:py-28 bg-gradient-to-b from-gray-50 to-white">
@@ -357,8 +401,13 @@ const Testimonials: React.FC = () => {
               {videos.map((video, index) => (
                 <div
                   key={video.id}
-                  className="min-w-full h-full relative flex-shrink-0 scroll-snap-align-center"
-                  style={{ scrollSnapAlign: 'center' }}
+                  className="video-slide h-full relative flex-shrink-0"
+                  style={{ 
+                    width: '100%',
+                    flexBasis: '100%',
+                    WebkitScrollSnapAlign: 'start',
+                    scrollSnapAlign: 'start'
+                  }}
                 >
                   <video
                     ref={(el) => {
@@ -493,7 +542,11 @@ const Testimonials: React.FC = () => {
           </div>
 
           {/* Enhanced Thumbnail Navigation */}
-          <div ref={thumbnailContainerRef} className="mt-4 md:mt-6 flex gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory">
+          <div 
+            ref={thumbnailContainerRef} 
+            className="mt-4 md:mt-6 flex gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory"
+            style={{ width: '100%', WebkitOverflowScrolling: 'touch' }}
+          >
             {videos.map((video, index) => (
               <button
                 key={video.id}

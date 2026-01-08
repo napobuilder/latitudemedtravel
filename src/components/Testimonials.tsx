@@ -108,12 +108,12 @@ const Testimonials: React.FC = () => {
 
   const handlePlayPause = useCallback(() => {
     // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handlePlayPause',message:'handlePlayPause called',data:{currentIndex,isPlaying},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'E'})}).catch(()=>{});
+    console.log('[DEBUG] handlePlayPause called', { currentIndex, isPlaying });
     // #endregion
     const video = videoRefs.current[currentIndex];
     if (video) {
       // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handlePlayPause:video',message:'Video found',data:{readyState:video.readyState,paused:video.paused,currentTime:video.currentTime},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'C'})}).catch(()=>{});
+      console.log('[DEBUG] Video found', { readyState: video.readyState, paused: video.paused, currentTime: video.currentTime });
       // #endregion
       if (isPlaying) {
         video.pause();
@@ -123,9 +123,10 @@ const Testimonials: React.FC = () => {
         const playPromise = video.play();
         if (playPromise !== undefined) {
           playPromise.then(() => {
-            fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handlePlayPause:playSuccess',message:'Play succeeded',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'D'})}).catch(()=>{});
+            console.log('[DEBUG] Play succeeded');
           }).catch((err) => {
-            fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handlePlayPause:playError',message:'Play failed',data:{error:err.message,name:err.name},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'D'})}).catch(()=>{});
+            console.error('[DEBUG] Play failed', { error: err.message, name: err.name });
+            alert(`Error al reproducir: ${err.message}`); // Temporary alert for debugging
           });
         }
         // #endregion
@@ -133,7 +134,8 @@ const Testimonials: React.FC = () => {
       }
     } else {
       // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handlePlayPause:noVideo',message:'No video ref found',data:{currentIndex},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'C'})}).catch(()=>{});
+      console.error('[DEBUG] No video ref found', { currentIndex });
+      alert(`No se encontró el video en índice ${currentIndex}`); // Temporary alert for debugging
       // #endregion
     }
   }, [currentIndex, isPlaying]);
@@ -146,7 +148,7 @@ const Testimonials: React.FC = () => {
   // Simplified tap handler for video slides - scroll-snap handles swipes natively
   const handleVideoTap = useCallback((e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
     // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handleVideoTap',message:'Tap event received on video slide',data:{type:e.type,targetTag:(e.target as HTMLElement).tagName,isButton:!!(e.target as HTMLElement).closest('button')},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
+    console.log('[DEBUG] handleVideoTap called', { type: e.type, targetTag: (e.target as HTMLElement).tagName, isButton: !!(e.target as HTMLElement).closest('button') });
     // #endregion
     // Only handle if clicking/tapping directly on the video slide, not on buttons
     if ((e.target as HTMLElement).closest('button')) {
@@ -159,7 +161,7 @@ const Testimonials: React.FC = () => {
   // Touch handler for tap detection (simplified - scroll-snap handles swipes)
   const handleVideoTouchEnd = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
     // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handleVideoTouchEnd',message:'Touch end on video slide',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
+    console.log('[DEBUG] handleVideoTouchEnd called', { hasTouchStart: touchStartX !== null });
     // #endregion
     // Only handle taps, not swipes (scroll-snap handles swipes)
     // Check if this was a tap (minimal movement)
@@ -167,6 +169,10 @@ const Testimonials: React.FC = () => {
       const touch = e.changedTouches[0];
       const deltaX = Math.abs(touch.clientX - touchStartX);
       const deltaY = Math.abs(touch.clientY - touchStartY);
+      
+      // #region agent log
+      console.log('[DEBUG] Touch distances', { deltaX, deltaY, isTap: deltaX < 15 && deltaY < 15 });
+      // #endregion
       
       // If movement is minimal, treat as tap
       if (deltaX < 15 && deltaY < 15) {

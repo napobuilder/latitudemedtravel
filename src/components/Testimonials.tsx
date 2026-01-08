@@ -29,32 +29,66 @@ const Testimonials: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [progress, setProgress] = useState<number[]>(new Array(videos.length).fill(0));
-  const [videoDurations, setVideoDurations] = useState<number[]>(new Array(videos.length).fill(0));
-  const [ripple, setRipple] = useState<{ x: number; y: number } | null>(null);
-  const [longPressTimer, setLongPressTimer] = useState<NodeJS.Timeout | null>(null);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchStartY, setTouchStartY] = useState<number | null>(null);
   
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const thumbnailContainerRef = useRef<HTMLDivElement>(null);
   const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isScrollingRef = useRef(false);
+
+  const minSwipeDistance = 50;
 
   const goToNext = useCallback(() => {
     if (currentIndex < videos.length - 1) {
-      setCurrentIndex(currentIndex + 1);
+      const nextIndex = currentIndex + 1;
+      isScrollingRef.current = true;
+      setCurrentIndex(nextIndex);
       setIsPlaying(false);
+      // Scroll to next video using scrollLeft
+      if (containerRef.current) {
+        const scrollPosition = nextIndex * containerRef.current.offsetWidth;
+        containerRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+      }
+      setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 500);
     }
   }, [currentIndex]);
 
   const goToPrevious = useCallback(() => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
+      const prevIndex = currentIndex - 1;
+      isScrollingRef.current = true;
+      setCurrentIndex(prevIndex);
       setIsPlaying(false);
+      // Scroll to previous video using scrollLeft
+      if (containerRef.current) {
+        const scrollPosition = prevIndex * containerRef.current.offsetWidth;
+        containerRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+      }
+      setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 500);
     }
   }, [currentIndex]);
 
   const goToSlide = useCallback((index: number) => {
+    isScrollingRef.current = true;
     setCurrentIndex(index);
     setIsPlaying(false);
+    // Scroll to selected video using scrollLeft
+    if (containerRef.current) {
+      const scrollPosition = index * containerRef.current.offsetWidth;
+      containerRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+    }
+    setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 500);
   }, []);
 
   const handlePlayPause = useCallback(() => {
@@ -75,76 +109,62 @@ const Testimonials: React.FC = () => {
     setIsMuted(!isMuted);
   }, [isMuted]);
 
-  // Tap zones handler
+  // Simple tap handler - just play/pause
   const handleTap = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = carouselRef.current?.getBoundingClientRect();
-    if (!rect) return;
-
-    const x = e.clientX - rect.left;
-    const width = rect.width;
-    const tapZone = x / width;
-
-    // Ripple effect
-    setRipple({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-    setTimeout(() => setRipple(null), 600);
-
-    if (tapZone < 0.25) {
-      // Left zone - previous
-      goToPrevious();
-    } else if (tapZone > 0.75) {
-      // Right zone - next
-      goToNext();
-    } else {
-      // Center zone - play/pause
-      handlePlayPause();
+    // Only handle if clicking directly on the container, not on buttons
+    if ((e.target as HTMLElement).closest('button')) {
+      return;
     }
-  }, [goToNext, goToPrevious, handlePlayPause]);
+    handlePlayPause();
+  }, [handlePlayPause]);
 
-  // Touch handlers
+  // Touch handlers for swipe detection
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     const touch = e.touches[0];
-    const rect = carouselRef.current?.getBoundingClientRect();
-    if (!rect) return;
+    setTouchStartX(touch.clientX);
+    setTouchStartY(touch.clientY);
+  }, []);
 
-    const x = touch.clientX - rect.left;
-    const width = rect.width;
-    const tapZone = x / width;
-
-    // Long press detection
-    const timer = setTimeout(() => {
-      if (isPlaying) {
-        handlePlayPause();
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    // Prevent default scrolling while swiping horizontally
+    if (touchStartX !== null && touchStartY !== null) {
+      const touch = e.touches[0];
+      const deltaX = Math.abs(touch.clientX - touchStartX);
+      const deltaY = Math.abs(touch.clientY - touchStartY);
+      
+      // If horizontal movement is greater than vertical, prevent scroll
+      if (deltaX > deltaY && deltaX > 10) {
+        e.preventDefault();
       }
-    }, 500);
-    setLongPressTimer(timer);
-  }, [isPlaying, handlePlayPause]);
+    }
+  }, [touchStartX, touchStartY]);
 
   const handleTouchEnd = useCallback((e: React.TouchEvent) => {
-    if (longPressTimer) {
-      clearTimeout(longPressTimer);
-      setLongPressTimer(null);
-    }
+    if (touchStartX === null || touchStartY === null) return;
 
     const touch = e.changedTouches[0];
-    const rect = carouselRef.current?.getBoundingClientRect();
-    if (!rect) return;
+    const distanceX = touch.clientX - touchStartX;
+    const distanceY = Math.abs(touch.clientY - touchStartY);
+    const absDistanceX = Math.abs(distanceX);
 
-    const x = touch.clientX - rect.left;
-    const width = rect.width;
-    const tapZone = x / width;
-
-    // Ripple effect
-    setRipple({ x: touch.clientX - rect.left, y: touch.clientY - rect.top });
-    setTimeout(() => setRipple(null), 600);
-
-    if (tapZone < 0.25) {
-      goToPrevious();
-    } else if (tapZone > 0.75) {
-      goToNext();
-    } else {
+    // Only consider it a swipe if horizontal movement is greater than vertical
+    // and exceeds minimum distance
+    if (absDistanceX > distanceY && absDistanceX > minSwipeDistance) {
+      if (distanceX > 0) {
+        // Swipe right - previous
+        goToPrevious();
+      } else {
+        // Swipe left - next
+        goToNext();
+      }
+    } else if (absDistanceX < 10 && distanceY < 10) {
+      // Small movement = tap = play/pause
       handlePlayPause();
     }
-  }, [longPressTimer, goToNext, goToPrevious, handlePlayPause]);
+
+    setTouchStartX(null);
+    setTouchStartY(null);
+  }, [touchStartX, touchStartY, goToNext, goToPrevious, handlePlayPause]);
 
   // Track video progress
   useEffect(() => {
@@ -177,24 +197,27 @@ const Testimonials: React.FC = () => {
     };
   }, [currentIndex, isPlaying]);
 
-  // Load video durations
+  // Detect scroll to update currentIndex
   useEffect(() => {
-    videoRefs.current.forEach((video, index) => {
-      if (video) {
-        const handleLoadedMetadata = () => {
-          if (video.duration) {
-            setVideoDurations(prev => {
-              const newDurations = [...prev];
-              newDurations[index] = video.duration;
-              return newDurations;
-            });
-          }
-        };
-        video.addEventListener('loadedmetadata', handleLoadedMetadata);
-        return () => video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      if (isScrollingRef.current) return; // Ignore programmatic scrolls
+
+      const containerWidth = container.offsetWidth;
+      const scrollLeft = container.scrollLeft;
+      const newIndex = Math.round(scrollLeft / containerWidth);
+
+      if (newIndex !== currentIndex && newIndex >= 0 && newIndex < videos.length) {
+        setCurrentIndex(newIndex);
+        setIsPlaying(false);
       }
-    });
-  }, []);
+    };
+
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, [currentIndex]);
 
   // Pause all videos except current
   useEffect(() => {
@@ -251,8 +274,10 @@ const Testimonials: React.FC = () => {
   // Auto-scroll thumbnail to active
   useEffect(() => {
     const thumbnail = thumbnailRefs.current[currentIndex];
-    if (thumbnail) {
-      thumbnail.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    const thumbnailContainer = thumbnailContainerRef.current;
+    if (thumbnail && thumbnailContainer) {
+      const scrollPosition = thumbnail.offsetLeft - (thumbnailContainer.offsetWidth / 2) + (thumbnail.offsetWidth / 2);
+      thumbnailContainer.scrollTo({ left: scrollPosition, behavior: 'smooth' });
     }
   }, [currentIndex]);
 
@@ -287,13 +312,14 @@ const Testimonials: React.FC = () => {
             className="relative bg-black rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden"
             style={{ aspectRatio: '9/16' }}
             onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
             onClick={handleTap}
           >
             {/* Animated Progress Bars (Story-style) */}
             <div className="absolute top-0 left-0 right-0 flex gap-1 p-2 z-20">
               {videos.map((_, index) => (
-                <div
+                <button
                   key={index}
                   className="flex-1 h-1 bg-white/20 rounded-full overflow-hidden cursor-pointer"
                   onClick={(e) => {
@@ -314,24 +340,30 @@ const Testimonials: React.FC = () => {
                       transition: index === currentIndex && isPlaying ? 'width 0.1s linear' : 'width 0.3s ease-out',
                     }}
                   />
-                </div>
+                </button>
               ))}
             </div>
 
-            {/* Video Container */}
+            {/* Video Container with CSS Scroll Snap */}
             <div
-              className="flex transition-transform duration-500 ease-out h-full"
+              ref={containerRef}
+              className="video-container flex overflow-x-auto scroll-snap-x-mandatory scroll-snap-type-x-mandatory h-full"
               style={{
-                transform: `translateX(-${currentIndex * 100}%)`,
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                WebkitOverflowScrolling: 'touch',
               }}
             >
               {videos.map((video, index) => (
                 <div
                   key={video.id}
-                  className="min-w-full h-full relative flex-shrink-0"
+                  className="min-w-full h-full relative flex-shrink-0 scroll-snap-align-center"
+                  style={{ scrollSnapAlign: 'center' }}
                 >
                   <video
-                    ref={(el) => (videoRefs.current[index] = el)}
+                    ref={(el) => {
+                      videoRefs.current[index] = el;
+                    }}
                     src={video.url}
                     className="w-full h-full object-cover"
                     playsInline
@@ -340,9 +372,9 @@ const Testimonials: React.FC = () => {
                     preload="metadata"
                   />
 
-                  {/* Play/Pause Overlay */}
+                  {/* Play/Pause Overlay - Centered with Grid */}
                   {index === currentIndex && !isPlaying && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 pointer-events-none">
+                    <div className="absolute inset-0 grid place-items-center bg-black/20 pointer-events-none">
                       <div className="bg-white/20 backdrop-blur-md rounded-full p-4 md:p-6 transform transition-transform hover:scale-110">
                         <svg
                           className="w-12 h-12 md:w-16 md:h-16 text-white"
@@ -355,8 +387,8 @@ const Testimonials: React.FC = () => {
                     </div>
                   )}
 
-                  {/* Video Counter with Animation */}
-                  <div className="absolute top-12 md:top-16 left-4 bg-black/60 backdrop-blur-md rounded-full px-3 md:px-4 py-1.5 md:py-2 transform transition-all duration-300">
+                  {/* Video Counter */}
+                  <div className="absolute top-12 md:top-16 left-4 bg-black/60 backdrop-blur-md rounded-full px-3 md:px-4 py-1.5 md:py-2">
                     <span className="text-white text-xs md:text-sm font-semibold">
                       {index + 1} / {videos.length}
                     </span>
@@ -364,21 +396,6 @@ const Testimonials: React.FC = () => {
                 </div>
               ))}
             </div>
-
-            {/* Ripple Effect */}
-            {ripple && (
-              <div
-                className="absolute pointer-events-none z-30 animate-ripple"
-                style={{
-                  left: ripple.x - 20,
-                  top: ripple.y - 20,
-                  width: 40,
-                  height: 40,
-                }}
-              >
-                <div className="w-full h-full bg-white/30 rounded-full" />
-              </div>
-            )}
 
             {/* Mute/Unmute Button */}
             <button
@@ -423,18 +440,18 @@ const Testimonials: React.FC = () => {
               )}
             </button>
 
-            {/* Navigation Arrows - Desktop only */}
+            {/* Navigation Arrows - Visible on all devices */}
             {currentIndex > 0 && (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   goToPrevious();
                 }}
-                className="hidden md:block absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 rounded-full p-3 transition-all duration-300 z-20 transform hover:scale-110"
+                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 active:bg-white/40 rounded-full p-2 md:p-3 transition-all duration-300 z-20 transform hover:scale-110 active:scale-95"
                 aria-label={t.testimonials.previousVideo}
               >
                 <svg
-                  className="w-6 h-6 text-white"
+                  className="w-5 h-5 md:w-6 md:h-6 text-white"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -455,11 +472,11 @@ const Testimonials: React.FC = () => {
                   e.stopPropagation();
                   goToNext();
                 }}
-                className="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 rounded-full p-3 transition-all duration-300 z-20 transform hover:scale-110"
+                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 active:bg-white/40 rounded-full p-2 md:p-3 transition-all duration-300 z-20 transform hover:scale-110 active:scale-95"
                 aria-label={t.testimonials.nextVideo}
               >
                 <svg
-                  className="w-6 h-6 text-white"
+                  className="w-5 h-5 md:w-6 md:h-6 text-white"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -476,11 +493,13 @@ const Testimonials: React.FC = () => {
           </div>
 
           {/* Enhanced Thumbnail Navigation */}
-          <div className="mt-4 md:mt-6 flex gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory">
+          <div ref={thumbnailContainerRef} className="mt-4 md:mt-6 flex gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory">
             {videos.map((video, index) => (
               <button
                 key={video.id}
-                ref={(el) => (thumbnailRefs.current[index] = el)}
+                ref={(el) => {
+                  thumbnailRefs.current[index] = el;
+                }}
                 onClick={() => goToSlide(index)}
                 className={`relative flex-shrink-0 rounded-lg md:rounded-xl overflow-hidden transition-all duration-300 snap-center ${
                   index === currentIndex

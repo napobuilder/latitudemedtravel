@@ -27,7 +27,7 @@ const Testimonials: React.FC = () => {
   const t = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true); // Start muted for iOS compatibility
   const [progress, setProgress] = useState<number[]>(new Array(videos.length).fill(0));
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchStartY, setTouchStartY] = useState<number | null>(null);
@@ -120,17 +120,43 @@ const Testimonials: React.FC = () => {
         setIsPlaying(false);
       } else {
         // #region agent log
-        const playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise.then(() => {
-            console.log('[DEBUG] Play succeeded');
-          }).catch((err) => {
-            console.error('[DEBUG] Play failed', { error: err.message, name: err.name });
-            alert(`Error al reproducir: ${err.message}`); // Temporary alert for debugging
-          });
+        // Ensure video is muted for iOS compatibility (required for programmatic play)
+        video.muted = true;
+        
+        // Check if video is ready to play
+        if (video.readyState < 2) {
+          console.log('[DEBUG] Video not ready, waiting for loadeddata');
+          video.addEventListener('loadeddata', () => {
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.then(() => {
+                console.log('[DEBUG] Play succeeded after load');
+                setIsPlaying(true);
+              }).catch((err) => {
+                console.error('[DEBUG] Play failed', { error: err.message, name: err.name });
+                alert(`Error al reproducir: ${err.message}`); // Temporary alert for debugging
+                setIsPlaying(false);
+              });
+            } else {
+              setIsPlaying(true);
+            }
+          }, { once: true });
+        } else {
+          const playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              console.log('[DEBUG] Play succeeded');
+              setIsPlaying(true);
+            }).catch((err) => {
+              console.error('[DEBUG] Play failed', { error: err.message, name: err.name });
+              alert(`Error al reproducir: ${err.message}`); // Temporary alert for debugging
+              setIsPlaying(false);
+            });
+          } else {
+            setIsPlaying(true);
+          }
         }
         // #endregion
-        setIsPlaying(true);
       }
     } else {
       // #region agent log

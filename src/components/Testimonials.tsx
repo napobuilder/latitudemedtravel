@@ -112,18 +112,8 @@ const Testimonials: React.FC = () => {
     
     const video = videoRefs.current[currentIndex];
     if (!video) {
-      console.error('[iOS Debug] No video ref found', { currentIndex });
       return;
     }
-
-    console.log('[iOS Debug] handlePlayPause', { 
-      currentIndex, 
-      isPlaying, 
-      readyState: video.readyState,
-      paused: video.paused,
-      muted: video.muted,
-      isMutedState: isMuted
-    });
 
     if (isPlaying) {
       video.pause();
@@ -143,29 +133,19 @@ const Testimonials: React.FC = () => {
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
-            console.log('[iOS Debug] Play succeeded');
             setIsPlaying(true);
           })
           .catch((err) => {
-            console.error('[iOS Debug] Play failed', { 
-              error: err.message, 
-              name: err.name,
-              code: err.code 
-            });
-            
             // iOS específico: si falla por políticas de autoplay, forzar mute y reintentar
             if (err.name === 'NotAllowedError' || err.name === 'AbortError') {
-              console.log('[iOS Debug] Retrying with muted=true');
               video.muted = true;
               setIsMuted(true); // Sincronizar estado React
               
               video.play()
                 .then(() => {
-                  console.log('[iOS Debug] Play succeeded after mute retry');
                   setIsPlaying(true);
                 })
                 .catch((retryErr) => {
-                  console.error('[iOS Debug] Play failed even with mute', retryErr);
                   setIsPlaying(false);
                 });
             } else {
@@ -183,14 +163,11 @@ const Testimonials: React.FC = () => {
     if (video.readyState >= 2) {
       attemptPlay();
     } else {
-      console.log('[iOS Debug] Video not ready, readyState:', video.readyState);
-      
       // Forzar carga del video
       video.load();
       
       // Usar canplay que es más confiable en iOS que loadeddata
       const handleCanPlay = () => {
-        console.log('[iOS Debug] canplay fired, attempting play');
         video.removeEventListener('canplay', handleCanPlay);
         clearTimeout(timeoutId);
         attemptPlay();
@@ -201,7 +178,6 @@ const Testimonials: React.FC = () => {
       // Timeout de fallback por si el evento nunca se dispara (iOS puede ser problemático)
       const timeoutId = setTimeout(() => {
         video.removeEventListener('canplay', handleCanPlay);
-        console.log('[iOS Debug] Timeout reached, attempting play anyway');
         attemptPlay();
       }, 2000);
     }
@@ -220,7 +196,6 @@ const Testimonials: React.FC = () => {
     // Sincronizar directamente con el video element
     if (video) {
       video.muted = newMutedState;
-      console.log('[iOS Debug] Mute toggled', { newMutedState, videoMuted: video.muted });
     }
   }, [isMuted, currentIndex]);
 

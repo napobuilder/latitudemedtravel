@@ -107,15 +107,34 @@ const Testimonials: React.FC = () => {
   }, []);
 
   const handlePlayPause = useCallback(() => {
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handlePlayPause',message:'handlePlayPause called',data:{currentIndex,isPlaying},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'E'})}).catch(()=>{});
+    // #endregion
     const video = videoRefs.current[currentIndex];
     if (video) {
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handlePlayPause:video',message:'Video found',data:{readyState:video.readyState,paused:video.paused,currentTime:video.currentTime},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'C'})}).catch(()=>{});
+      // #endregion
       if (isPlaying) {
         video.pause();
         setIsPlaying(false);
       } else {
-        video.play();
+        // #region agent log
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handlePlayPause:playSuccess',message:'Play succeeded',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'D'})}).catch(()=>{});
+          }).catch((err) => {
+            fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handlePlayPause:playError',message:'Play failed',data:{error:err.message,name:err.name},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'D'})}).catch(()=>{});
+          });
+        }
+        // #endregion
         setIsPlaying(true);
       }
+    } else {
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handlePlayPause:noVideo',message:'No video ref found',data:{currentIndex},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'C'})}).catch(()=>{});
+      // #endregion
     }
   }, [currentIndex, isPlaying]);
 
@@ -126,6 +145,9 @@ const Testimonials: React.FC = () => {
 
   // Simple tap handler - just play/pause
   const handleTap = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handleTap',message:'Click event received',data:{targetTag:(e.target as HTMLElement).tagName,isButton:!!(e.target as HTMLElement).closest('button')},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
     // Only handle if clicking directly on the container, not on buttons
     if ((e.target as HTMLElement).closest('button')) {
       return;
@@ -155,12 +177,19 @@ const Testimonials: React.FC = () => {
   }, [touchStartX, touchStartY]);
 
   const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handleTouchEnd',message:'Touch end received',data:{hasTouchStart:touchStartX!==null},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
     if (touchStartX === null || touchStartY === null) return;
 
     const touch = e.changedTouches[0];
     const distanceX = touch.clientX - touchStartX;
     const distanceY = Math.abs(touch.clientY - touchStartY);
     const absDistanceX = Math.abs(distanceX);
+
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handleTouchEnd:distances',message:'Touch distances calculated',data:{distanceX,distanceY,absDistanceX,isSwipe:absDistanceX>distanceY&&absDistanceX>minSwipeDistance,isTap:absDistanceX<10&&distanceY<10},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{});
+    // #endregion
 
     // Only consider it a swipe if horizontal movement is greater than vertical
     // and exceeds minimum distance
@@ -174,7 +203,14 @@ const Testimonials: React.FC = () => {
       }
     } else if (absDistanceX < 10 && distanceY < 10) {
       // Small movement = tap = play/pause
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handleTouchEnd:tapDetected',message:'Tap detected, calling handlePlayPause',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{});
+      // #endregion
       handlePlayPause();
+    } else {
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handleTouchEnd:noAction',message:'No action taken - movement in dead zone',data:{absDistanceX,distanceY},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{});
+      // #endregion
     }
 
     setTouchStartX(null);

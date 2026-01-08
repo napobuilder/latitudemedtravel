@@ -120,3 +120,29 @@ details.mobile-accordion .content > div {
 .video-container::-webkit-scrollbar {
     display: none;
 }
+
+/* iOS Safari: Prevenir comportamientos de gestos nativos en videos */
+.video-slide video {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
+/* iOS Safari: Mejorar respuesta de botones táctiles */
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* iOS Safari: Asegurar que los botones de control de video sean clickeables */
+.video-slide button {
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+/* Fix para iOS Safari: prevenir zoom en double-tap */
+@supports (-webkit-touch-callout: none) {
+    .video-slide button {
+        touch-action: manipulation;
+    }
+}

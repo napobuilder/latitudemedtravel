@@ -37,11 +37,8 @@ const Testimonials: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const thumbnailContainerRef = useRef<HTMLDivElement>(null);
-  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const progressIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isScrollingRef = useRef(false);
-
-  const minSwipeDistance = 50;
 
   const goToNext = useCallback(() => {
     if (currentIndex < videos.length - 1) {
@@ -106,111 +103,136 @@ const Testimonials: React.FC = () => {
     }, 500);
   }, []);
 
-  const handlePlayPause = useCallback(() => {
-    // #region agent log
-    console.log('[DEBUG] handlePlayPause called', { currentIndex, isPlaying });
-    // #endregion
-    const video = videoRefs.current[currentIndex];
-    if (video) {
-      // #region agent log
-      console.log('[DEBUG] Video found', { readyState: video.readyState, paused: video.paused, currentTime: video.currentTime });
-      // #endregion
-      if (isPlaying) {
-        video.pause();
-        setIsPlaying(false);
-      } else {
-        // #region agent log
-        // Ensure video is muted for iOS compatibility (required for programmatic play)
-        video.muted = true;
-        
-        // Check if video is ready to play
-        if (video.readyState < 2) {
-          console.log('[DEBUG] Video not ready, waiting for loadeddata');
-          video.addEventListener('loadeddata', () => {
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-              playPromise.then(() => {
-                console.log('[DEBUG] Play succeeded after load');
-                setIsPlaying(true);
-              }).catch((err) => {
-                console.error('[DEBUG] Play failed', { error: err.message, name: err.name });
-                alert(`Error al reproducir: ${err.message}`); // Temporary alert for debugging
-                setIsPlaying(false);
-              });
-            } else {
-              setIsPlaying(true);
-            }
-          }, { once: true });
-        } else {
-          const playPromise = video.play();
-          if (playPromise !== undefined) {
-            playPromise.then(() => {
-              console.log('[DEBUG] Play succeeded');
-              setIsPlaying(true);
-            }).catch((err) => {
-              console.error('[DEBUG] Play failed', { error: err.message, name: err.name });
-              alert(`Error al reproducir: ${err.message}`); // Temporary alert for debugging
-              setIsPlaying(false);
-            });
-          } else {
-            setIsPlaying(true);
-          }
-        }
-        // #endregion
-      }
-    } else {
-      // #region agent log
-      console.error('[DEBUG] No video ref found', { currentIndex });
-      alert(`No se encontró el video en índice ${currentIndex}`); // Temporary alert for debugging
-      // #endregion
+  const handlePlayPause = useCallback((e?: React.MouseEvent | React.TouchEvent) => {
+    // Prevenir propagación si viene de un evento
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
     }
-  }, [currentIndex, isPlaying]);
-
-  const handleMuteToggle = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsMuted(!isMuted);
-  }, [isMuted]);
-
-  // Simplified tap handler for video slides - scroll-snap handles swipes natively
-  const handleVideoTap = useCallback((e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
-    // #region agent log
-    console.log('[DEBUG] handleVideoTap called', { type: e.type, targetTag: (e.target as HTMLElement).tagName, isButton: !!(e.target as HTMLElement).closest('button') });
-    // #endregion
-    // Only handle if clicking/tapping directly on the video slide, not on buttons
-    if ((e.target as HTMLElement).closest('button')) {
+    
+    const video = videoRefs.current[currentIndex];
+    if (!video) {
+      console.error('[iOS Debug] No video ref found', { currentIndex });
       return;
     }
-    e.stopPropagation(); // Prevent event from bubbling to scroll container
-    handlePlayPause();
-  }, [handlePlayPause]);
 
-  // Touch handler for tap detection (simplified - scroll-snap handles swipes)
-  const handleVideoTouchEnd = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
-    // #region agent log
-    console.log('[DEBUG] handleVideoTouchEnd called', { hasTouchStart: touchStartX !== null });
-    // #endregion
-    // Only handle taps, not swipes (scroll-snap handles swipes)
-    // Check if this was a tap (minimal movement)
-    if (touchStartX !== null && touchStartY !== null) {
-      const touch = e.changedTouches[0];
-      const deltaX = Math.abs(touch.clientX - touchStartX);
-      const deltaY = Math.abs(touch.clientY - touchStartY);
-      
-      // #region agent log
-      console.log('[DEBUG] Touch distances', { deltaX, deltaY, isTap: deltaX < 15 && deltaY < 15 });
-      // #endregion
-      
-      // If movement is minimal, treat as tap
-      if (deltaX < 15 && deltaY < 15) {
-        e.stopPropagation(); // Prevent scroll container from handling
-        handleVideoTap(e as any);
-      }
+    console.log('[iOS Debug] handlePlayPause', { 
+      currentIndex, 
+      isPlaying, 
+      readyState: video.readyState,
+      paused: video.paused,
+      muted: video.muted,
+      isMutedState: isMuted
+    });
+
+    if (isPlaying) {
+      video.pause();
+      setIsPlaying(false);
+      return;
     }
+
+    // Para iOS: mantener el estado de mute del usuario, pero forzar mute si es la primera reproducción
+    // iOS requiere que el video esté muted para autoplay programático sin interacción previa
+    const shouldBeMuted = isMuted;
+    video.muted = shouldBeMuted;
+
+    // Función para intentar reproducir con manejo de errores iOS
+    const attemptPlay = () => {
+      const playPromise = video.play();
+      
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            console.log('[iOS Debug] Play succeeded');
+            setIsPlaying(true);
+          })
+          .catch((err) => {
+            console.error('[iOS Debug] Play failed', { 
+              error: err.message, 
+              name: err.name,
+              code: err.code 
+            });
+            
+            // iOS específico: si falla por políticas de autoplay, forzar mute y reintentar
+            if (err.name === 'NotAllowedError' || err.name === 'AbortError') {
+              console.log('[iOS Debug] Retrying with muted=true');
+              video.muted = true;
+              setIsMuted(true); // Sincronizar estado React
+              
+              video.play()
+                .then(() => {
+                  console.log('[iOS Debug] Play succeeded after mute retry');
+                  setIsPlaying(true);
+                })
+                .catch((retryErr) => {
+                  console.error('[iOS Debug] Play failed even with mute', retryErr);
+                  setIsPlaying(false);
+                });
+            } else {
+              setIsPlaying(false);
+            }
+          });
+      } else {
+        // Navegadores antiguos que no retornan Promise
+        setIsPlaying(true);
+      }
+    };
+
+    // Verificar si el video está listo para reproducir
+    // readyState: 0=HAVE_NOTHING, 1=HAVE_METADATA, 2=HAVE_CURRENT_DATA, 3=HAVE_FUTURE_DATA, 4=HAVE_ENOUGH_DATA
+    if (video.readyState >= 2) {
+      attemptPlay();
+    } else {
+      console.log('[iOS Debug] Video not ready, readyState:', video.readyState);
+      
+      // Forzar carga del video
+      video.load();
+      
+      // Usar canplay que es más confiable en iOS que loadeddata
+      const handleCanPlay = () => {
+        console.log('[iOS Debug] canplay fired, attempting play');
+        video.removeEventListener('canplay', handleCanPlay);
+        clearTimeout(timeoutId);
+        attemptPlay();
+      };
+      
+      video.addEventListener('canplay', handleCanPlay, { once: true });
+      
+      // Timeout de fallback por si el evento nunca se dispara (iOS puede ser problemático)
+      const timeoutId = setTimeout(() => {
+        video.removeEventListener('canplay', handleCanPlay);
+        console.log('[iOS Debug] Timeout reached, attempting play anyway');
+        attemptPlay();
+      }, 2000);
+    }
+  }, [currentIndex, isPlaying, isMuted]);
+
+  const handleMuteToggle = useCallback((e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const video = videoRefs.current[currentIndex];
+    const newMutedState = !isMuted;
+    
+    // Actualizar estado React
+    setIsMuted(newMutedState);
+    
+    // Sincronizar directamente con el video element
+    if (video) {
+      video.muted = newMutedState;
+      console.log('[iOS Debug] Mute toggled', { newMutedState, videoMuted: video.muted });
+    }
+  }, [isMuted, currentIndex]);
+
+  // Touch handlers simplificados - el botón de play maneja los taps directamente
+  // Estos handlers solo rastrean el swipe para el scroll-snap
+  const handleVideoTouchEnd = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    // Solo limpiar el estado del touch
     setTouchStartX(null);
     setTouchStartY(null);
-  }, [touchStartX, touchStartY, handleVideoTap]);
+  }, []);
 
-  // Track touch start for tap detection
+  // Track touch start para scroll-snap
   const handleVideoTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
     const touch = e.touches[0];
     setTouchStartX(touch.clientX);
@@ -438,37 +460,61 @@ const Testimonials: React.FC = () => {
                     width: '100%',
                     flexBasis: '100%',
                     WebkitScrollSnapAlign: 'start',
-                    scrollSnapAlign: 'start'
+                    scrollSnapAlign: 'start',
+                    touchAction: 'pan-x', // Permitir swipe horizontal, prevenir otros gestos
                   }}
-                  onClick={handleVideoTap}
                   onTouchStart={handleVideoTouchStart}
                   onTouchEnd={handleVideoTouchEnd}
                 >
+                  {/* Video element con pointer-events-none para evitar interceptación de taps en iOS */}
                   <video
                     ref={(el) => {
                       videoRefs.current[index] = el;
                     }}
                     src={video.url}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover pointer-events-none"
                     playsInline
+                    // @ts-ignore - webkit-playsinline es necesario para iOS antiguo
+                    webkit-playsinline="true"
+                    x5-playsinline="true"
                     muted={isMuted}
                     loop={false}
                     preload="metadata"
+                    style={{ pointerEvents: 'none' }} // Doble seguridad para iOS
                   />
 
-                  {/* Play/Pause Overlay - Centered with Grid */}
-                  {index === currentIndex && !isPlaying && (
-                    <div className="absolute inset-0 grid place-items-center bg-black/20 pointer-events-none">
-                      <div className="bg-white/20 backdrop-blur-md rounded-full p-4 md:p-6 transform transition-transform hover:scale-110">
-                        <svg
-                          className="w-12 h-12 md:w-16 md:h-16 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
-                        </svg>
-                      </div>
-                    </div>
+                  {/* Play/Pause Button - CLICKEABLE para iOS */}
+                  {index === currentIndex && (
+                    <button
+                      type="button"
+                      onClick={handlePlayPause}
+                      onTouchEnd={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handlePlayPause(e);
+                      }}
+                      className="absolute inset-0 w-full h-full flex items-center justify-center bg-transparent focus:outline-none"
+                      style={{ 
+                        touchAction: 'manipulation', // Elimina delay de 300ms en iOS
+                        WebkitTapHighlightColor: 'transparent',
+                      }}
+                      aria-label={isPlaying ? 'Pausar video' : 'Reproducir video'}
+                    >
+                      {/* Overlay visual solo cuando está pausado */}
+                      {!isPlaying && (
+                        <div className="bg-black/20 absolute inset-0 flex items-center justify-center">
+                          <div className="bg-white/20 backdrop-blur-md rounded-full p-4 md:p-6 transform transition-transform active:scale-95">
+                            <svg
+                              className="w-12 h-12 md:w-16 md:h-16 text-white"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
+                            </svg>
+                          </div>
+                        </div>
+                      )}
+                    </button>
                   )}
 
                   {/* Video Counter */}
@@ -481,11 +527,21 @@ const Testimonials: React.FC = () => {
               ))}
             </div>
 
-            {/* Mute/Unmute Button */}
+            {/* Mute/Unmute Button - Optimizado para iOS */}
             <button
+              type="button"
               onClick={handleMuteToggle}
-              className="absolute top-12 md:top-16 right-4 bg-black/60 backdrop-blur-md hover:bg-black/80 rounded-full p-2 md:p-2.5 transition-all duration-300 z-20 transform hover:scale-110"
-              aria-label={isMuted ? 'Unmute' : 'Mute'}
+              onTouchEnd={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleMuteToggle(e);
+              }}
+              className="absolute top-12 md:top-16 right-4 bg-black/60 backdrop-blur-md hover:bg-black/80 active:bg-black/90 rounded-full p-2 md:p-2.5 transition-all duration-300 z-30 transform hover:scale-110 active:scale-95"
+              style={{ 
+                touchAction: 'manipulation',
+                WebkitTapHighlightColor: 'transparent',
+              }}
+              aria-label={isMuted ? 'Activar sonido' : 'Silenciar'}
             >
               {isMuted ? (
                 <svg
@@ -524,14 +580,25 @@ const Testimonials: React.FC = () => {
               )}
             </button>
 
-            {/* Navigation Arrows - Visible on all devices */}
+            {/* Navigation Arrows - Optimizado para iOS */}
             {currentIndex > 0 && (
               <button
+                type="button"
                 onClick={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
                   goToPrevious();
                 }}
-                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 active:bg-white/40 rounded-full p-2 md:p-3 transition-all duration-300 z-20 transform hover:scale-110 active:scale-95"
+                onTouchEnd={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  goToPrevious();
+                }}
+                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 active:bg-white/40 rounded-full p-2 md:p-3 transition-all duration-300 z-30 transform hover:scale-110 active:scale-95"
+                style={{ 
+                  touchAction: 'manipulation',
+                  WebkitTapHighlightColor: 'transparent',
+                }}
                 aria-label={t.testimonials.previousVideo}
               >
                 <svg
@@ -552,11 +619,22 @@ const Testimonials: React.FC = () => {
 
             {currentIndex < videos.length - 1 && (
               <button
+                type="button"
                 onClick={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
                   goToNext();
                 }}
-                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 active:bg-white/40 rounded-full p-2 md:p-3 transition-all duration-300 z-20 transform hover:scale-110 active:scale-95"
+                onTouchEnd={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  goToNext();
+                }}
+                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/30 active:bg-white/40 rounded-full p-2 md:p-3 transition-all duration-300 z-30 transform hover:scale-110 active:scale-95"
+                style={{ 
+                  touchAction: 'manipulation',
+                  WebkitTapHighlightColor: 'transparent',
+                }}
                 aria-label={t.testimonials.nextVideo}
               >
                 <svg

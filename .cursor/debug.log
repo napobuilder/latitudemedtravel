@@ -1,0 +1,8 @@
+{"location":"Testimonials.tsx:handleTap","message":"Click event received","data":{"targetTag":"VIDEO","isButton":false},"timestamp":1767898774999,"sessionId":"debug-session","hypothesisId":"A"}
+{"location":"Testimonials.tsx:handlePlayPause:playSuccess","message":"Play succeeded","data":{},"timestamp":1767898775010,"sessionId":"debug-session","hypothesisId":"D"}
+{"location":"Testimonials.tsx:handlePlayPause","message":"handlePlayPause called","data":{"currentIndex":0,"isPlaying":false},"timestamp":1767898774999,"sessionId":"debug-session","hypothesisId":"E"}
+{"location":"Testimonials.tsx:handlePlayPause:video","message":"Video found","data":{"readyState":4,"paused":true,"currentTime":0},"timestamp":1767898775000,"sessionId":"debug-session","hypothesisId":"C"}
+{"location":"Testimonials.tsx:handleTap","message":"Click event received","data":{"targetTag":"VIDEO","isButton":false},"timestamp":1767898785272,"sessionId":"debug-session","hypothesisId":"A"}
+{"location":"Testimonials.tsx:handlePlayPause:video","message":"Video found","data":{"readyState":4,"paused":true,"currentTime":0},"timestamp":1767898785273,"sessionId":"debug-session","hypothesisId":"C"}
+{"location":"Testimonials.tsx:handlePlayPause","message":"handlePlayPause called","data":{"currentIndex":1,"isPlaying":false},"timestamp":1767898785272,"sessionId":"debug-session","hypothesisId":"E"}
+{"location":"Testimonials.tsx:handlePlayPause:playSuccess","message":"Play succeeded","data":{},"timestamp":1767898785280,"sessionId":"debug-session","hypothesisId":"D"}

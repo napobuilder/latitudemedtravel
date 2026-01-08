@@ -143,79 +143,47 @@ const Testimonials: React.FC = () => {
     setIsMuted(!isMuted);
   }, [isMuted]);
 
-  // Simple tap handler - just play/pause
-  const handleTap = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  // Simplified tap handler for video slides - scroll-snap handles swipes natively
+  const handleVideoTap = useCallback((e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
     // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handleTap',message:'Click event received',data:{targetTag:(e.target as HTMLElement).tagName,isButton:!!(e.target as HTMLElement).closest('button')},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
+    fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handleVideoTap',message:'Tap event received on video slide',data:{type:e.type,targetTag:(e.target as HTMLElement).tagName,isButton:!!(e.target as HTMLElement).closest('button')},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
     // #endregion
-    // Only handle if clicking directly on the container, not on buttons
+    // Only handle if clicking/tapping directly on the video slide, not on buttons
     if ((e.target as HTMLElement).closest('button')) {
       return;
     }
+    e.stopPropagation(); // Prevent event from bubbling to scroll container
     handlePlayPause();
   }, [handlePlayPause]);
 
-  // Touch handlers for swipe detection
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+  // Touch handler for tap detection (simplified - scroll-snap handles swipes)
+  const handleVideoTouchEnd = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handleVideoTouchEnd',message:'Touch end on video slide',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
+    // Only handle taps, not swipes (scroll-snap handles swipes)
+    // Check if this was a tap (minimal movement)
+    if (touchStartX !== null && touchStartY !== null) {
+      const touch = e.changedTouches[0];
+      const deltaX = Math.abs(touch.clientX - touchStartX);
+      const deltaY = Math.abs(touch.clientY - touchStartY);
+      
+      // If movement is minimal, treat as tap
+      if (deltaX < 15 && deltaY < 15) {
+        e.stopPropagation(); // Prevent scroll container from handling
+        handleVideoTap(e as any);
+      }
+    }
+    setTouchStartX(null);
+    setTouchStartY(null);
+  }, [touchStartX, touchStartY, handleVideoTap]);
+
+  // Track touch start for tap detection
+  const handleVideoTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
     const touch = e.touches[0];
     setTouchStartX(touch.clientX);
     setTouchStartY(touch.clientY);
   }, []);
-
-  const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    // Prevent default scrolling while swiping horizontally
-    if (touchStartX !== null && touchStartY !== null) {
-      const touch = e.touches[0];
-      const deltaX = Math.abs(touch.clientX - touchStartX);
-      const deltaY = Math.abs(touch.clientY - touchStartY);
-      
-      // If horizontal movement is greater than vertical, prevent scroll
-      if (deltaX > deltaY && deltaX > 10) {
-        e.preventDefault();
-      }
-    }
-  }, [touchStartX, touchStartY]);
-
-  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handleTouchEnd',message:'Touch end received',data:{hasTouchStart:touchStartX!==null},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
-    // #endregion
-    if (touchStartX === null || touchStartY === null) return;
-
-    const touch = e.changedTouches[0];
-    const distanceX = touch.clientX - touchStartX;
-    const distanceY = Math.abs(touch.clientY - touchStartY);
-    const absDistanceX = Math.abs(distanceX);
-
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handleTouchEnd:distances',message:'Touch distances calculated',data:{distanceX,distanceY,absDistanceX,isSwipe:absDistanceX>distanceY&&absDistanceX>minSwipeDistance,isTap:absDistanceX<10&&distanceY<10},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{});
-    // #endregion
-
-    // Only consider it a swipe if horizontal movement is greater than vertical
-    // and exceeds minimum distance
-    if (absDistanceX > distanceY && absDistanceX > minSwipeDistance) {
-      if (distanceX > 0) {
-        // Swipe right - previous
-        goToPrevious();
-      } else {
-        // Swipe left - next
-        goToNext();
-      }
-    } else if (absDistanceX < 10 && distanceY < 10) {
-      // Small movement = tap = play/pause
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handleTouchEnd:tapDetected',message:'Tap detected, calling handlePlayPause',data:{},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{});
-      // #endregion
-      handlePlayPause();
-    } else {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/1ad88967-b14a-4ec1-b1f0-df9bb97b84ee',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Testimonials.tsx:handleTouchEnd:noAction',message:'No action taken - movement in dead zone',data:{absDistanceX,distanceY},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{});
-      // #endregion
-    }
-
-    setTouchStartX(null);
-    setTouchStartY(null);
-  }, [touchStartX, touchStartY, goToNext, goToPrevious, handlePlayPause]);
 
   // Track video progress
   useEffect(() => {
@@ -391,10 +359,6 @@ const Testimonials: React.FC = () => {
             ref={carouselRef}
             className="relative bg-black rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden"
             style={{ aspectRatio: '9/16' }}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-            onClick={handleTap}
           >
             {/* Animated Progress Bars (Story-style) */}
             <div className="absolute top-0 left-0 right-0 flex gap-1 p-2 z-20">
@@ -444,6 +408,9 @@ const Testimonials: React.FC = () => {
                     WebkitScrollSnapAlign: 'start',
                     scrollSnapAlign: 'start'
                   }}
+                  onClick={handleVideoTap}
+                  onTouchStart={handleVideoTouchStart}
+                  onTouchEnd={handleVideoTouchEnd}
                 >
                   <video
                     ref={(el) => {

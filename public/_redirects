@@ -1,4 +1,5 @@
-/*    /index.html   200
-
 # QR Code Dynamic Redirect - Cambia el destino cuando quieras
 /go   https://latitudemedtravel.com/en   302
+
+# SPA catch-all (debe ir al final)
+/*    /index.html   200

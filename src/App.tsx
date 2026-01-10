@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { useLanguage } from './contexts/LanguageContext';
-import { detectLanguage } from './utils/languageDetector';
-import { getLanguageFromPath, buildLocalizedPath } from './utils/routes';
+import { getLanguageFromPath } from './utils/routes';
 import HomePage from './pages/HomePage';
 import ServiceDetailPage from './pages/ServiceDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -25,7 +24,7 @@ const ScrollToTop: React.FC = () => {
 
 // Componente para redirigir desde / a /es/ o /en/
 const RootRedirect: React.FC = () => {
-  const language = detectLanguage();
+  const { language } = useLanguage();
   return <Navigate to={`/${language}`} replace />;
 };
 

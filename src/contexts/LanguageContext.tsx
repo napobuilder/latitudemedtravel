@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Language } from '../i18n/types';
-import { detectLanguage, saveLanguagePreference } from '../utils/languageDetector';
+import { detectLanguage, detectLanguageSync, saveLanguagePreference } from '../utils/languageDetector';
 
 interface LanguageContextType {
   language: Language;
@@ -18,10 +18,36 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   children, 
   initialLanguage 
 }) => {
-  // Inicializar con el idioma detectado o el proporcionado
+  // Inicializar con el idioma detectado síncronamente (para render inicial)
   const [language, setLanguageState] = useState<Language>(
-    initialLanguage || detectLanguage()
+    initialLanguage || detectLanguageSync()
   );
+
+  // Efecto para detectar idioma por geolocalización en la primera carga
+  // Solo si no hay preferencia guardada y no hay initialLanguage
+  useEffect(() => {
+    // Si hay un idioma inicial (desde URL), no hacer detección geográfica
+    if (initialLanguage) return;
+
+    // Si hay preferencia guardada, no hacer detección geográfica
+    if (typeof window !== 'undefined') {
+      const savedLanguage = localStorage.getItem('lmt-language');
+      if (savedLanguage === 'es' || savedLanguage === 'en') {
+        return;
+      }
+    }
+
+    // Hacer detección geográfica asíncrona
+    detectLanguage().then((detectedLanguage) => {
+      // Solo actualizar si detectamos un idioma diferente
+      if (detectedLanguage !== language) {
+        setLanguageState(detectedLanguage);
+        saveLanguagePreference(detectedLanguage);
+      }
+    }).catch(() => {
+      // Si falla, mantener el idioma detectado síncronamente
+    });
+  }, []); // Solo ejecutar una vez al montar
 
   // Efecto para guardar la preferencia cuando cambia el idioma
   useEffect(() => {

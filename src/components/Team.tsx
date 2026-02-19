@@ -88,12 +88,16 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ miembro }) => {
             {miembro.cargo}
           </p>
           
-          {/* Descripción con expandir/colapsar */}
+          {/* Descripción con expandir/colapsar - comillas estilo revista */}
           {textoAMostrar && (
-            <div className="mb-6 w-full max-w-md">
-              <p className="text-gray-600 leading-relaxed text-left">
-                {textoAMostrar}
-              </p>
+            <div className="mb-6 w-full max-w-md relative pl-6 pr-4">
+              <span className="absolute left-0 top-0 text-xl md:text-2xl font-bold text-brand-blue-500 leading-none select-none translate-x-0.5" aria-hidden>"</span>
+              <div className="relative">
+                <p className="text-gray-600 leading-relaxed text-left">
+                  {textoAMostrar}
+                </p>
+                <span className="absolute right-0 bottom-0 text-xl md:text-2xl font-bold text-brand-blue-500 leading-none select-none -translate-x-0.5" aria-hidden>"</span>
+              </div>
               {tieneDescripcionCompleta && (
                 <div className="text-left mt-3">
                   <button
@@ -128,12 +132,12 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ miembro }) => {
                 {miembro.especialidades.map((especialidad, idx) => (
                   <span
                     key={idx}
-                    className="inline-flex items-center px-4 py-2 bg-brand-blue-50 text-brand-blue-800 text-sm font-semibold rounded-full group-hover:bg-brand-blue-100 transition-colors duration-300"
+                    className="inline-flex items-center min-h-10 px-4 py-2 bg-brand-blue-50 text-brand-blue-800 text-sm font-semibold rounded-full group-hover:bg-brand-blue-100 transition-colors duration-300"
                   >
-                    <svg className="w-4 h-4 mr-2 text-brand-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 mr-2 flex-shrink-0 text-brand-yellow-500" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    {especialidad}
+                    <span className="text-left leading-tight">{especialidad}</span>
                   </span>
                 ))}
               </div>

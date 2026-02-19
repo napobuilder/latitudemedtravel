@@ -334,8 +334,8 @@ export const getDoctoresTraducidos = (language: 'es' | 'en'): Doctor[] => {
 const equipoCarolinaEn: MiembroEquipo = {
   id: 'carolina_matheus',
   nombre: 'Carolina Matheus',
-  cargo: 'Specialized Nurse in Plastic Surgery',
-  fotoUrl: '/assets/images/Carolina Matheus.png',
+  cargo: 'Specialized Plastic Surgery Nurse',
+  fotoUrl: '/Gemini_Generated_Image_p3zzk7p3zzk7p3zz.png',
   descripcion: 'Professional nurse specialized in the area of plastic surgery, with a solid career dedicated to comprehensive patient care before, during, and after surgical procedures.',
   descripcionCompleta: 'I am a professional nurse specialized in the area of plastic surgery, with a solid career dedicated to comprehensive patient care before, during, and after surgical procedures. My professional practice is distinguished by clinical excellence, personalized attention, and deep respect for the safety, well-being, and optimal recovery of each patient. I have extensive experience in pre and postoperative care, advanced management of surgical wounds, pain control, continuous clinical follow-up, and close accompaniment, fundamental aspects to achieve successful aesthetic results and safe recovery. My work is based on updated protocols, ethical practices, and quality standards of modern plastic surgery. I am characterized by providing human, warm, and highly professional care, understanding that each patient is unique and requires not only technical knowledge but also trust, tranquility, and clear guidance throughout their process. I work with a high sense of responsibility, discretion, and commitment, taking care of every detail that influences the patient\'s experience and satisfaction. My goal is to offer the best nursing care in plastic surgery, providing security, comfort, and expert accompaniment, so that each patient lives their process with confidence, serenity, and results that reflect well-being and harmony.',
   especialidades: [
@@ -350,14 +350,16 @@ const equipoCarolinaEn: MiembroEquipo = {
 const equipoAngelaEn: MiembroEquipo = {
   id: 'angela_pena',
   nombre: 'Angela Peña',
-  cargo: 'Specialized Nurse',
-  fotoUrl: '/assets/images/Angela Peña.png',
-  descripcion: 'Nursing professional with extensive experience in specialized care for plastic surgery patients, committed to providing excellence in care and personalized accompaniment throughout the recovery process.',
+  cargo: 'Specialized Plastic Surgery Nurse',
+  fotoUrl: '/Gemini_Generated_Image_njk69cnjk69cnjk6.png',
+  descripcion: 'I am a nursing professional exclusively dedicated to the comprehensive care and specialized recovery of patients in the field of plastic surgery.',
+  descripcionCompleta: 'I am a nursing professional exclusively dedicated to the comprehensive care and specialized recovery of patients in the field of plastic surgery. My focus is on ensuring a smooth, safe, and comfortable transition through all stages of the surgical process, providing rigorous clinical support combined with deeply compassionate care. I understand that undergoing an aesthetic procedure is a transformative experience, which is why my main commitment is to offer an environment of utmost trust, calm, and emotional support. I have solid experience in meticulously monitoring patient progress, applying techniques for optimal recovery, and proactively preventing any complications. My work philosophy merges technical precision with exceptional empathy, ensuring that each person feels heard, cared for, and guided step by step. I work under the strictest biosafety and quality standards, maintaining constant communication with the medical team. My fundamental purpose is to transform the recovery period into a positive and stress-free experience, thereby facilitating impeccable aesthetic results and the overall well-being of those who trust in my care.',
   especialidades: [
-    'Specialized Care',
-    'Personalized Attention',
-    'Recovery Follow-up',
-    'Patient Support'
+    'Comprehensive Perioperative Assistance',
+    'Advanced Healing Optimization',
+    'Comprehensive Comfort Management',
+    'Detailed Clinical Monitoring',
+    'Compassionate Support & Guidance'
   ]
 };
 
@@ -579,7 +581,7 @@ export const equipo: MiembroEquipo[] = [
     id: 'carolina_matheus',
     nombre: 'Carolina Matheus',
     cargo: 'Enfermera Especializada en Cirugía Plástica',
-    fotoUrl: '/assets/images/Carolina Matheus.png',
+    fotoUrl: '/Gemini_Generated_Image_p3zzk7p3zzk7p3zz.png',
     descripcion: 'Enfermera profesional especializada en el área de cirugía plástica, con una sólida trayectoria dedicada al cuidado integral del paciente antes, durante y después de los procedimientos quirúrgicos.',
     descripcionCompleta: 'Soy enfermera profesional especializada en el área de cirugía plástica, con una sólida trayectoria dedicada al cuidado integral del paciente antes, durante y después de los procedimientos quirúrgicos. Mi ejercicio profesional se distingue por la excelencia clínica, la atención personalizada y un profundo respeto por la seguridad, el bienestar y la recuperación óptima de cada paciente. Cuento con amplia experiencia en cuidados pre y postoperatorios, manejo avanzado de heridas quirúrgicas, control del dolor, seguimiento clínico continuo y acompañamiento cercano, aspectos fundamentales para lograr resultados estéticos exitosos y una recuperación segura. Mi labor se basa en protocolos actualizados, prácticas éticas y estándares de calidad propios de la cirugía plástica moderna. Me caracterizo por brindar una atención humana, cálida y altamente profesional, entendiendo que cada paciente es único y requiere no solo conocimientos técnicos, sino también confianza, tranquilidad y orientación clara durante todo su proceso. Trabajo con un alto sentido de responsabilidad, discreción y compromiso, cuidando cada detalle que influye en la experiencia y satisfacción del paciente. Mi objetivo es ofrecer los mejores cuidados de enfermería en cirugía plástica, aportando seguridad, confort y acompañamiento experto, para que cada paciente viva su proceso con confianza, serenidad y resultados que reflejen bienestar y armonía.',
     especialidades: [
@@ -593,14 +595,16 @@ export const equipo: MiembroEquipo[] = [
   {
     id: 'angela_pena',
     nombre: 'Angela Peña',
-    cargo: 'Enfermera Especializada',
-    fotoUrl: '/assets/images/Angela Peña.png',
-    descripcion: 'Profesional de enfermería con amplia experiencia en cuidados especializados para pacientes de cirugía plástica, comprometida con brindar atención de excelencia y acompañamiento personalizado durante todo el proceso de recuperación.',
+    cargo: 'Enfermera Especializada en Cirugía Plástica',
+    fotoUrl: '/Gemini_Generated_Image_njk69cnjk69cnjk6.png',
+    descripcion: 'Soy profesional de enfermería con una dedicación exclusiva al cuidado integral y la recuperación especializada de pacientes en el ámbito de la cirugía plástica.',
+    descripcionCompleta: 'Soy profesional de enfermería con una dedicación exclusiva al cuidado integral y la recuperación especializada de pacientes en el ámbito de la cirugía plástica. Mi enfoque se centra en garantizar una transición fluida, segura y confortable a través de todas las etapas del proceso quirúrgico, brindando un soporte clínico riguroso combinado con una atención profundamente humana. Comprendo que someterse a un procedimiento estético es una experiencia transformadora, por lo que mi principal compromiso es ofrecer un entorno de máxima confianza, calma y contención. Poseo una sólida experiencia en el monitoreo meticuloso de la evolución del paciente, la aplicación de técnicas para una recuperación óptima y la prevención proactiva de cualquier eventualidad. Mi filosofía de trabajo fusiona la precisión técnica con una empatía excepcional, asegurando que cada persona se sienta escuchada, cuidada y guiada paso a paso. Trabajo bajo los más estrictos estándares de bioseguridad y calidad, manteniendo una comunicación constante con el equipo médico. Mi propósito fundamental es transformar el periodo de recuperación en una experiencia positiva y libre de estrés, facilitando así resultados estéticos impecables y el bienestar integral de quienes confían en mis cuidados.',
     especialidades: [
-      'Cuidados Especializados',
-      'Atención Personalizada',
-      'Seguimiento de Recuperación',
-      'Apoyo al Paciente'
+      'Asistencia Integral Perioperatoria',
+      'Optimización de la Cicatrización',
+      'Manejo Integral del Confort',
+      'Monitoreo Evolutivo Detallado',
+      'Soporte Humano y Orientación'
     ]
   }
 ];

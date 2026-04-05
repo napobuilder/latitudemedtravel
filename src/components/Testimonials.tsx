@@ -9,18 +9,8 @@ interface VideoTestimonial {
 }
 
 const videos: VideoTestimonial[] = [
-  { id: '1', url: '/assets/videos/WhatsApp Video 2025-12-17 at 8.28.37 PM.mp4' },
-  { id: '2', url: '/assets/videos/WhatsApp Video 2025-12-17 at 8.28.46 PM (1).mp4' },
-  { id: '3', url: '/assets/videos/WhatsApp Video 2025-12-17 at 8.28.45 PM (3).mp4' },
-  { id: '4', url: '/assets/videos/WhatsApp Video 2025-12-17 at 8.28.35 PM.mp4' },
-  { id: '5', url: '/assets/videos/WhatsApp Video 2025-12-17 at 8.28.36 PM.mp4' },
-  { id: '6', url: '/assets/videos/WhatsApp Video 2025-12-17 at 8.28.45 PM (1).mp4' },
-  { id: '7', url: '/assets/videos/WhatsApp Video 2025-12-17 at 8.28.45 PM (2).mp4' },
-  { id: '8', url: '/assets/videos/WhatsApp Video 2025-12-17 at 8.28.45 PM.mp4' },
-  { id: '9', url: '/assets/videos/WhatsApp Video 2025-12-17 at 8.28.46 PM (2).mp4' },
-  { id: '10', url: '/assets/videos/WhatsApp Video 2025-12-17 at 8.28.46 PM.mp4' },
-  { id: '11', url: '/assets/videos/WhatsApp Video 2025-12-17 at 8.28.31 PM.mp4' },
-  { id: '12', url: '/assets/videos/WhatsApp Video 2025-12-17 at 8.28.33 PM.mp4' },
+  { id: '1', url: 'https://i.imgur.com/h77K0ky.mp4' },
+  { id: '2', url: '/assets/videos/promo-video.mp4' },
 ];
 
 const Testimonials: React.FC = () => {

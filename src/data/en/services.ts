@@ -59,7 +59,7 @@ export const servicios: Servicio[] = [
   },
   {
     id: 'bichectomia',
-    nombre: 'Buccal Fat Removal',
+    nombre: 'Bichectomy',
     subtitulo: 'Removal of fat pads in the cheeks to refine facial features.',
     descripcion: 'Buccal fat removal is a surgical procedure in which the fat pads located at the lower edge of the cheeks are removed. These fat pads make the cheeks look more prominent. The most used technique is the internal or intraoral approach, which consists of making an incision in the oral mucosa at the upper part at the height of the second premolar. It requires local anesthesia and in very few cases requires stitches. Potential candidates are usually people with round faces or who wish to highlight the cheekbones to refine facial features, lengthen the face, and improve facial harmony. It is frequent in people with thin build who cannot slim their face despite exercise, sometimes caused by hereditary predisposition. This procedure decreases the round and wide appearance of the face, providing a thinner appearance naturally. Recovery time is short, 2 to 4 days, and one of the advantages is that there are no visible scars.',
     precioConsulta: 55,
@@ -115,7 +115,7 @@ export const servicios: Servicio[] = [
   },
   {
     id: 'liposuccion-lipoescultura',
-    nombre: 'Liposuction / Body Contouring',
+    nombre: 'Liposuction / Body Contouring / Mommy Makeover',
     subtitulo: 'Removal of localized body fat to shape the patient\'s silhouette.',
     descripcion: 'Normally liposuction is performed on the abdomen, hips, and thighs, although it can also be performed on other areas of the body such as arms, knees, ankles, double chin, buttocks, or face. The fundamental objective is to remove body fat in order to eliminate localized adiposity, cellulite, shape the patient\'s silhouette, and to a lesser extent reduce body weight. This procedure is not a treatment for obesity or overweight control. There are different techniques: conventional (application of liquids with vasoconstrictor directly to the fat), micro air PAL (Power Assisted Liposuction, with anteroposterior movements in the cannula), ultrasonic or Vaser (ultrasonic waves that break and emulsify fat, useful in areas with abundant fibrosis) and laser (laser lipolysis, which destroys adipocyte membranes). This surgery is designed for people who wish to eliminate fatty tissue, candidates who have tried to remove those fat deposits with exercise and diet without success, or who want to shape their body and have normal weight with elastic and firm skin. It is recommended to have 5 days to be able to return to work and personal activities.',
     precioConsulta: 55,
@@ -126,7 +126,7 @@ export const servicios: Servicio[] = [
   },
   {
     id: 'lipectomia-abdominoplastia',
-    nombre: 'Abdominoplasty',
+    nombre: 'Abdominoplasty / Tummy Tuck',
     subtitulo: 'Removal of excess abdominal skin and fat with reinforcement of abdominal muscles.',
     descripcion: 'This surgical technique consists of making an incision above the pubis at the height of the lower abdominal fold, where excess skin and fat are lifted and removed. The abdominal muscles are reinforced, allowing a firmer appearance. This procedure allows removing unwanted tissue in the abdominal region which was obtained either due to weight loss, pregnancy, or hereditary conditions, among others. If you present skin sagging, stretch marks under the navel, and prominent abdomen, you are a candidate for this surgery. Generally, this procedure is performed on patients who, after being pregnant, are left with stretch marks, skin sagging, and marked abdominal weakness, and people who have had considerable weight loss, mostly after bariatric surgery. This surgery can last up to 3 hours and you can return to daily activities within 2 weeks. With this procedure, a defined waist is expected, improve the appearance of the navel, remove almost completely the stretch marks located in the lower abdomen, and tighten the skin in the abdominal region. Final and definitive results will be seen at 12 months of this procedure.',
     precioConsulta: 55,
@@ -137,7 +137,7 @@ export const servicios: Servicio[] = [
   },
   {
     id: 'gluteoplastia',
-    nombre: 'Buttock Augmentation',
+    nombre: 'BBL Fat Transfer',
     subtitulo: 'Increase and shaping of the buttock shape through implants or lipoinjection.',
     descripcion: 'Buttock lift can be performed through implant placement, leaving only a scar at the intergluteal fold level, or with gluteal lipoinjection which is performed through liposuction incisions. This procedure seeks to increase and shape the buttocks. There are two main types: gluteal lipoinjection (the fat extracted from liposuction is used to perform a volume increase in the buttocks, transferring approximately 300-350cc of fat in each buttock, has the advantage that there will be no rejection by the organism and results are more natural) and silicone implants (similar to breast implants but with special characteristics, larger and flattened, resembling the shape of the buttocks, used in people with little adipose tissue and poorly developed gluteal muscles). Buttock augmentation is indicated for patients who wish to improve the volume and projection of the gluteal region, or who find some disproportion in the shape of the buttocks. These procedures can last up to 2 hours and can be combined with body contouring in surrounding areas to better define the curvature of the buttocks. Partial results can be seen in a matter of weeks when bruising and inflammation decrease by 90%.',
     precioConsulta: 55,

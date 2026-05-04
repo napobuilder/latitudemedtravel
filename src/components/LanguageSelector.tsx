@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Language } from '../i18n/types';
-import { getLanguageFromPath, getPathWithoutLanguage, buildLocalizedPath, getServicesRouteName } from '../utils/routes';
+import { getLanguageFromPath, getPathWithoutLanguage, buildLocalizedPath, getServicesRouteName, getEvaluationRouteName } from '../utils/routes';
 
 const LanguageSelector: React.FC = () => {
   const { language, setLanguage } = useLanguage();
@@ -57,6 +57,10 @@ const LanguageSelector: React.FC = () => {
       const serviceId = pathSegments[1];
       const newRouteName = getServicesRouteName(newLanguage);
       navigate(`/${newLanguage}/${newRouteName}/${serviceId}`, { replace: true });
+    } else if (pathSegments[0] === 'valoracion' || pathSegments[0] === 'evaluation') {
+      // Es la página de valoración
+      const newRouteName = getEvaluationRouteName(newLanguage);
+      navigate(`/${newLanguage}/${newRouteName}`, { replace: true });
     } else {
       // Otra ruta, solo cambiar el prefijo
       navigate(buildLocalizedPath(newLanguage, pathWithoutLanguage), { replace: true });

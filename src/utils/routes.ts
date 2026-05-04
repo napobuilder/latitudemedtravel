@@ -62,3 +62,12 @@ export const buildLocalizedPath = (language: Language, path: string): string => 
 export const getServicesRouteName = (language: Language): string => {
   return language === 'es' ? 'servicios' : 'procedures';
 };
+
+/**
+ * Obtiene el nombre de la ruta de valoración según el idioma
+ * @param language - Idioma actual
+ * @returns 'valoracion' para español, 'evaluation' para inglés
+ */
+export const getEvaluationRouteName = (language: Language): string => {
+  return language === 'es' ? 'valoracion' : 'evaluation';
+};

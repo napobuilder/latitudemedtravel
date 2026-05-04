@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import ServiceDetailPage from './pages/ServiceDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
 import Header from './components/Header';
+import EvaluationPage from './pages/EvaluationPage';
 
 // Componente para manejar scroll restoration
 const ScrollToTop: React.FC = () => {
@@ -58,10 +59,12 @@ const App: React.FC = () => {
           {/* Rutas en español */}
           <Route path="/es" element={<HomePage />} />
           <Route path="/es/servicios/:serviceId" element={<ServiceDetailPage />} />
+          <Route path="/es/valoracion" element={<EvaluationPage />} />
           
           {/* Rutas en inglés */}
           <Route path="/en" element={<HomePage />} />
           <Route path="/en/procedures/:serviceId" element={<ServiceDetailPage />} />
+          <Route path="/en/evaluation" element={<EvaluationPage />} />
           
           {/* 404 para cualquier otra ruta */}
           <Route path="*" element={<NotFoundPage />} />

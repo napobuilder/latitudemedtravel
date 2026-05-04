@@ -705,7 +705,7 @@ const EvaluationPage: React.FC = () => {
                          </div>
                        </div>
                        <div className="relative">
-                         <label className="block text-sm font-semibold text-[#002E5D] mb-2">Peso (Lbs)</label>
+                         <label className="block text-sm font-semibold text-[#002E5D] mb-2">Peso (Lbs o Kg)</label>
                          <input type="number" name="weight" value={formData.weight} onChange={handleInputChange} className="w-full px-4 py-4 rounded-xl border border-gray-200 bg-gray-50 outline-none focus:bg-white focus:ring-2 focus:ring-[#004A99]/20 transition-all" />
                          {bmi && <span className={`absolute right-3 top-[38px] text-xs font-bold px-2 py-1 rounded-md shadow-sm animate-fade-in ${bmi < 30 ? 'bg-green-100 text-green-700' : 'bg-[#FFC72C] text-[#002E5D]'}`}>IMC: {bmi}</span>}
                        </div>

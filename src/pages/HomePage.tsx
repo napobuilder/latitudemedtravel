@@ -67,7 +67,7 @@ const HomePage: React.FC = () => {
         <Faq />
       </AnimatedSection>
       <AnimatedSection>
-        <ContactCta />
+        {/* <ContactCta /> */}
       </AnimatedSection>
       <Footer />
     </>

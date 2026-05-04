@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
 import { 
   ChevronRight, ChevronLeft, CheckCircle, UploadCloud, User, Activity, 
   Plane, Camera, FileText, AlertCircle, Sparkles, MapPin, X, Image as ImageIcon, ShieldCheck, ArrowRight
@@ -39,7 +39,7 @@ const EvaluationPage: React.FC = () => {
   const [formData, setFormData] = useState({
     firstName: '', lastName: '', email: '', phone: '', contactMethod: 'Email', location: '',
     procedures: [], prevSurgery: '',
-    age: '', heightFeet: '5', heightInches: '5', weight: '', smoking: '', conditions: '', medications: '',
+    age: '', heightFeet: '5', heightInches: '5', weight: '', weightUnit: 'Lbs', smoking: '', conditions: '', medications: '',
     timeframe: '', companion: '', passport: '',
     photos: []
   });
@@ -302,7 +302,7 @@ const EvaluationPage: React.FC = () => {
             cirugia_previa: formData.prevSurgery,
             edad: formData.age,
             estatura: `${formData.heightFeet}ft ${formData.heightInches}in`,
-            peso_lbs: formData.weight,
+            peso: `${formData.weight} ${formData.weightUnit}`,
             fuma: formData.smoking,
             medicamentos: formData.medications,
             condiciones: formData.conditions,
@@ -327,7 +327,10 @@ const EvaluationPage: React.FC = () => {
 
   const calculateBMI = () => {
     if (!formData.weight || !formData.heightFeet) return null;
-    const weightLbs = parseFloat(formData.weight);
+    let weightLbs = parseFloat(formData.weight);
+    if (formData.weightUnit === 'Kg') {
+      weightLbs = weightLbs * 2.20462;
+    }
     const totalInches = (parseInt(formData.heightFeet) * 12) + parseInt(formData.heightInches || 0);
     if (totalInches === 0) return null;
     const bmi = (703 * weightLbs) / (totalInches * totalInches);
@@ -693,8 +696,14 @@ const EvaluationPage: React.FC = () => {
                          </div>
                        </div>
                        <div className="relative">
-                         <label className="block text-sm font-semibold text-[#002E5D] mb-2">Peso (Lbs o Kg)</label>
-                         <input type="number" name="weight" value={formData.weight} onChange={handleInputChange} className="w-full px-4 py-4 rounded-xl border border-gray-200 bg-gray-50 outline-none focus:bg-white focus:ring-2 focus:ring-[#004A99]/20 transition-all" />
+                         <label className="block text-sm font-semibold text-[#002E5D] mb-2">{isSpanish ? 'Peso' : 'Weight'}</label>
+                          <div className="flex relative">
+                            <input type="number" name="weight" value={formData.weight} onChange={handleInputChange} className="w-full pl-4 pr-16 py-4 rounded-xl border border-gray-200 bg-gray-50 outline-none focus:bg-white focus:ring-2 focus:ring-[#004A99]/20 transition-all" />
+                            <select name="weightUnit" value={formData.weightUnit} onChange={handleInputChange} className="absolute right-0 top-0 bottom-0 bg-transparent border-l border-gray-200 text-sm font-semibold text-[#004A99] px-2 outline-none cursor-pointer rounded-r-xl">
+                              <option value="Lbs">Lbs</option>
+                              <option value="Kg">Kg</option>
+                            </select>
+                          </div>
                          {bmi && <span className={`absolute right-3 top-[38px] text-xs font-bold px-2 py-1 rounded-md shadow-sm animate-fade-in ${bmi < 30 ? 'bg-green-100 text-green-700' : 'bg-[#FFC72C] text-[#002E5D]'}`}>IMC: {bmi}</span>}
                        </div>
                      </div>

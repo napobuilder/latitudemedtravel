@@ -7,6 +7,7 @@ import ServiceDetailPage from './pages/ServiceDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
 import Header from './components/Header';
 import EvaluationPage from './pages/EvaluationPage';
+import RetiroPage from './pages/RetiroPage';
 
 // Componente para manejar scroll restoration
 const ScrollToTop: React.FC = () => {
@@ -46,26 +47,33 @@ const LanguageSync: React.FC = () => {
 };
 
 const App: React.FC = () => {
+  const location = useLocation();
+  const isRetiro = location.pathname === '/retiro';
+
   return (
     <>
       <LanguageSync />
       <ScrollToTop />
-      <Header />
-      <main className="pt-20">
+      {/* Ocultar Header y offset en la landing del retiro */}
+      {!isRetiro && <Header />}
+      <main className={isRetiro ? '' : 'pt-20'}>
         <Routes>
           {/* Redirigir / a /es/ o /en/ según preferencia */}
           <Route path="/" element={<RootRedirect />} />
-          
+
           {/* Rutas en español */}
           <Route path="/es" element={<HomePage />} />
           <Route path="/es/servicios/:serviceId" element={<ServiceDetailPage />} />
           <Route path="/es/valoracion" element={<EvaluationPage />} />
-          
+
           {/* Rutas en inglés */}
           <Route path="/en" element={<HomePage />} />
           <Route path="/en/procedures/:serviceId" element={<ServiceDetailPage />} />
           <Route path="/en/evaluation" element={<EvaluationPage />} />
-          
+
+          {/* ── Landing del Retiro — full-bleed, sin Header global ── */}
+          <Route path="/retiro" element={<RetiroPage />} />
+
           {/* 404 para cualquier otra ruta */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

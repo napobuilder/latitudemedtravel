@@ -1,7 +1,24 @@
 /* src/css/main.css */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Landing page utilities */
+.landing-gradient-navy {
+  background: linear-gradient(135deg, #0B1B33 0%, #142850 50%, #1A3566 100%);
+}
+.landing-gradient-gold {
+  background: linear-gradient(135deg, #B5852A 0%, #D9A441 50%, #E8C068 100%);
+}
+.landing-text-gradient {
+  background: linear-gradient(135deg, #D9A441, #E8C068);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 
 /* Estilos personalizados que moviste del <style> original */
 .faq-question summary::-webkit-details-marker {

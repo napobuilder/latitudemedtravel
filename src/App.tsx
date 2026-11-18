@@ -8,6 +8,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import Header from './components/Header';
 import EvaluationPage from './pages/EvaluationPage';
 import RetiroPage from './pages/RetiroPage';
+import LandingPage from './pages/LandingPage';
 
 // Componente para manejar scroll restoration
 const ScrollToTop: React.FC = () => {
@@ -48,16 +49,24 @@ const LanguageSync: React.FC = () => {
 
 const App: React.FC = () => {
   const location = useLocation();
-  const isRetiro = location.pathname === '/retiro';
+  const isStandalonePage = ['/retiro', '/landing', '/beauty-party', '/beauty-party-weekend'].includes(location.pathname);
 
   return (
     <>
       <LanguageSync />
       <ScrollToTop />
-      {/* Ocultar Header y offset en la landing del retiro */}
-      {!isRetiro && <Header />}
-      <main className={isRetiro ? '' : 'pt-20'}>
+      {/* Ocultar Header corporativo en landings standalone */}
+      {!isStandalonePage && <Header />}
+      <main className={isStandalonePage ? '' : 'pt-20'}>
         <Routes>
+          {/* Landing page de ventas Beauty Party — layout standalone */}
+          <Route path="/landing" element={<LandingPage />} />
+          <Route path="/beauty-party" element={<LandingPage />} />
+          <Route path="/beauty-party-weekend" element={<LandingPage />} />
+
+          {/* Landing del Retiro — full-bleed, sin Header global */}
+          <Route path="/retiro" element={<RetiroPage />} />
+
           {/* Redirigir / a /es/ o /en/ según preferencia */}
           <Route path="/" element={<RootRedirect />} />
 
@@ -70,9 +79,6 @@ const App: React.FC = () => {
           <Route path="/en" element={<HomePage />} />
           <Route path="/en/procedures/:serviceId" element={<ServiceDetailPage />} />
           <Route path="/en/evaluation" element={<EvaluationPage />} />
-
-          {/* ── Landing del Retiro — full-bleed, sin Header global ── */}
-          <Route path="/retiro" element={<RetiroPage />} />
 
           {/* 404 para cualquier otra ruta */}
           <Route path="*" element={<NotFoundPage />} />
